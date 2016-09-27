@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+        <LinearLayout
+            android:id="@+id/actionBar"
+            android:layout_alignParentTop="true"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnBack"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                android:text="&lt;-" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Advance Search"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black" />
+
+            <Button
+                android:id="@+id/btnReset"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:text="@string/txtResetButton"/>
+        </LinearLayout>
+
+
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_below="@+id/actionBar"
+                android:layout_above="@+id/btnMatching"
+                android:id="@+id/listSetting"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+
+            <Button
+                android:id="@+id/btnMatching"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_menu_bar"
+                android:text="@string/txtMatching"
+                android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>
