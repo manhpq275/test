@@ -3,6 +3,7 @@ package asia.ienter.matching.views.activities;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Point;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -282,4 +283,7 @@ public class HomeActivity extends FragmentActivity {
         display.getSize(size);
         MCApp.setScreenSize(size);
     }
+
+
+
 }

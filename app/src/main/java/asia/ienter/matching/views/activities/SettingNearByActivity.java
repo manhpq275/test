@@ -14,8 +14,10 @@ import android.widget.Toast;
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.views.adapters.AdvanceSearchAdapter;
+import asia.ienter.matching.views.fragments.NearByFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by hoangtuan on 9/20/16.
@@ -27,6 +29,8 @@ public class SettingNearByActivity extends AppCompatActivity {
 
     @InjectView(R.id.txtRange)
     TextView tvRange;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,5 +69,13 @@ public class SettingNearByActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         this.overridePendingTransition(R.anim.hold, R.anim.exit_to_right);
+    }
+
+
+    @OnClick(R.id.btnGoToProfile)
+    public void onGoToProfile(){
+        setResult(NearByFragment.RESULT_CODE_PROFILE);
+        onBackPressed();
+
     }
 }

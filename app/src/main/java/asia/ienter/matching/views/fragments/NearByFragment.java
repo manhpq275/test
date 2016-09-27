@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import asia.ienter.matching.R;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.custom.CircleImageView;
+import asia.ienter.matching.views.activities.HomeActivity;
 import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.activities.SettingNearByActivity;
 import butterknife.ButterKnife;
@@ -131,7 +132,18 @@ public class NearByFragment extends BaseFragment {
 
     public void onSettingNearBy(){
         Intent profile = new Intent(mContext, SettingNearByActivity.class);
-        profile.putExtra("ID",10);
-        startActivity(profile);
+        startActivityForResult(profile,REQUEST_FROM_NEAR_BY);
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == NearByFragment.REQUEST_FROM_NEAR_BY) {
+            if(resultCode==RESULT_CODE_PROFILE){
+                ((HomeActivity)getActivity()).changeTab(3);
+            }
+        }
+    }
+    public static final int REQUEST_FROM_NEAR_BY = 10000;
+    public static final int RESULT_CODE_PROFILE = 10001;
 }
