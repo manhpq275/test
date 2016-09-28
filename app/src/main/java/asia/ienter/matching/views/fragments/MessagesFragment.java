@@ -16,24 +16,37 @@ import android.widget.ProgressBar;
 import java.util.ArrayList;
 
 import asia.ienter.matching.R;
+import asia.ienter.matching.interfaces.IMessagesCallback;
 import asia.ienter.matching.interfaces.ITopViewCallback;
 import asia.ienter.matching.models.TopView;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.adapters.ContactsAdapter;
+import asia.ienter.matching.views.adapters.MessageListAdapter;
+import asia.ienter.matching.views.dialogs.DialogLike;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
 /**
  * Created by phamquangmanh on 9/15/16.
  */
-public class MessagesFragment extends BaseFragment implements ITopViewCallback {
+public class MessagesFragment extends BaseFragment implements ITopViewCallback,IMessagesCallback {
 
     private static final String TAG = "MessagesFragment";
     ArrayList<TopView> topViewArrayList;
-    ContactsAdapter adapter;
+    MessageListAdapter adapter;
     public boolean isGrid = true;
     private ArrayList<TopView> mUsers = new ArrayList<>();
+
+    public int getTabSelected() {
+        return tabSelected;
+    }
+
+    public void setTabSelected(int tabSelected) {
+        this.tabSelected = tabSelected;
+    }
+
+    private int tabSelected = 3;
     @InjectView(R.id.recycleTop)
     RecyclerView recycleTopView;
 
@@ -130,7 +143,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback {
                             int index = topViewArrayList.size();
                             int end = index + 5;
                             for (int i = index; i < end; i++) {
-                                TopView user = new TopView(""+i,"Name " + i,true);
+                                TopView user = new TopView(""+i,"Name " + i,1);
                                 user.setAndroid_version_name("Name " + i);
                                 user.setAndroid_image_url(android_image_urls[4]);
                                 topViewArrayList.add(user);
@@ -156,13 +169,13 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback {
         showLoading();
         topViewArrayList.clear();
         for(int i=0;i<android_version_names.length;i++){
-            TopView androidVersion = new TopView(""+i,"Name "+i,false);
+            TopView androidVersion = new TopView(""+i,"Name "+i,2);
             androidVersion.setAndroid_version_name(android_version_names[i]);
             androidVersion.setAndroid_image_url(android_image_urls[i]);
             topViewArrayList.add(androidVersion);
         }
         //  topViewArrayList.add(null);
-        adapter = new ContactsAdapter(this,topViewArrayList);
+        adapter = new MessageListAdapter(this,topViewArrayList);
         recycleTopView.setAdapter(adapter);
         hideLoading();
     }
@@ -176,13 +189,27 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback {
     }
 
     @Override
-    public void OnItemClickLike(int position) {
+    public boolean OnItemClickLike(int position) {
         MLog.e(TAG,"Item click Like");
         TopView topView = topViewArrayList.get(position);
-        topViewArrayList.get(position).setLike(!topView.isLike());
+        int isLiked = topView.isLike();
+        if(isLiked==0) isLiked = 1;
+        if(isLiked==1) isLiked = 0;
+        topViewArrayList.get(position).setLike(isLiked);
 
-
+        new DialogLike(mContext,this).show();
         MLog.e(TAG,"Item click Like 2");
+        return isAccept;
     }
 
+    boolean isAccept = false;
+    @Override
+    public void onAcceptCallback() {
+        isAccept =true;
+    }
+
+    @Override
+    public void onCancelCallback() {
+        isAccept =false;
+    }
 }

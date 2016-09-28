@@ -122,7 +122,7 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
                                 int index = topViewArrayList.size();
                                 int end = index + 5;
                                 for (int i = index; i < end; i++) {
-                                    TopView user = new TopView(""+i,"Name " + i,true);
+                                    TopView user = new TopView(""+i,"Name " + i,1);
                                     user.setAndroid_version_name("Name " + i);
                                     user.setAndroid_image_url(android_image_urls[4]);
                                     topViewArrayList.add(user);
@@ -174,7 +174,7 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
         showLoading();
         topViewArrayList.clear();
         for(int i=0;i<android_version_names.length;i++){
-            TopView androidVersion = new TopView(""+i,"Name "+i,false);
+            TopView androidVersion = new TopView(""+i,"Name "+i,0);
             androidVersion.setAndroid_version_name(android_version_names[i]);
             androidVersion.setAndroid_image_url(android_image_urls[i]);
             topViewArrayList.add(androidVersion);
@@ -219,12 +219,16 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
     }
 
     @Override
-    public void OnItemClickLike(int position) {
+    public boolean OnItemClickLike(int position) {
         MLog.e(TAG,"Item click Like");
         TopView topView = topViewArrayList.get(position);
-        topViewArrayList.get(position).setLike(!topView.isLike());
+        int isLiked = topView.isLike();
+        if(isLiked==0) isLiked = 1;
+        if(isLiked==1) isLiked = 0;
+        topViewArrayList.get(position).setLike(isLiked);
 
 
         MLog.e(TAG,"Item click Like 2");
+        return  true;
     }
 }

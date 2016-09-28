@@ -116,7 +116,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
             });
             btnLike.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    setLike(btnLike,!item.isLike());
+                    setLike(btnLike,false);
                     listener.OnItemClickLike(position);
                 }
             });

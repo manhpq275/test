@@ -85,7 +85,7 @@ public class ContactsAdapter extends RecyclerView.Adapter<ContactsAdapter.ViewHo
             });
             btnLike.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    setLike(btnLike,!item.isLike());
+                    setLike(btnLike,true);
                     listener.OnItemClickLike(position);
                 }
             });

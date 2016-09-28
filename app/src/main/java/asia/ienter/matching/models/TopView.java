@@ -7,11 +7,11 @@ public class TopView extends BaseView{
     private String android_version_name;
     private String android_image_url;
 
-    private boolean isLike;
+    private int likeStatus;
 
-    public TopView(String id, String name, boolean isLike) {
+    public TopView(String id, String name, int likeStatus) {
         super(id, name);
-        this.isLike = isLike;
+        this.likeStatus = likeStatus;
     }
 
     public String getAndroid_version_name() {
@@ -30,11 +30,11 @@ public class TopView extends BaseView{
         this.android_image_url = android_image_url;
     }
 
-    public boolean isLike() {
-        return isLike;
+    public int isLike() {
+        return likeStatus;
     }
 
-    public void setLike(boolean like) {
-        isLike = like;
+    public void setLike(int like) {
+        likeStatus = like;
     }
 }

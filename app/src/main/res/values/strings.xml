@@ -46,6 +46,7 @@
     <string name="txtContacts">Contacts</string>
     <string name="txtInvitations">Invitations</string>
     <string name="txtMyRequest">My Requests</string>
+    <string name="txt_like_or_not">People send request</string>
 
     <string-array name="advance_search_string_array">
         <item>filter 1</item>

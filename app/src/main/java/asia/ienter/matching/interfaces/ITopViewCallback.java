@@ -7,5 +7,5 @@ import asia.ienter.matching.models.TopView;
  */
 public interface ITopViewCallback {
     void OnItemClickRecycleView(TopView topView);
-    void OnItemClickLike(int position);
+    boolean OnItemClickLike(int position);
 }
