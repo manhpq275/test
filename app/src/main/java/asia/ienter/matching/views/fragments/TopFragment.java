@@ -59,6 +59,13 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
         return mView;
     }
 
+    @Override
+    public void setUserVisibleHint(boolean visibleHint){
+        super.setUserVisibleHint(visibleHint);
+        if(!visibleHint) return;
+        loadDataFromApi();
+
+    }
     private boolean isLoading;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;

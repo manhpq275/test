@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/fragment_background_color"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/height_menu_bar">
+
+    <LinearLayout
+        android:id="@+id/lnMenuTab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_menu_bar"
+        android:background="@color/colorAccent"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dr_bg_left_conner"
+            android:padding="10dp"
+            android:text="@string/txtContacts" />
+
+        <TextView
+            android:id="@+id/lst1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dr_bg_mid_conner_active"
+            android:padding="10dp"
+            android:text="@string/txtInvitations" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/dr_bg_right_conner"
+            android:padding="10dp"
+            android:text="@string/txtMyRequest" />
+
+    </LinearLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:layout_below="@+id/lnMenuTab"
+        android:id="@+id/mSwipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/recycleTop"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/recycle_view_padding" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+    <ProgressBar
+        android:id="@+id/mProgressLoading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone" />
+
+    <ProgressBar
+        android:id="@+id/mProgressLoadingMore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:visibility="gone" />
+</RelativeLayout>

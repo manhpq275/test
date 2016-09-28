@@ -43,6 +43,9 @@
     <string name="txtSearching">Finding people near by you about 50km</string>
     <string name="txt_help_near_by">Automatic matching system  for you based on your location</string>
     <string name="txtRange">You can change range search near by</string>
+    <string name="txtContacts">Contacts</string>
+    <string name="txtInvitations">Invitations</string>
+    <string name="txtMyRequest">My Requests</string>
 
     <string-array name="advance_search_string_array">
         <item>filter 1</item>
