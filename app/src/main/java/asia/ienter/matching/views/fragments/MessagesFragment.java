@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -20,12 +21,14 @@ import asia.ienter.matching.interfaces.IMessagesCallback;
 import asia.ienter.matching.interfaces.ITopViewCallback;
 import asia.ienter.matching.models.TopView;
 import asia.ienter.matching.utils.MLog;
+import asia.ienter.matching.views.activities.ChatActivity;
 import asia.ienter.matching.views.activities.MyPageActivity;
-import asia.ienter.matching.views.adapters.ContactsAdapter;
 import asia.ienter.matching.views.adapters.MessageListAdapter;
-import asia.ienter.matching.views.dialogs.DialogLike;
+import asia.ienter.matching.views.dialogs.DialogChat;
+import asia.ienter.matching.views.dialogs.DialogLikeMe;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by phamquangmanh on 9/15/16.
@@ -46,9 +49,18 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         this.tabSelected = tabSelected;
     }
 
-    private int tabSelected = 3;
+    private int tabSelected = 2;
     @InjectView(R.id.recycleTop)
     RecyclerView recycleTopView;
+
+    @InjectView(R.id.tab1)
+    TextView tab1;
+
+    @InjectView(R.id.tab2)
+    TextView tab2;
+
+    @InjectView(R.id.tab3)
+    TextView tab3;
 
     public static MessagesFragment newInstance(Bundle args) {
         MessagesFragment myFragment = new MessagesFragment();
@@ -143,7 +155,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                             int index = topViewArrayList.size();
                             int end = index + 5;
                             for (int i = index; i < end; i++) {
-                                TopView user = new TopView(""+i,"Name " + i,1);
+                                TopView user = new TopView(""+i,"Name " + i,2);
                                 user.setAndroid_version_name("Name " + i);
                                 user.setAndroid_image_url(android_image_urls[4]);
                                 topViewArrayList.add(user);
@@ -169,7 +181,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         showLoading();
         topViewArrayList.clear();
         for(int i=0;i<android_version_names.length;i++){
-            TopView androidVersion = new TopView(""+i,"Name "+i,2);
+            TopView androidVersion = new TopView(""+i,"Name "+i,0);
             androidVersion.setAndroid_version_name(android_version_names[i]);
             androidVersion.setAndroid_image_url(android_image_urls[i]);
             topViewArrayList.add(androidVersion);
@@ -180,12 +192,20 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         hideLoading();
     }
 
+    DialogChat dialogChat;
     @Override
     public void OnItemClickRecycleView(TopView topView) {
         MLog.e(TAG,"Item click RecycleView");
-        Intent profile = new Intent(mContext, MyPageActivity.class);
-        profile.putExtra("ID",10);
-        startActivity(profile);
+        if(tabSelected==1){
+            dialogChat =  new DialogChat(mContext,this);
+            dialogChat.show();
+        }else {
+            Intent profile = new Intent(mContext, MyPageActivity.class);
+            profile.putExtra("ID",10);
+            startActivity(profile);
+
+        }
+
     }
 
     @Override
@@ -197,7 +217,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         if(isLiked==1) isLiked = 0;
         topViewArrayList.get(position).setLike(isLiked);
 
-        new DialogLike(mContext,this).show();
+        new DialogLikeMe(mContext,this).show();
         MLog.e(TAG,"Item click Like 2");
         return isAccept;
     }
@@ -209,7 +229,56 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     }
 
     @Override
+    public void onAcceptChatCallback() {
+        dialogChat.hide();
+        // goto chatactivity
+        Intent i = new Intent(mContext, ChatActivity.class);
+        startActivity(i);
+
+    }
+
+    @Override
     public void onCancelCallback() {
         isAccept =false;
+    }
+
+    private void onTabChange(int tabSelected){
+        switch (tabSelected){
+            case 1:
+                tab1.setBackgroundResource(R.drawable.dr_bg_left_conner_active);
+                tab2.setBackgroundResource(R.drawable.dr_bg_mid_conner);
+                tab3.setBackgroundResource(R.drawable.dr_bg_right_conner);
+                break;
+            case 2:
+                tab1.setBackgroundResource(R.drawable.dr_bg_left_conner);
+                tab2.setBackgroundResource(R.drawable.dr_bg_mid_conner_active);
+                tab3.setBackgroundResource(R.drawable.dr_bg_right_conner);
+                break;
+            case 3:
+                tab1.setBackgroundResource(R.drawable.dr_bg_left_conner);
+                tab2.setBackgroundResource(R.drawable.dr_bg_mid_conner);
+                tab3.setBackgroundResource(R.drawable.dr_bg_right_conner_active);
+                break;
+        }
+
+        setTabSelected(tabSelected);
+        adapter = new MessageListAdapter(this,topViewArrayList);
+        recycleTopView.setAdapter(adapter);
+    }
+
+
+    @OnClick(R.id.tab1)
+    public void onClickTab1(){
+        onTabChange(1);
+    }
+
+    @OnClick(R.id.tab2)
+    public void onClickTab2(){
+        onTabChange(2);
+    }
+
+    @OnClick(R.id.tab3)
+    public void onClickTab3(){
+        onTabChange(3);
     }
 }

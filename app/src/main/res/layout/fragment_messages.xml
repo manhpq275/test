@@ -16,6 +16,7 @@
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/tab1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dr_bg_left_conner"
@@ -23,7 +24,7 @@
             android:text="@string/txtContacts" />
 
         <TextView
-            android:id="@+id/lst1"
+            android:id="@+id/tab2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dr_bg_mid_conner_active"
@@ -31,6 +32,7 @@
             android:text="@string/txtInvitations" />
 
         <TextView
+            android:id="@+id/tab3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/dr_bg_right_conner"

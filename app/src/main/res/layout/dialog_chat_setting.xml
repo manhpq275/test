@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        android:id="@+id/rlContent">
+        <Button
+            android:id="@+id/btnViewProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMessage"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="View Profile"/>
+        <Button
+            android:id="@+id/btnShareFacebook"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnViewProfile"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Share facebook "/>
+        <Button
+            android:id="@+id/btnHide"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnShareFacebook"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Hide "/>
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnHide"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Cancel"/>
+    </RelativeLayout>
+
+
+
+</RelativeLayout>

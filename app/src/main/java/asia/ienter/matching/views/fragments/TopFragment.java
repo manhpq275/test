@@ -11,10 +11,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import asia.ienter.matching.R;
+import asia.ienter.matching.interfaces.IDialogLikeCallback;
+import asia.ienter.matching.interfaces.IMessagesCallback;
 import asia.ienter.matching.interfaces.ITopViewCallback;
 import asia.ienter.matching.models.TopView;
 import asia.ienter.matching.utils.MLog;
@@ -22,6 +25,7 @@ import asia.ienter.matching.views.activities.AdvanceSearchActivity;
 import asia.ienter.matching.views.activities.HomeActivity;
 import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.adapters.TopAdapter;
+import asia.ienter.matching.views.dialogs.DialogLike;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 
@@ -64,7 +68,6 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
         super.setUserVisibleHint(visibleHint);
         if(!visibleHint) return;
         loadDataFromApi();
-
     }
     private boolean isLoading;
     private int visibleThreshold = 5;
@@ -222,12 +225,19 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
     public boolean OnItemClickLike(int position) {
         MLog.e(TAG,"Item click Like");
         TopView topView = topViewArrayList.get(position);
-        int isLiked = topView.isLike();
-        if(isLiked==0) isLiked = 1;
-        if(isLiked==1) isLiked = 0;
-        topViewArrayList.get(position).setLike(isLiked);
+        new DialogLike(mContext, new IDialogLikeCallback() {
 
+            @Override
+            public void onSendLike() {
+                Toast.makeText(mContext,"Send Like",Toast.LENGTH_SHORT).show();
+            }
 
+            @Override
+            public void onSendRequest() {
+                Toast.makeText(mContext,"Send Request",Toast.LENGTH_SHORT).show();
+
+            }
+        }).show();
         MLog.e(TAG,"Item click Like 2");
         return  true;
     }

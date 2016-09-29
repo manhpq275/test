@@ -47,6 +47,7 @@
     <string name="txtInvitations">Invitations</string>
     <string name="txtMyRequest">My Requests</string>
     <string name="txt_like_or_not">People send request</string>
+    <string name="txtGotoChat">Go to chat</string>
 
     <string-array name="advance_search_string_array">
         <item>filter 1</item>
@@ -62,4 +63,19 @@
         <item>filter 10</item>
         <item>filter 11</item>
     </string-array>
+    <string-array name="msg_temp_list">
+        <item>message template 1</item>
+        <item>message template 2</item>
+        <item>message template 3</item>
+        <item>message template 4</item>
+        <item></item>
+        <item>message template 5</item>
+        <item>message template 6</item>
+        <item>message template 7</item>
+        <item>message template 8</item>
+        <item></item>
+        <item>message template 10</item>
+        <item>message template 11</item>
+    </string-array>
+
 </resources>

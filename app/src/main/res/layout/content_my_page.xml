@@ -44,12 +44,6 @@
                         android:layout_height="100dp" android:layout_gravity="center|bottom|left"
                         android:src="@drawable/ic_car_travel" android:layout_marginLeft="16dp"
                         android:layout_marginBottom="16dp" android:id="@+id/imgProfileUser"/>
-                    <ImageView
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:id="@+id/imgChangeCover" android:layout_gravity="bottom|right"
-                        android:layout_margin="16dp" android:src="@drawable/ic_edit_white"
-                        android:scaleType="fitCenter"/>
                 </FrameLayout>
                 <!--Image List-->
                 <HorizontalScrollView android:layout_width="match_parent"
@@ -100,12 +94,6 @@
                         android:layout_gravity="center" android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
                         android:layout_marginRight="16dp" android:textColor="#000000"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:id="@+id/imgChangeProfile" android:src="@drawable/ic_edit_black"
-                        android:scaleType="fitXY" android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -153,12 +141,6 @@
                         android:layout_gravity="center" android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
                         android:layout_marginRight="16dp" android:textColor="#000000"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_edit_black"
-                        android:scaleType="fitXY" android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -199,12 +181,6 @@
                         android:layout_gravity="center" android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
                         android:layout_marginRight="16dp" android:textColor="#000000"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_edit_black"
-                        android:scaleType="fitXY" android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -245,12 +221,6 @@
                         android:layout_gravity="center" android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
                         android:layout_marginRight="16dp" android:textColor="#000000"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_edit_black"
-                        android:scaleType="fitXY" android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -291,12 +261,6 @@
                         android:layout_gravity="center" android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
                         android:layout_marginRight="16dp" android:textColor="#000000"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_edit_black"
-                        android:scaleType="fitXY" android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"
@@ -338,12 +302,6 @@
                         android:layout_gravity="center" android:layout_marginLeft="16dp"
                         android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
                         android:layout_marginRight="16dp" android:textColor="#000000"/>
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/ic_edit_black"
-                        android:scaleType="fitXY" android:layout_marginRight="8dp"
-                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
                 </LinearLayout>
                 <LinearLayout
                     android:orientation="vertical"

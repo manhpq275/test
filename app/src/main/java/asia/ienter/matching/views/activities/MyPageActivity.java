@@ -28,7 +28,6 @@ import asia.ienter.matching.views.fragments.SettingFragment;
 public class MyPageActivity extends AppCompatActivity {
     private ReplaceFragment fragmentHandle;
     private CircleImageView imgProfile;
-    private ImageView changeCover;
     private LinearLayout layoutShowImage;
 
     private final String list_image_user[] = {
@@ -50,19 +49,7 @@ public class MyPageActivity extends AppCompatActivity {
         ImageView imgBackground = (ImageView) findViewById(R.id.imgBackground);
         Picasso.with(getApplicationContext()).load("https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13718686_1085301731562985_7217436262619398099_n.jpg?oh=733eda78106fc1ad9cbdc868fda213df&oe=5865A5A1")
                 .resize(400, 300).into(imgBackground);
-        changeCover = (ImageView) findViewById(R.id.imgChangeCover);
-        imgProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupSelectImage(imgProfile);
-            }
-        });
-        changeCover.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupSelectImage(changeCover);
-            }
-        });
+
         Button btnGoAbout = (Button) findViewById(R.id.btnAboutApp);
         btnGoAbout.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -70,18 +57,12 @@ public class MyPageActivity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-        ImageView imgChangeProfile = (ImageView) findViewById(R.id.imgChangeProfile);
-        imgChangeProfile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                changeFragment();
-            }
-        });
-
         buildSlideShowImage();
     }
 
+    /**
+     *
+     */
     private void buildSlideShowImage() {
         layoutShowImage = (LinearLayout) findViewById(R.id.layoutShowImage);
         for(int i=0;i<list_image_user.length;i++){
@@ -92,71 +73,6 @@ public class MyPageActivity extends AppCompatActivity {
         }
         View addMore = LayoutInflater.from(getApplicationContext()).inflate(R.layout.layout_add_more_image, null);
         layoutShowImage.addView(addMore);
-    }
-
-    private void handleGoSetting() {
-        fragmentHandle.replaceWithAnimation(getSupportFragmentManager(), SettingFragment.newInstance(), R.id.layoutContent,
-                R.anim.enter_from_bottom,
-                R.anim.hold,
-                R.anim.hold,
-                R.anim.exit_from_top);
-    }
-
-    private void handleGoAboutApp() {
-        fragmentHandle.replaceWithAnimation(getSupportFragmentManager(), AboutFragment.newInstance(), R.id.layoutContent,
-                R.anim.enter_from_bottom,
-                R.anim.hold,
-                R.anim.hold,
-                R.anim.exit_from_top);
-    }
-
-    /**
-     * show popup menu on button
-     * @param btnClick
-     */
-    private void showPopupSelectImage(View btnClick){
-        PopupMenu popup = new PopupMenu(MyPageActivity.this, btnClick);
-        //Inflating the Popup using xml file
-        popup.getMenuInflater().inflate(R.menu.popup_menu, popup.getMenu());
-        popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-            public boolean onMenuItemClick(MenuItem item) {
-                handlePopupClick(item);
-                return true;
-            }
-        });
-
-        popup.show();
-    }
-
-    /**
-     * Handle on item menu popup click
-     * @param item
-     */
-    private void handlePopupClick(MenuItem item) {
-        switch (item.getItemId()){
-            case R.id.from_facebook:
-                //pickImage();
-                changeFragment();
-                break;
-            case R.id.from_gallery:
-                //handleChangeDisplayName();
-                changeFragment();
-                break;
-            case R.id.from_camera:
-                //handleChangeSecretPassword();
-                changeFragment();
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void changeFragment(){
-        fragmentHandle.replaceWithAnimation(getSupportFragmentManager(), SelectImageFragment.newInstance(), R.id.layoutContent,
-                R.anim.enter_from_bottom,
-                R.anim.hold,
-                R.anim.hold,
-                R.anim.exit_from_top);
     }
 
     @Override

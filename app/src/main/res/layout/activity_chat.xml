@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:id="@+id/lnActionBar"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_action_bar"
+        android:background="@color/menu_background_color">
+
+        <Button
+            android:id="@+id/btnBack"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="back"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Minh Ngoc"
+            android:gravity="center"
+            android:layout_weight="1"/>
+        <Button
+            android:id="@+id/btnChatSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_action_bar"
+            android:text="settings"/>
+
+    </LinearLayout>
+    <View android:layout_height="1dp"
+        android:id="@+id/viewline"
+        android:layout_below="@+id/lnActionBar"
+        android:layout_width="match_parent"
+        android:background="@android:color/darker_gray"/>
+    <RelativeLayout
+        android:layout_below="@+id/viewline"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+
+            android:paddingBottom="@dimen/height_menu_bar"
+            android:id="@+id/lstMessage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/tvUseTmp">
+
+        </android.support.v7.widget.RecyclerView>
+        <TextView
+            android:layout_above="@+id/rlChatBox"
+            android:id="@+id/tvUseTmp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Use template message"
+            android:gravity="center"/>
+        <RelativeLayout
+            android:id="@+id/rlChatBox"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:background="@color/menu_background_color">
+
+            <View android:layout_height="1dp"
+                android:layout_width="match_parent"
+                android:background="@android:color/darker_gray"/>
+            <EditText
+                android:layout_marginRight="@dimen/height_menu_bar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_menu_bar"/>
+            <Button
+                android:text="send"
+                android:layout_alignParentRight="true"
+                android:layout_width="@dimen/height_menu_bar"
+                android:layout_height="@dimen/height_menu_bar" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

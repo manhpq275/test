@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dialog_liked_height"
+        android:layout_margin="@dimen/dialog_liked_padding"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        android:id="@+id/rlContent">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dialog_image_height"
+            android:id="@+id/imgLike"
+            android:src="@mipmap/img_like"
+            android:scaleType="fitXY"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+        <TextView
+            android:id="@+id/tvMessage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/imgLike"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="@string/txtGotoChat"/>
+        <Button
+            android:id="@+id/btnAccept"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tvMessage"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            android:text="Accept"/>
+    </RelativeLayout>
+    <ImageView
+        android:layout_width="@dimen/dialog_close_btn_size"
+        android:layout_height="@dimen/dialog_close_btn_size"
+        android:layout_alignTop="@+id/rlContent"
+        android:layout_alignRight="@+id/rlContent"
+        android:layout_marginTop="@dimen/dialog_close_btn_padding"
+        android:layout_marginRight="@dimen/dialog_close_btn_padding"
+        android:src="@mipmap/btn_close"
+        android:id="@+id/btn_close_dialog"/>
+
+
+</RelativeLayout>

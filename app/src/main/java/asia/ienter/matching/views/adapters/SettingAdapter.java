@@ -52,10 +52,7 @@ public class SettingAdapter extends RecyclerView.Adapter<SettingAdapter.ViewHold
             holder.layoutContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new ReplaceFragment().replaceWithAnimation(((SettingActivity)mActivity).getSupportFragmentManager(), AboutDetailFragment.newInstance(), R.id.layoutContent, R.anim.enter_from_right,
-                            R.anim.hold,
-                            R.anim.hold,
-                            R.anim.exit_to_right);
+
                 }
             });
         }else{

@@ -5,8 +5,9 @@
              android:layout_height="match_parent"
              android:id="@+id/layoutContent">
         <include
-            layout="@layout/content_my_page"
+            layout="@layout/content_my_page2"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:layout_marginBottom="@dimen/height_menu_bar"/>
 </FrameLayout>

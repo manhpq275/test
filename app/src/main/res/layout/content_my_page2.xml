@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:fillViewport="true">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="match_parent"
+                  android:orientation="vertical">
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            style="@style/AppTheme.Card.NoMargins">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <FrameLayout android:layout_width="match_parent"
+                             android:layout_height="300dp">
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:id="@+id/imgBackground" android:scaleType="fitXY"/>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" android:layout_weight="1"
+                            android:visibility="gone">
+                        </LinearLayout>
+                        <LinearLayout
+                            android:orientation="vertical"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" android:layout_weight="1"
+                            android:background="@color/colorPrimary" android:visibility="gone">
+                        </LinearLayout>
+                    </LinearLayout>
+                    <asia.ienter.matching.utils.custom.CircleImageView
+                        android:layout_width="100dp"
+                        android:layout_height="100dp" android:layout_gravity="center|bottom|left"
+                        android:src="@drawable/ic_car_travel" android:layout_marginLeft="16dp"
+                        android:layout_marginBottom="16dp" android:id="@+id/imgProfileUser"/>
+                    <ImageView
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:id="@+id/imgChangeCover" android:layout_gravity="bottom|right"
+                        android:layout_margin="16dp" android:src="@drawable/ic_edit_white"
+                        android:scaleType="fitCenter"/>
+                </FrameLayout>
+                <!--Image List-->
+                <HorizontalScrollView android:layout_width="match_parent"
+                                      android:layout_height="wrap_content"
+                                      android:scrollbars="none">
+                    <LinearLayout android:layout_width="match_parent"
+                                  android:layout_height="wrap_content"
+                                  android:orientation="horizontal"
+                                  android:id="@+id/layoutShowImage"/>
+
+                </HorizontalScrollView>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+
+        <!--Name first information-->
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" android:gravity="center">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="H.D.T さん"
+                android:id="@+id/textView6" android:layout_weight="1"
+                android:layout_marginLeft="10dp" android:textColor="#000"/>
+        </LinearLayout>
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            style="@style/AppTheme.Card.NoMargins">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="About Me"
+                        android:id="@+id/txtNameUser" android:layout_weight="1"
+                        android:layout_gravity="center" android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                        android:layout_marginRight="16dp" android:textColor="#000000"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:id="@+id/imgChangeProfile" android:src="@drawable/ic_edit_black"
+                        android:scaleType="fitXY" android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="#d8d8d8"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="My name’s HDT. \nI’m 22 years old and I’m single. I have just graduated from university in August with the major in accounting. I got 3 months experience as an internship at A company. \nI like reading books and cooking.  I’m a careful and hard-working person. I’m eager to learn new things and willing to work in team. I easily adapt to with new working environment and take initiative in work."
+                        android:id="@+id/textView3" android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp" android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <!--Basic Information-->
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            style="@style/AppTheme.Card.NoMargins"
+                                            android:layout_marginTop="10dp">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Basic Informations"
+                        android:layout_weight="1"
+                        android:layout_gravity="center" android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                        android:layout_marginRight="16dp" android:textColor="#000000"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_edit_black"
+                        android:scaleType="fitXY" android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="#d8d8d8"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <!--Jobs & Education-->
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            style="@style/AppTheme.Card.NoMargins">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Jobs &amp; Educations"
+                        android:layout_weight="1"
+                        android:layout_gravity="center" android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                        android:layout_marginRight="16dp" android:textColor="#000000"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_edit_black"
+                        android:scaleType="fitXY" android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="#d8d8d8"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <!--Character & Life Style-->
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            style="@style/AppTheme.Card.NoMargins">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Characters &amp; Life Styles"
+                        android:layout_weight="1"
+                        android:layout_gravity="center" android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                        android:layout_marginRight="16dp" android:textColor="#000000"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_edit_black"
+                        android:scaleType="fitXY" android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="#d8d8d8"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <!--Love & Married-->
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            style="@style/AppTheme.Card.NoMargins">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Love &amp; Married"
+                        android:layout_weight="1"
+                        android:layout_gravity="center" android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                        android:layout_marginRight="16dp" android:textColor="#000000"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_edit_black"
+                        android:scaleType="fitXY" android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="#d8d8d8"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+        <!--Hobby-->
+        <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+                                            android:orientation="horizontal"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginTop="10dp"
+                                            android:layout_marginBottom="10dp"
+                                            style="@style/AppTheme.Card.NoMargins">
+            <LinearLayout android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:orientation="vertical">
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="Hobby"
+                        android:layout_weight="1"
+                        android:layout_gravity="center" android:layout_marginLeft="16dp"
+                        android:layout_marginTop="5dp" android:layout_marginBottom="5dp"
+                        android:layout_marginRight="16dp" android:textColor="#000000"/>
+                    <ImageView
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/ic_edit_black"
+                        android:scaleType="fitXY" android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp" android:layout_marginBottom="8dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp" android:background="#d8d8d8"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                </LinearLayout>
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" android:gravity="center"
+                    android:layout_marginLeft="6dp" android:layout_marginRight="6dp">
+                    <asia.ienter.matching.utils.custom.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_chat3" android:layout_margin="10dp"/>
+                    <asia.ienter.matching.utils.custom.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_car_travel" android:layout_margin="10dp"/>
+                    <asia.ienter.matching.utils.custom.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_eat_food" android:layout_margin="10dp"/>
+                    <asia.ienter.matching.utils.custom.CircleImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/ic_bottle_wine" android:layout_margin="10dp"/>
+                </LinearLayout>
+            </LinearLayout>
+
+        </android.support.v7.widget.CardView>
+    </LinearLayout>
+</ScrollView>
