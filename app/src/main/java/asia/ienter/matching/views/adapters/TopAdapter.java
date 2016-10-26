@@ -54,7 +54,18 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(TopAdapter.ViewHolder holder, int position) {
         holder.tvName.setText(topViewArrayList.get(position).getAndroid_version_name());
-        Picasso.with(mContext).load(topViewArrayList.get(position).getAndroid_image_url()).resize(240, 120).into(holder.imAvatar);
+        switch (position%3){
+            case 1:
+                Picasso.with(mContext).load(R.mipmap.m_avatar1).into(holder.imAvatar);
+                break;
+            case 2:
+                Picasso.with(mContext).load(R.mipmap.m_avatar2).into(holder.imAvatar);
+                break;
+            default:
+                Picasso.with(mContext).load(R.mipmap.m_avatar3).into(holder.imAvatar);
+                break;
+        }
+
         holder.bind(position,mTopFragment);
     }
 
@@ -81,13 +92,13 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
             btnLike = (ImageView) view.findViewById(R.id.btnLike);
             lnInfo = (LinearLayout) view.findViewById(R.id.lnInfo);
 
-//            if(mTopFragment.isGrid){
-//                ViewGroup.LayoutParams params = imAvatar.getLayoutParams();
-//                params.width = MCApp.getScreenSize().x/2;
-//                params.height = MCApp.getScreenSize().x/2;
-//                imAvatar.setLayoutParams(params);
-//            }else
-//            {
+            if(mTopFragment.isGrid){
+                ViewGroup.LayoutParams params = imAvatar.getLayoutParams();
+                params.width = MCApp.getScreenSize().x/2;
+                params.height = MCApp.getScreenSize().x/2;
+                imAvatar.setLayoutParams(params);
+            }else
+            {
 //                btnLike.setImageResource(R.mipmap.btn_like_full);
 //                btnLike.setPadding(10,0,0,0);
 //
@@ -99,12 +110,12 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
 //                ViewGroup.LayoutParams paramsInfo = lnInfo.getLayoutParams();
 //                paramsInfo.height = paramsInfo.height*2;
 //                lnInfo.setLayoutParams(paramsInfo);
-//
-//                ViewGroup.LayoutParams params = imAvatar.getLayoutParams();
-//                params.width = MCApp.getScreenSize().x;
-//                params.height = MCApp.getScreenSize().x;
-//                imAvatar.setLayoutParams(params);
-//            }
+
+                ViewGroup.LayoutParams params = imAvatar.getLayoutParams();
+                params.width = MCApp.getScreenSize().x;
+                params.height = MCApp.getScreenSize().x;
+                imAvatar.setLayoutParams(params);
+            }
 
         }
         public void bind(final int position,final TopFragment listener) {

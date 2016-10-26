@@ -8,12 +8,12 @@
                   android:layout_height="match_parent"
         android:orientation="vertical">
         <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="?actionBarSize"
-            android:orientation="horizontal" android:background="@color/colorPrimary" android:gravity="center">
+                      android:layout_height="@dimen/height_action_bar"
+            android:orientation="horizontal" android:background="@color/text_color_menu_active" android:gravity="center">
 
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text="&lt;-"
                 android:id="@+id/btnAboutApp" android:layout_margin="10dp"/>
             <TextView
@@ -24,8 +24,8 @@
                 android:id="@+id/textView9" android:layout_weight="1" android:gravity="center"
                 android:textColor="#ffffff"/>
             <Button
-                android:layout_width="50dp"
-                android:layout_height="50dp"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:text="..."
                 android:id="@+id/btnSetting" android:layout_margin="10dp"
                 />

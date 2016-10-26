@@ -189,6 +189,7 @@ public class HomeActivity extends FragmentActivity {
                 setTabActive(tabMessage,true);
                 setTabActive(tabProfile,false);
                 leftBtnTopBar.setVisibility(View.INVISIBLE);
+                rightBtnTopBar.setImageResource(R.mipmap.btn_lock);
                 break;
             case TAB_PROFILE:
                 setTabActive(tabMatching,false);
@@ -237,9 +238,11 @@ public class HomeActivity extends FragmentActivity {
         ((ProfileFragment)fragment).onGoAbout();
     }
 
+
+    boolean isLock =false;
     @OnClick(R.id.rightBtnTopBar)
     public void onClickRightBtnTopBar(){
-        MLog.e(TAG,"Right Btn TopBar Onclick");
+        MLog.e(TAG, "Right Btn TopBar Onclick");
         fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
 
         if (fragment==null) return;
@@ -249,6 +252,14 @@ public class HomeActivity extends FragmentActivity {
             ((NearByFragment)fragment).onSettingNearBy();
         }else if (fragment instanceof ProfileFragment){
             ((ProfileFragment)fragment).onGoSetting();
+        }else if (fragment instanceof MessagesFragment){
+            isLock = !isLock;
+            ((MessagesFragment)fragment).onLockClick(isLock);
+            if(isLock){
+                rightBtnTopBar.setImageResource(R.mipmap.btn_unlock);
+            }else{
+                rightBtnTopBar.setImageResource(R.mipmap.btn_lock);
+            }
         }else return;
 
     }
@@ -285,5 +296,11 @@ public class HomeActivity extends FragmentActivity {
     }
 
 
-
+    public void changeInformation(String aboutMe) {
+        fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
+        if (fragment==null) return;
+        if(fragment instanceof ProfileFragment){
+            ((ProfileFragment)fragment).updateInformationView(aboutMe);
+        }
+    }
 }

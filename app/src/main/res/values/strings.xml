@@ -78,4 +78,18 @@
         <item>message template 11</item>
     </string-array>
 
+    <string-array name="action_hobby">
+        <item>Chatting</item>
+        <item>Car</item>
+        <item>Going out</item>
+        <item>Drinking</item>
+    </string-array>
+
+    <string-array name="change_number_people">
+        <item>All</item>
+        <item>10 人</item>
+        <item>20 人</item>
+        <item>30 人</item>
+    </string-array>
+
 </resources>

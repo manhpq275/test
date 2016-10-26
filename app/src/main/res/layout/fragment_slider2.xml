@@ -24,7 +24,7 @@
         <ImageView
             android:layout_width="80dp"
             android:layout_height="80dp"
-            android:id="@+id/imageView2" android:src="@drawable/ic_chat3"/>
+            android:id="@+id/imgMainSlide" android:src="@drawable/ic_chat3"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"

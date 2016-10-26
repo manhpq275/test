@@ -4,9 +4,34 @@
              android:layout_height="match_parent">
 
     <android.support.v4.view.ViewPager
+
         android:id="@+id/pagerSlider"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_action_bar"
+        android:id="@+id/topActionBar"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:background="@color/text_color_menu_active">
+
+
+        <TextView
+            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:text="@string/app_name"
+            android:textSize="@dimen/textSize_appName_actionBar"
+            android:textStyle="bold"
+            android:layout_weight="1"
+            android:textColor="@android:color/white"
+            android:textAllCaps="true"
+            android:gravity="center"
+            />
+
+    </LinearLayout>
+
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -25,22 +50,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Đăng nhập qua Facebook"
-                android:id="@+id/btnLoginApp" android:background="@drawable/dr_button_border"
-                android:layout_marginLeft="10dp" android:layout_marginRight="10dp"
-                android:layout_marginBottom="5dp" android:textColor="#fff"
+                android:id="@+id/btnLoginApp"
+                android:background="@drawable/dr_button_border"
+
+                android:textColor="#fff"
                 android:gravity="center" android:layout_marginTop="5dp"
                 android:textAllCaps="false"
                 style="?android:attr/borderlessButtonStyle" android:textSize="18sp"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/txtTextShow" android:gravity="center"
-                android:maxLines="2" android:textColor="#fff"
-                android:textSize="12sp" android:layout_marginTop="5dp"
-                android:layout_marginBottom="5dp" android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"/>
+            <!--<TextView-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:text="Medium Text"-->
+                <!--android:id="@+id/txtTextShow" android:gravity="center"-->
+                <!--android:maxLines="2" android:textColor="#fff"-->
+                <!--android:textSize="12sp" android:layout_marginTop="5dp"-->
+                <!--android:layout_marginBottom="5dp" android:layout_marginLeft="10dp"-->
+                <!--android:layout_marginRight="10dp"/>-->
         </LinearLayout>
         <!--<com.facebook.login.widget.LoginButton-->
             <!--android:id="@+id/btnLoginFb"-->

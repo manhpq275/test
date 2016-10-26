@@ -11,7 +11,7 @@ import asia.ienter.matching.views.fragments.SliderFragment;
  * Created by hoangtuan on 9/6/16.
  */
 public class LoginSliderAdapter extends FragmentStatePagerAdapter {
-    private int NUMBER_DAY_OF_WEAK = 4;
+    private int NUMBER_DAY_OF_WEAK = 6;
 
     public LoginSliderAdapter(FragmentManager manager) {
         super(manager);

@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
         sliderAdapter = new LoginSliderAdapter(getSupportFragmentManager());
         addBottomDots(0);
         viewPager.setAdapter(sliderAdapter);
-        viewPager.setOffscreenPageLimit(4);
+        viewPager.setOffscreenPageLimit(6);
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -84,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
         ((TextView)findViewById(R.id.txtShowTitleSlider)).setText(Html.fromHtml("Nếu bạn thích một ai đó, và tình cờ họ cũng thích bạn thì hãy..."));
-        ((TextView)findViewById(R.id.txtTextShow)).setText(Html.fromHtml("Bằng cách tiếp tục, bạn đồng ý với <b>Điều khoản dịch vụ</b> và <b>Chính sách về Quyền riêng tư</b>"));
+      //  ((TextView)findViewById(R.id.txtTextShow)).setText(Html.fromHtml("Bằng cách tiếp tục, bạn đồng ý với <b>Điều khoản dịch vụ</b> và <b>Chính sách về Quyền riêng tư</b>"));
 
         //Setting facebook button
 //        btnLogin  = (LoginButton) findViewById(R.id.btnLoginFb);
@@ -149,7 +149,7 @@ public class LoginActivity extends AppCompatActivity {
     private void addBottomDots(int currentPage) {
         int colorsActive = ContextCompat.getColor(getApplicationContext(), R.color.dot_dark_screen);
         int colorsInactive = ContextCompat.getColor(getApplicationContext(), R.color.dot_light_screen);
-        dots = new TextView[4];
+        dots = new TextView[6];
         dotsLayout.removeAllViews();
         for (int i = 0; i < dots.length; i++) {
             dots[i] = new TextView(this);

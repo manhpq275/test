@@ -281,4 +281,14 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     public void onClickTab3(){
         onTabChange(3);
     }
+
+    public void onLockClick(boolean isLock) {
+        if(isLock){
+            tab1.setEnabled(false);
+            tab2.setEnabled(false);
+        }else{
+            tab1.setEnabled(true);
+            tab2.setEnabled(true);
+        }
+    }
 }

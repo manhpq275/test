@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.PopupMenu;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.utils.ReplaceFragment;
@@ -60,17 +64,45 @@ public class ProfileFragment extends BaseFragment {
                 showPopupSelectImage(changeCover);
             }
         });
-
+        Picasso.with(mContext).load("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT87f6LTPcdzho8Q5aNfn8wPiA0MKcr45om_g4_A1S-hx2xdr7S5g")
+                .resize(240, 120).into(imgProfile);
+        ImageView imgBackground = (ImageView) mView.findViewById(R.id.imgBackground);
+        Picasso.with(mContext).load("http://protiumdesign.com/wp-content/uploads/2015/04/Material-Design-Background-1024.jpg")
+                .resize(400, 300).into(imgBackground);
         ImageView imgChangeProfile = (ImageView) mView.findViewById(R.id.imgChangeProfile);
         imgChangeProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                changeFragment();
+                changeProfileFragment();
+            }
+        });
+
+        ImageView imgChangeHobby = (ImageView) mView.findViewById(R.id.imgChangeHobby);
+        imgChangeHobby.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeHobbyFragment();
             }
         });
     }
 
-    private void changeFragment(){
+    private void changeHobbyFragment() {
+        fragmentHandle.replaceWithAnimation(getActivity().getSupportFragmentManager(), ChangeHobbyFragment.newInstance(), R.id.layoutMainContent,
+                R.anim.enter_from_right,
+                R.anim.hold,
+                R.anim.hold,
+                R.anim.exit_to_right);
+    }
+
+    private void changeProfileFragment() {
+        fragmentHandle.replaceWithAnimation(getActivity().getSupportFragmentManager(), ChangeAboutMeFragment.newInstance(), R.id.layoutMainContent,
+                R.anim.enter_from_right,
+                R.anim.hold,
+                R.anim.hold,
+                R.anim.exit_to_right);
+    }
+
+    private void changeSelectImageFragment(){
         fragmentHandle.replaceWithAnimation(getActivity().getSupportFragmentManager(), SelectImageFragment.newInstance(), R.id.layoutMainContent,
                 R.anim.enter_from_bottom,
                 R.anim.hold,
@@ -80,7 +112,7 @@ public class ProfileFragment extends BaseFragment {
 
     @Override
     protected void loadDataFromApi() {
-
+        Log.i("Data", "Go here");
     }
 
     public void handleGoSetting() {
@@ -112,15 +144,15 @@ public class ProfileFragment extends BaseFragment {
         switch (item.getItemId()){
             case R.id.from_facebook:
                 //pickImage();
-                changeFragment();
+                changeSelectImageFragment();
                 break;
             case R.id.from_gallery:
                 //handleChangeDisplayName();
-                changeFragment();
+                changeSelectImageFragment();
                 break;
             case R.id.from_camera:
                 //handleChangeSecretPassword();
-                changeFragment();
+                changeSelectImageFragment();
                 break;
             default:
                 break;
@@ -143,5 +175,9 @@ public class ProfileFragment extends BaseFragment {
         });
 
         popup.show();
+    }
+
+    public void updateInformationView(String aboutMe) {
+        ((TextView) mView.findViewById(R.id.txtAboutMe)).setText(aboutMe);
     }
 }

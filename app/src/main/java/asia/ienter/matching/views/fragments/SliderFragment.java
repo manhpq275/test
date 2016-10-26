@@ -3,7 +3,6 @@ package asia.ienter.matching.views.fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,11 +34,7 @@ public class SliderFragment extends Fragment {
         if(bundle!=null){
             position = bundle.getInt("Position", 0);
         }
-        if(position!=0) {
-            mMainView = inflater.inflate(R.layout.fragment_slider, null);
-        }else{
-            mMainView = inflater.inflate(R.layout.fragment_slider2, null);
-        }
+        mMainView = inflater.inflate(R.layout.fragment_slider, null);
         buildView();
         return mMainView;
     }
@@ -57,24 +52,45 @@ public class SliderFragment extends Fragment {
         TextView txtComment = (TextView) mMainView.findViewById(R.id.txtTextSlider);
         switch (position){
             case 0:
-                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
-//                imageMain.setImageResource(R.drawable.ic_movie);
-                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+//                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
+                imageMain.setImageResource(R.mipmap.img_slider1);
+//                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+                txtComment.setText("");
                 break;
             case 1:
-                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen2));
-                imageMain.setImageResource(R.drawable.ic_car_travel);
-                txtComment.setText("Cùng nhau đi du lịch khắp nơi ");
+//                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
+                imageMain.setImageResource(R.mipmap.img_slider2);
+//                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+                txtComment.setText("");
+//                txtComment.setText("Cùng nhau đi du lịch khắp nơi ");
                 break;
             case 2:
-                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen3));
-                imageMain.setImageResource(R.drawable.ic_eat_food);
-                txtComment.setText("Cùng ăn bữa ăn thân mật");
+                //                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
+                imageMain.setImageResource(R.mipmap.img_slider3);
+//                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+                txtComment.setText("");
+//                txtComment.setText("Cùng ăn bữa ăn thân mật");
                 break;
             case 3:
-                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen4));
-                imageMain.setImageResource(R.drawable.ic_bottle_wine);
-                txtComment.setText("Cùng nhau thưởng thức đồ uống");
+                //                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
+                imageMain.setImageResource(R.mipmap.img_slider4);
+//                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+                txtComment.setText("");
+               // txtComment.setText("Cùng nhau thưởng thức đồ uống");
+                break;
+            case 4:
+                //                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
+                imageMain.setImageResource(R.mipmap.img_slider5);
+//                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+                txtComment.setText("");
+                // txtComment.setText("Cùng nhau thưởng thức đồ uống");
+                break;
+            case 5:
+                //                layoutContent.setBackgroundColor(ContextCompat.getColor(getActivity(), R.color.bg_screen1));
+                imageMain.setImageResource(R.mipmap.img_slider6);
+//                txtComment.setText("Cùng nhau trò chuyện trong ứng dụng ");
+                txtComment.setText("");
+                // txtComment.setText("Cùng nhau thưởng thức đồ uống");
                 break;
             default:
                 break;

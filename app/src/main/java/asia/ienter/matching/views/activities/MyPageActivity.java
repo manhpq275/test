@@ -30,12 +30,10 @@ public class MyPageActivity extends AppCompatActivity {
     private CircleImageView imgProfile;
     private LinearLayout layoutShowImage;
 
-    private final String list_image_user[] = {
-            "https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13227214_1043697852390040_8717076642059613757_n.jpg?oh=b81ac88e1bc479f105b398375a24c8ee&oe=58733E4D",
-            "https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/580372_955530281206798_5678687062761502191_n.jpg?oh=4a77eb0e0a378d6889da8288496dbce8&oe=587D1D89",
-            "https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/315041_339167659509733_1166522795_n.jpg?oh=9e97113e64da0d8a1d6e8aa10ede12b2&oe=587B191D",
-            "https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/390468_346509578775541_800237657_n.jpg?oh=6f88958d3953e08d7f1aefc8cf4fcb72&oe=58798195",
-            "https://scontent-hkg3-1.xx.fbcdn.net/v/l/t1.0-9/1981923_630694610357035_1810204288871521189_n.jpg?oh=b84c1de152a4ce69a8f8f14c9d6d90db&oe=5837DD47"
+    private final int list_image_user[] = {
+            R.mipmap.m_avatar1,
+            R.mipmap.m_avatar2,
+            R.mipmap.m_avatar3
     };
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,11 +42,11 @@ public class MyPageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_mypage);
         fragmentHandle = new ReplaceFragment();
         imgProfile = (CircleImageView) findViewById(R.id.imgProfileUser);
-        Picasso.with(getApplicationContext()).load("https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13226657_1043244802435345_3258483637215210696_n.jpg?oh=3fb1a3e064f9149b7c19b384c512ca84&oe=587A218D")
-                .resize(240, 120).into(imgProfile);
+        Picasso.with(getApplicationContext()).load(R.mipmap.m_avatar1)
+                .resize(100, 100).into(imgProfile);
         ImageView imgBackground = (ImageView) findViewById(R.id.imgBackground);
-        Picasso.with(getApplicationContext()).load("https://scontent-hkg3-1.xx.fbcdn.net/v/t1.0-9/13718686_1085301731562985_7217436262619398099_n.jpg?oh=733eda78106fc1ad9cbdc868fda213df&oe=5865A5A1")
-                .resize(400, 300).into(imgBackground);
+        Picasso.with(getApplicationContext()).load(R.mipmap.m_avatar3)
+                .resize(300, 300).into(imgBackground);
 
         Button btnGoAbout = (Button) findViewById(R.id.btnAboutApp);
         btnGoAbout.setOnClickListener(new View.OnClickListener() {

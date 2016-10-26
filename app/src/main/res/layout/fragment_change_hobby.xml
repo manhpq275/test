@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent" android:focusableInTouchMode="false"
+              android:background="#fff" android:clickable="true">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_action_bar"
+                  android:orientation="horizontal" android:background="@color/text_color_menu_active" android:gravity="center">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="&lt;-"
+            android:id="@+id/btnBack" android:layout_margin="10dp"
+            android:background="@color/white"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Change Hobby"
+            android:id="@+id/textView9" android:layout_weight="1" android:gravity="center"
+            android:textColor="#fff"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="ST"
+            android:id="@+id/btnSetting" android:layout_margin="10dp"
+            android:visibility="invisible"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:gravity="center"
+        android:background="@color/white" android:layout_weight="1">
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/listHobby"
+            android:scrollbars="vertical"/>
+    </LinearLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Save"
+        android:id="@+id/btnSave" android:layout_gravity="center"/>
+</LinearLayout>

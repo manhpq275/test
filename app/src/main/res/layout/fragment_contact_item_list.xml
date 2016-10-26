@@ -22,8 +22,9 @@
             android:layout_height="100dp"
             android:layout_marginLeft="100dp"
             android:background="@android:color/white"
-            android:gravity="center_horizontal"
+            android:gravity="center_vertical"
             android:paddingTop="@dimen/recycle_view_padding"
+            android:paddingLeft="@dimen/recycle_view_padding"
             android:paddingBottom="@dimen/recycle_view_padding"
             >
 

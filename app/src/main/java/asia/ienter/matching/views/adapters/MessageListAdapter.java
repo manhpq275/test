@@ -54,11 +54,31 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.tvName.setText(topViewArrayList.get(position).getAndroid_version_name());
         if(mTopFragment.getTabSelected() == 1){
-            Picasso.with(mContext).load(topViewArrayList.get(position).getAndroid_image_url()).resize(100, 100).into(holder.imAvatar);
+            switch (position%3){
+                case 1:
+                    Picasso.with(mContext).load(R.mipmap.m_avatar1).resize(100, 100).into(holder.imAvatar);
+                    break;
+                case 2:
+                    Picasso.with(mContext).load(R.mipmap.m_avatar2).resize(100, 100).into(holder.imAvatar);
+                    break;
+                default:
+                    Picasso.with(mContext).load(R.mipmap.m_avatar3).resize(100, 100).into(holder.imAvatar);
+                    break;
+            }
+
 
         }else{
-            Picasso.with(mContext).load(topViewArrayList.get(position).getAndroid_image_url()).resize(240, 240).into(holder.imAvatar);
-
+            switch (position%3){
+                case 1:
+                    Picasso.with(mContext).load(R.mipmap.m_avatar1).resize(240, 240).into(holder.imAvatar);
+                    break;
+                case 2:
+                    Picasso.with(mContext).load(R.mipmap.m_avatar2).resize(240, 240).into(holder.imAvatar);
+                    break;
+                default:
+                    Picasso.with(mContext).load(R.mipmap.m_avatar3).resize(240, 240).into(holder.imAvatar);
+                    break;
+            }
         }
        holder.bind(position,mTopFragment);
     }

@@ -44,7 +44,7 @@ public class ChatActivity extends AppCompatActivity implements IChatSettingCallb
 
     @Override
     public void onViewProfileCallback() {
-        Intent i = new Intent(this,ProfileActivity.class);
+        Intent i = new Intent(this,MyPageActivity.class);
         startActivityForResult(i,10000);
     }
 
