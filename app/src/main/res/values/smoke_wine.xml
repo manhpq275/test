@@ -1,0 +1,8 @@
+<resources>
+    <string name="smokeWine_1">Không dùng</string>
+    <string name="smokeWine_2">Thi thoảng</string>
+    <string name="smokeWine_3">Dùng ít</string>
+    <string name="smokeWine_4">Dùng nhiều</string>
+    <string name="smokeWine_5">Thường xuyên</string>
+    <string name="smokeWine_6">Nghiện nặng</string>
+</resources>

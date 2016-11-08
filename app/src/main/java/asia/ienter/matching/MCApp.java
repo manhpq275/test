@@ -4,10 +4,16 @@ import android.app.Application;
 import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Typeface;
+import android.text.TextUtils;
 import android.util.Size;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 
 import java.util.HashMap;
 
+import asia.ienter.matching.models.AdvanceSearchView;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.MLog;
 
@@ -27,6 +33,9 @@ public class MCApp extends Application {
     public static Context getAppContext() {
         return sInstance.getApplicationContext();
     }
+    private RequestQueue mRequestQueue;
+
+    private static AdvanceSearchView advanceSearchView;
 
     @Override
     protected void attachBaseContext(Context base) {
@@ -67,5 +76,31 @@ public class MCApp extends Application {
     }
     public static Point getScreenSize(){
         return screenSize;
+    }
+
+    public RequestQueue getRequestQueue() {
+        if (mRequestQueue == null) {
+            mRequestQueue = Volley.newRequestQueue(getApplicationContext());
+        }
+
+        return mRequestQueue;
+    }
+    public <T> void addToRequestQueue(Request<T> req, String tag) {
+        req.setTag(TextUtils.isEmpty(tag) ? TAG : tag);
+        getRequestQueue().add(req);
+    }
+
+    public <T> void addToRequestQueue(Request<T> req) {
+        req.setTag(TAG);
+        getRequestQueue().add(req);
+    }
+
+    public static void setAdvanceSearchView(AdvanceSearchView advanceSearchView){
+        MCApp.advanceSearchView = advanceSearchView;
+    }
+
+    public static AdvanceSearchView getAdvanceSearchView(){
+        if(advanceSearchView == null) advanceSearchView = new AdvanceSearchView("","");
+        return advanceSearchView;
     }
 }

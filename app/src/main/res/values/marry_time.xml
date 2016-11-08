@@ -1,0 +1,5 @@
+<resources>
+    <string name="marryTime_1">Dưới 3 tháng</string>
+    <string name="marryTime_2">3 - 6 tháng</string>
+    <string name="marryTime_3">Trên 6 tháng</string>
+</resources>

@@ -50,6 +50,11 @@
         <item name="android:windowExitAnimation">@anim/slidedown</item>
     </style>
 
+    <style name="DialogAnimation3">
+        <item name="android:windowEnterAnimation">@anim/slideup2</item>
+        <item name="android:windowExitAnimation">@anim/slidedown2</item>
+    </style>
+
     <style name="DialogSlideAnim" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
         <item name="android:layout_width">fill_parent</item>
@@ -64,6 +69,18 @@
 
     <style name="DialogSlideAnim2" parent="@android:style/Theme.Dialog">
         <item name="android:windowAnimationStyle">@style/DialogAnimation2</item>
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+
+
+        <!-- No backgrounds, titles or window float -->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+
+    <style name="DialogSlideUp" parent="@android:style/Theme.Dialog">
+        <item name="android:windowAnimationStyle">@style/DialogAnimation3</item>
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">fill_parent</item>
 

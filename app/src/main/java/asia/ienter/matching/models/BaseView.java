@@ -4,27 +4,28 @@ package asia.ienter.matching.models;
  * Created by phamquangmanh on 9/22/16.
  */
 public class BaseView {
-    protected String Id;
-    protected String Name;
+    private String id;
+    private String name;
 
     public BaseView(String id, String name) {
-        Id = id;
-        Name = name;
+        this.id = id;
+        this.name = name;
     }
 
     public String getId() {
-        return Id;
+        return id;
     }
 
     public void setId(String id) {
-        Id = id;
+        this.id = id;
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
     public void setName(String name) {
-        Name = name;
+        this.name = name;
     }
 }
+

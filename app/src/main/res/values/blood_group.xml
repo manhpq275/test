@@ -1,0 +1,8 @@
+<resources>
+    <string name="bloodGroup_1">A</string>
+    <string name="bloodGroup_2">B</string>
+    <string name="bloodGroup_3">AB</string>
+    <string name="bloodGroup_4">O</string>
+    <string name="bloodGroup_5">RH+</string>
+    <string name="bloodGroup_6">RH-</string>
+</resources>

@@ -7,16 +7,33 @@ import android.util.Log;
  */
 public class MLog {
 
-    public static void d(String tag,String messages){
-       if(Config.ISLOG){
-           Log.d(tag,messages);
-       }
+    public static void e(Class<?> clazz, String msg) {
+        if (Config.ISLOG)
+            e(clazz.getSimpleName(), msg);
     }
 
-    public static void e(String tag,String messages){
-        if(Config.ISLOG){
-            Log.e(tag,messages);
-        }
+    public static void d(Class<?> clazz, String msg) {
+        if (Config.ISLOG)
+            d(clazz.getSimpleName(), msg);
     }
 
+    public static void e(String tag, String msg) {
+        if (Config.ISLOG)
+            Log.e(tag, msg);
+    }
+
+    public static void d(String tag, String msg) {
+        if (Config.ISLOG)
+            Log.d(tag, msg);
+    }
+
+    public static void e(String msg) {
+        if (Config.ISLOG)
+            d("MCApp", msg);
+    }
+
+    public static void d(String msg) {
+        if (Config.ISLOG)
+            d("MCApp", msg);
+    }
 }

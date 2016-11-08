@@ -5,7 +5,9 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
+import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
+import asia.ienter.matching.models.AdvanceSearchView;
 import asia.ienter.matching.utils.SharedPreference;
 
 /**
@@ -17,6 +19,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
         SharedPreference.getInstance().putBoolean("GiftCode", true);
+        MCApp.setAdvanceSearchView(new AdvanceSearchView(null, null));
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -34,4 +37,7 @@ public class SplashActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
+
+
 }

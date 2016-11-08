@@ -22,4 +22,5 @@
     <color name="black">#000000</color>
 
     <color name="black_transparent">#80000000</color>
+    <color name="background_advance_search">#f7f7f2</color>
 </resources>
