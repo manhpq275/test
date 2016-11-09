@@ -21,8 +21,12 @@ public class AppConstants {
     public static final String MARRY_TIME_PREFIX = "marryTime_";
     public static final String  MARRY_PREFIX = "married_";
     public static final String CHILDREN_PREFIX = "children_";
+    public static final String LOVE_COST_PREFIX = "loveCost_";
+    public static final String LANGUAGE_PREFIX = "language_" ;
 
 
     public static int VOLLEY_TIMEOUT = 30000;
     public static int VOLLEY_MAX_NUM_RETRIES = 0;
+
+    //fb api hash key: "ga0RGNYHvNM5d0SLGQfpQWAPGJ8="  pass: hdtq2402
 }

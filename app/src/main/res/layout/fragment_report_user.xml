@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <LinearLayout android:layout_width="match_parent"
+                  android:layout_height="@dimen/height_action_bar"
+                  android:orientation="horizontal" android:background="@color/text_color_menu_active" android:gravity="center"
+                  android:clickable="true">
+
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="&lt;-"
+            android:id="@+id/btnAboutApp" android:layout_margin="10dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Report User"
+            android:id="@+id/textView9" android:layout_weight="1" android:gravity="center"
+            android:textColor="#ffffff"/>
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:text="..."
+            android:id="@+id/btnSetting" android:layout_margin="10dp"
+            android:visibility="invisible"/>
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:gravity="center" android:background="#fff">
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirm Report"
+            android:id="@+id/btnConfirmReport" android:layout_gravity="center_horizontal"/>
+    </LinearLayout>
+</LinearLayout>

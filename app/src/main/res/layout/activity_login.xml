@@ -68,15 +68,15 @@
                 <!--android:layout_marginBottom="5dp" android:layout_marginLeft="10dp"-->
                 <!--android:layout_marginRight="10dp"/>-->
         </LinearLayout>
-        <!--<com.facebook.login.widget.LoginButton-->
-            <!--android:id="@+id/btnLoginFb"-->
-            <!--android:layout_width="200dp"-->
-            <!--android:layout_height="300dp"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="30dp"-->
-            <!--android:layout_marginBottom="30dp"-->
-            <!--android:text=""-->
-            <!--android:visibility="gone"/>-->
+        <com.facebook.login.widget.LoginButton
+            android:id="@+id/btnLoginFb"
+            android:layout_width="200dp"
+            android:layout_height="300dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="30dp"
+            android:text=""
+            android:visibility="gone"/>
     </LinearLayout>
     <TextView
         android:layout_width="match_parent"
@@ -86,4 +86,9 @@
         android:id="@+id/txtShowTitleSlider" android:gravity="center" android:textColor="#fff"
         android:layout_marginTop="?android:attr/actionBarSize" android:layout_marginRight="20dp"
         android:textSize="20sp" android:layout_marginLeft="20dp" android:maxLines="2"/>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Logout"
+        android:id="@+id/btnLogout" android:visibility="gone"/>
 </FrameLayout>

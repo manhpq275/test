@@ -3,23 +3,30 @@ package asia.ienter.matching.views.activities;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+
+import java.util.ArrayList;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogListCallBack;
 import asia.ienter.matching.models.AdvanceSearchView;
 import asia.ienter.matching.models.enums.BloodGroup;
+import asia.ienter.matching.models.enums.Children;
 import asia.ienter.matching.models.enums.Externality;
+import asia.ienter.matching.models.enums.Languages;
 import asia.ienter.matching.models.enums.Level;
+import asia.ienter.matching.models.enums.LoveCost;
 import asia.ienter.matching.models.enums.MarriedHistory;
 import asia.ienter.matching.models.enums.MarryTime;
 import asia.ienter.matching.models.enums.Regions;
 import asia.ienter.matching.models.enums.SmokeWine;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.dialogs.DialogList;
+import asia.ienter.matching.views.dialogs.DialogListMultiple;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -31,16 +38,21 @@ public class AdvanceSearchActivity extends AppCompatActivity {
 
     View pauseView;
     AdvanceSearchView advanceSearchView;
-    @InjectView(R.id.tvAddress)   TextView tvAddress;
-    @InjectView(R.id.tvHomeLand)   TextView tvHomeLand;
-    @InjectView(R.id.tvExternality)   TextView tvExternality;
-    @InjectView(R.id.tvBloodGroup)   TextView tvBloodGroup;
-    @InjectView(R.id.tvLevel)   TextView tvLevel;
-    @InjectView(R.id.tvSmoke)   TextView tvSmoke;
-    @InjectView(R.id.tvDrinkWine)   TextView tvDrinkWine;
-    @InjectView(R.id.tvMarryTime)   TextView tvMarryTime;
-    @InjectView(R.id.tvMarriedHistory)   TextView tvMarriedHistory;
+    @InjectView(R.id.tvAddress)         TextView tvAddress;
+    @InjectView(R.id.tvHomeLand)        TextView tvHomeLand;
+    @InjectView(R.id.tvExternality)     TextView tvExternality;
+    @InjectView(R.id.tvBloodGroup)      TextView tvBloodGroup;
+    @InjectView(R.id.tvLevel)           TextView tvLevel;
+    @InjectView(R.id.tvSmoke)           TextView tvSmoke;
+    @InjectView(R.id.tvDrinkWine)       TextView tvDrinkWine;
+    @InjectView(R.id.tvMarryTime)       TextView tvMarryTime;
+    @InjectView(R.id.tvMarriedHistory)  TextView tvMarriedHistory;
+    @InjectView(R.id.tvChildren)        TextView tvChildren;
+    @InjectView(R.id.tvMatchingPay)     TextView tvMatchingPay;
+    @InjectView(R.id.tvLanguages)       TextView tvLanguages;
 
+    @InjectView(R.id.cbAvatar) CheckBox cbAvatar;
+    @InjectView(R.id.cbDescription) CheckBox cbDescription;
 
 
     @Override
@@ -52,6 +64,11 @@ public class AdvanceSearchActivity extends AppCompatActivity {
         pauseView = findViewById(R.id.PauseView);
         ButterKnife.inject(this);
 
+    }
+
+    private void loadData(){
+        cbAvatar.setChecked(advanceSearchView.isAvatar());
+        cbDescription.setChecked(advanceSearchView.isDescription());
     }
 
     @Override
@@ -408,6 +425,135 @@ public class AdvanceSearchActivity extends AppCompatActivity {
             }
         });
         dialogList.show(getString(R.string.txt_marriage_history), listItems);
+    }
+
+    @OnClick(R.id.tvChildren)
+    public void onClickChildren() {
+        Children childrens[] = Children.class.getEnumConstants();
+        int i = 0;
+        final String listItems[] = new String[childrens.length];
+        for (Children children : childrens) {
+            listItems[i] = children.toString();
+            MLog.d(DialogList.class, "" + listItems[i]);
+            i++;
+        }
+        this.pauseView.setVisibility(View.VISIBLE);
+        int selectedItem =0;
+        if (advanceSearchView != null) {
+            selectedItem= advanceSearchView.getChildren();
+        }
+        DialogList dialogList = new DialogList(this,selectedItem, new IDialogListCallBack() {
+            @Override
+            public void onClickBack() {
+                pauseView.setVisibility(View.GONE);
+                advanceSearchView.setChildren(advanceSearchView.getChildren());
+            }
+
+            @Override
+            public void onClickItem(int position) {
+                advanceSearchView.setChildren(position);
+            }
+
+            @Override
+            public void onClickDone() {
+                pauseView.setVisibility(View.GONE);
+                tvChildren.setText(Children.fromInteger(advanceSearchView.getChildren()).toString());
+            }
+        });
+        dialogList.show(getString(R.string.txt_is_children), listItems);
+    }
+
+    @OnClick(R.id.tvMatchingPay)
+    public void onClickMatchingPay() {
+        LoveCost loveCosts[] = LoveCost.class.getEnumConstants();
+        int i = 0;
+        final String listItems[] = new String[loveCosts.length];
+        for (LoveCost loveCost : loveCosts) {
+            listItems[i] = loveCost.toString();
+            MLog.d(DialogList.class, "" + listItems[i]);
+            i++;
+        }
+        this.pauseView.setVisibility(View.VISIBLE);
+        int selectedItem =0;
+        if (advanceSearchView != null) {
+            selectedItem= advanceSearchView.getMatchingPay();
+        }
+        DialogList dialogList = new DialogList(this,selectedItem, new IDialogListCallBack() {
+            @Override
+            public void onClickBack() {
+                pauseView.setVisibility(View.GONE);
+                advanceSearchView.setMatchingPay(advanceSearchView.getMatchingPay());
+            }
+
+            @Override
+            public void onClickItem(int position) {
+                advanceSearchView.setMatchingPay(position);
+            }
+
+            @Override
+            public void onClickDone() {
+                pauseView.setVisibility(View.GONE);
+                tvMatchingPay.setText(LoveCost.fromInteger(advanceSearchView.getMatchingPay()).toString());
+            }
+        });
+        dialogList.show(getString(R.string.txt_who_pay_matching), listItems);
+    }
+
+    @OnClick(R.id.cbAvatar)
+    public void onClickCBAvatar(){
+        advanceSearchView.setAvatar(cbAvatar.isChecked());
+    }
+
+    @OnClick(R.id.cbDescription)
+    public void onClickCBDescription(){
+        advanceSearchView.setDescription(cbDescription.isChecked());
+    }
+
+    @OnClick(R.id.tvLanguages)
+    public void onClickLanguage() {
+        Languages languages[] = Languages.class.getEnumConstants();
+        int i = 0;
+        final String listItems[] = new String[languages.length];
+        for (Languages language : languages) {
+            listItems[i] = language.toString();
+            MLog.d(DialogListMultiple.class, "" + listItems[i]);
+            i++;
+        }
+        this.pauseView.setVisibility(View.VISIBLE);
+        ArrayList<Integer> selectedItem = new ArrayList<>();
+        if (advanceSearchView != null) {
+            selectedItem= advanceSearchView.getLanguages();
+        }
+        DialogListMultiple dialogList = new DialogListMultiple(this,selectedItem, new IDialogListCallBack() {
+            @Override
+            public void onClickBack() {
+                pauseView.setVisibility(View.GONE);
+                advanceSearchView.setLanguages(advanceSearchView.getLanguages());
+            }
+
+            @Override
+            public void onClickItem(int position) {
+                ArrayList<Integer> selectedItem_tmp = advanceSearchView.getLanguages();
+                int indexOf = selectedItem_tmp.indexOf(position);
+                if (indexOf >= 0) {
+                    selectedItem_tmp.remove(indexOf);
+                } else {
+                    selectedItem_tmp.add(position);
+                }
+                advanceSearchView.setLanguages(selectedItem_tmp);
+            }
+
+            @Override
+            public void onClickDone() {
+                pauseView.setVisibility(View.GONE);
+                String tmp="";
+                for(int i=0;i<advanceSearchView.getLanguages().size();i++){
+                    tmp += Languages.fromInteger(advanceSearchView.getLanguages().get(i)).toString() + "/\n";
+                }
+                tvLanguages.setText(tmp);
+            }
+        });
+        dialogList.show(getString(R.string.txt_who_pay_matching), listItems);
     }
 
 

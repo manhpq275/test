@@ -2,10 +2,13 @@ package asia.ienter.matching.views.adapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Interpolator;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.utils.MLog;
@@ -17,9 +20,16 @@ public class DialogListAdapter extends BaseAdapter {
     Context context;
     int mSelectedItem = 0;
     String listItem[];
-    public DialogListAdapter(Context context,String listItem[]){
+    ArrayList<Integer> listSelected;
+    boolean multipleChoice = false;
+
+    public DialogListAdapter(Context context, String listItem[],boolean multipleChoice) {
         this.context = context;
         this.listItem = listItem;
+        this.multipleChoice = multipleChoice;
+        if (this.multipleChoice) {
+            listSelected = new ArrayList<>();
+        }
     }
 
     @Override
@@ -39,31 +49,49 @@ public class DialogListAdapter extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        final View view= View.inflate(context, R.layout.dialog_item_list, null);;
+        final View view = View.inflate(context, R.layout.dialog_item_list, null);
+        ;
         ViewHolder viewHolder = null;
-        if(viewHolder == null){
+        if (viewHolder == null) {
             viewHolder = new ViewHolder();
             viewHolder.item = (TextView) view.findViewById(R.id.list_item);
             view.setTag(viewHolder);
-        }else{
+        } else {
             viewHolder = (ViewHolder) view.getTag();
         }
 
         viewHolder.item.setText(listItem[position]);
 
-        MLog.d(DialogListAdapter.class,"Item select ="+mSelectedItem );
-        if (position == mSelectedItem) {
-            viewHolder.item.setBackgroundColor(Color.LTGRAY);
+        MLog.d(DialogListAdapter.class, "Item select =" + mSelectedItem);
+        if(multipleChoice){
+            for(int i=0;i<listSelected.size();i++){
+                if (position == listSelected.get(i)) {
+                    viewHolder.item.setBackgroundColor(Color.LTGRAY);
+                }
+            }
+        }else{
+            if (position == mSelectedItem) {
+                viewHolder.item.setBackgroundColor(Color.LTGRAY);
+            }
         }
 
         return view;
     }
 
-    public void setOnClickItem(int position){
-        mSelectedItem = position;
+    public void setOnClickItem(int position) {
+        if (multipleChoice) {
+            int indexOf = listSelected.indexOf(position);
+            if (indexOf >= 0) {
+                listSelected.remove(indexOf);
+            } else {
+                listSelected.add(position);
+            }
+        } else {
+            mSelectedItem = position;
+        }
     }
 
-    private class ViewHolder{
+    private class ViewHolder {
         public TextView item;
     }
 }

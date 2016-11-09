@@ -1,0 +1,6 @@
+<resources>
+    <string name="loveCost_0">Chia đều</string>
+    <string name="loveCost_1">Đàn ông trả</string>
+    <string name="loveCost_2">Phụ nữ trả</string>
+    <string name="loveCost_3">Tùy tình huống để có thể trả</string>
+</resources>

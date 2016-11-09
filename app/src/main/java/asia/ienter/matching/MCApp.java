@@ -30,6 +30,8 @@ public class MCApp extends Application {
     public static Typeface typefaceHome;
     public static Point screenSize;
 
+    private static String accessToken = "";
+
     public static Context getAppContext() {
         return sInstance.getApplicationContext();
     }
@@ -102,5 +104,13 @@ public class MCApp extends Application {
     public static AdvanceSearchView getAdvanceSearchView(){
         if(advanceSearchView == null) advanceSearchView = new AdvanceSearchView("","");
         return advanceSearchView;
+    }
+
+    public static void setAccessToken(String accessToken){
+        MCApp.accessToken = accessToken;
+    }
+
+    public static String getAccessToken(){
+        return accessToken;
     }
 }

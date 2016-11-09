@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">matching</string>
-    <string name="facebook_app_id">1816256758607269</string>
+    <string name="facebook_app_id">676624882501880</string>
     <string name="hash_key">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
     <string name="dialog_content_login">Matching App gặp vấn đề khi đăng nhập vào facebook. Hãy thực hiện lại sau một lúc nữa!</string>
 
@@ -81,6 +81,7 @@
     <string name="txtAll">Tất cả</string>
     <string name="btn_close">Hủy bỏ</string>
     <string name="btn_done">Xong</string>
+
 
     <string-array name="advance_search_string_array">
         <item>filter 1</item>
