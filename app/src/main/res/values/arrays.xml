@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="facebook_permissions">
+        <item>email</item>
+        <!--<item>publish_actions</item>-->
+        <item>public_profile</item>
+        <item>user_about_me</item>
+        <item>user_birthday</item>
+        <item>user_education_history</item>
+        <item>user_friends</item>
+        <item>user_games_activity</item>
+        <item>user_hometown</item>
+        <item>user_likes</item>
+        <item>user_location</item>
+        <item>user_photos</item>
+        <item>user_posts</item>
+        <item>user_relationship_details</item>
+        <item>user_relationships</item>
+        <item>user_religion_politics</item>
+        <item>user_status</item>
+        <item>user_tagged_places</item>
+        <item>user_videos</item>
+        <item>user_website</item>
+        <item>user_work_history</item>
+    </string-array>
+
+    <string-array name="about_string_array">
+        <item>Cam kết an toàn cho các cuộc hẹn</item>
+        <item>Cam kết độ tin cậy và an ninh</item>
+        <item>Các mục cấm</item>
+        <item>Giới thiệu về ứng dụng</item>
+        <item>Đánh giá ứng dụng</item>
+        <item>Các câu hỏi thường gặp</item>
+    </string-array>
+
+    <string-array name="media_selection">
+        <item>Thư viện Facebook</item>
+        <item>Chụp Camera</item>
+        <item>Thư viện máy</item>
+    </string-array>
+</resources>

@@ -1,16 +1,13 @@
 package asia.ienter.matching.views.adapters;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,10 +15,7 @@ import java.util.Arrays;
 import asia.ienter.matching.R;
 import asia.ienter.matching.utils.ReplaceFragment;
 import asia.ienter.matching.views.activities.AboutActivity;
-import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.fragments.AboutDetailFragment;
-import asia.ienter.matching.views.fragments.ProfileFragment;
-import asia.ienter.matching.views.fragments.SelectImageFragment;
 
 /**
  * Created by hoangtuan on 9/21/16.
@@ -43,7 +37,7 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
     }
 
     @Override
-    public void onBindViewHolder(AboutAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(AboutAdapter.ViewHolder holder,final int position) {
         String title = itemShow.get(position);
         if(!title.isEmpty()) {
             holder.txtAboutTitle.setText(title);
@@ -52,17 +46,22 @@ public class AboutAdapter extends RecyclerView.Adapter<AboutAdapter.ViewHolder> 
             holder.layoutContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    new ReplaceFragment().replaceWithAnimation(((AboutActivity)mActivity).getSupportFragmentManager(), AboutDetailFragment.newInstance(), R.id.layoutContent,
-                            R.anim.enter_from_right,
-                            R.anim.hold,
-                            R.anim.hold,
-                            R.anim.exit_to_right);
+                    handleGoDetailAbout(position);
+
                 }
             });
         }else{
             holder.layoutNoContent.setVisibility(View.VISIBLE);
             holder.txtAboutTitle.setVisibility(View.GONE);
         }
+    }
+
+    private void handleGoDetailAbout(int position) {
+        new ReplaceFragment().replaceWithAnimation(((AboutActivity)mActivity).getSupportFragmentManager(), AboutDetailFragment.newInstance(position), R.id.layoutContent,
+                R.anim.enter_from_right,
+                R.anim.hold,
+                R.anim.hold,
+                R.anim.exit_to_right);
     }
 
     @Override

@@ -15,9 +15,9 @@ import java.util.ArrayList;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
-import asia.ienter.matching.models.TopView;
+import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.views.fragments.MessagesFragment;
-import asia.ienter.matching.views.fragments.TopFragment;
 
 /**
  * Created by phamquangmanh on 9/15/16.
@@ -26,10 +26,10 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     private static final String TAG = "TopAdapter";
 
-    ArrayList<TopView> topViewArrayList = new ArrayList<>();
+    ArrayList<UserView> topViewArrayList = new ArrayList<>();
     Context mContext;
     MessagesFragment mTopFragment;
-    public MessageListAdapter(MessagesFragment mTopFragment, ArrayList<TopView> topViewArrayList) {
+    public MessageListAdapter(MessagesFragment mTopFragment, ArrayList<UserView> topViewArrayList) {
         this.mTopFragment = mTopFragment;
         this.mContext = mTopFragment.getContext();
         this.topViewArrayList.addAll(topViewArrayList);
@@ -52,33 +52,15 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.tvName.setText(topViewArrayList.get(position).getAndroid_version_name());
+        holder.tvName.setText(topViewArrayList.get(position).getName());
         if(mTopFragment.getTabSelected() == 1){
-            switch (position%3){
-                case 1:
-                    Picasso.with(mContext).load(R.mipmap.m_avatar1).resize(100, 100).into(holder.imAvatar);
-                    break;
-                case 2:
-                    Picasso.with(mContext).load(R.mipmap.m_avatar2).resize(100, 100).into(holder.imAvatar);
-                    break;
-                default:
-                    Picasso.with(mContext).load(R.mipmap.m_avatar3).resize(100, 100).into(holder.imAvatar);
-                    break;
-            }
+            Picasso.with(mContext).load(Config.BASE_URL+topViewArrayList.get(position).getImageUser()).into(holder.imAvatar);
+
 
 
         }else{
-            switch (position%3){
-                case 1:
-                    Picasso.with(mContext).load(R.mipmap.m_avatar1).resize(240, 240).into(holder.imAvatar);
-                    break;
-                case 2:
-                    Picasso.with(mContext).load(R.mipmap.m_avatar2).resize(240, 240).into(holder.imAvatar);
-                    break;
-                default:
-                    Picasso.with(mContext).load(R.mipmap.m_avatar3).resize(240, 240).into(holder.imAvatar);
-                    break;
-            }
+            Picasso.with(mContext).load(Config.BASE_URL+topViewArrayList.get(position).getImageUser()).into(holder.imAvatar);
+
         }
        holder.bind(position,mTopFragment);
     }
@@ -115,7 +97,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         }
         public void bind(final int position,final MessagesFragment listener) {
-            final TopView item = topViewArrayList.get(position);
+            final UserView item = topViewArrayList.get(position);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                         listener.OnItemClickRecycleView(item);
@@ -125,25 +107,25 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             btnLike.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                     if(mTopFragment.getTabSelected() == 2){
-                        if(item.isLike() == 0)                        setLike(btnLike,1);
-                        if(item.isLike() == 1)                        setLike(btnLike,0);
+//                        if(item.isLike() == 0)                        setLike(btnLike,1);
+//                        if(item.isLike() == 1)                        setLike(btnLike,0);
                         listener.OnItemClickLike(position);
                     }
 
                 }
             });
             if(mTopFragment.getTabSelected() == 3){
-                if(item.isLike() == 1)                        setLike(btnLike,1);
-                if(item.isLike() == 2)                        setLike(btnLike,2);
+//                if(item.isLike() == 1)                        setLike(btnLike,1);
+//                if(item.isLike() == 2)                        setLike(btnLike,2);
             }else if(mTopFragment.getTabSelected() == 2){
-                if(item.isLike() == 0)                        setLike(btnLike,0);
-                if(item.isLike() == 1)                        setLike(btnLike,1);
+//                if(item.isLike() == 0)                        setLike(btnLike,0);
+//                if(item.isLike() == 1)                        setLike(btnLike,1);
             }
         }
 
     }
 
-    public void onNotifyDataSetChanged(ArrayList<TopView> datas){
+    public void onNotifyDataSetChanged(ArrayList<UserView> datas){
         topViewArrayList.clear();
         topViewArrayList.addAll(datas);
         notifyDataSetChanged();

@@ -1,0 +1,12 @@
+<resources>
+    <string name="report_0">Tất cả</string>
+    <string name="report_1">Người sử dụng không đủ 18 tuổi</string>
+    <string name="report_2">Đăng ký thông tin sai lệch và giả mạo</string>
+    <string name="report_3">Sử dụng ứng mục với mục đích thương mại</string>
+    <string name="report_4">Có liên kết đến các trang web hay ứng dụng khác</string>
+    <string name="report_5">Mục đích tống tiền</string>
+    <string name="report_6">Quấy rối hoặc gây sự</string>
+    <string name="report_7">Vu khống và lạm dụng lời nói</string>
+    <string name="report_8">Vi phạm bản quyền người khác</string>
+    <string name="report_9">Vi phạm luật pháp, hành vi sai trái</string>
+</resources>

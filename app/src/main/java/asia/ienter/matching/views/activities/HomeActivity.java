@@ -4,8 +4,13 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Point;
+import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
@@ -21,6 +26,7 @@ import asia.ienter.matching.R;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.ReplaceFragment;
 import asia.ienter.matching.utils.SharedPreference;
+import asia.ienter.matching.utils.UIHelper;
 import asia.ienter.matching.views.dialogs.DialogGift;
 import asia.ienter.matching.views.dialogs.DialogHelpNearBy;
 import asia.ienter.matching.views.fragments.MessagesFragment;
@@ -75,16 +81,19 @@ public class HomeActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
         Fragment f = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
-        if (f instanceof MessagesFragment || f instanceof ProfileFragment) {
+        if (f instanceof MessagesFragment ) {
             super.onBackPressed();
         } else if (f instanceof TopFragment) {
-            finish();
-        } else {
+            UIHelper.killApp(false);
+        } else if (f instanceof ProfileFragment) {
+            UIHelper.killApp(false);
+        }else {
             super.onBackPressed();
         }
     }
 
     private void initService() {
+        loadData();
     }
 
     private void initView() {
@@ -142,7 +151,7 @@ public class HomeActivity extends FragmentActivity {
         changeBackgroundTab(mTabSelect);
         fragmentManager = getSupportFragmentManager();
         ReplaceFragment replaceFragment = new ReplaceFragment();
-        MLog.d(TAG,"changeTab()");
+        MLog.d(TAG, "changeTab()");
         switch (position) {
             case TAB_MATCHING:
                 fragment = TopFragment.newInstance(null);
@@ -157,7 +166,7 @@ public class HomeActivity extends FragmentActivity {
                 replaceFragment.replace(fragmentManager,fragment, R.id.home_content_fragment);
                 break;
             case TAB_PROFILE:
-                fragment =  new ProfileFragment();
+                fragment =  ProfileFragment.newInstance(true);
                 replaceFragment.replace(fragmentManager, fragment, R.id.home_content_fragment);
                 break;
         }
@@ -213,7 +222,7 @@ public class HomeActivity extends FragmentActivity {
     }
     @OnClick(R.id.leftBtnTopBar)
     public void onClickLeftBtnTopBar(){
-        MLog.e(TAG,"Left Btn TopBar Onclick");
+        MLog.e(TAG, "Left Btn TopBar Onclick");
         fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
 
         if (fragment==null) return;
@@ -284,7 +293,7 @@ public class HomeActivity extends FragmentActivity {
 
     @OnClick(R.id.tabProfile)
     public void onClickTabProfile(){
-        MLog.e(TAG,"change tab Profile");
+        MLog.e(TAG, "change tab Profile");
         changeTab(TAB_PROFILE);
     }
 
@@ -303,4 +312,64 @@ public class HomeActivity extends FragmentActivity {
             ((ProfileFragment)fragment).updateInformationView(aboutMe);
         }
     }
+
+    public void loadData(){
+
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1) {
+                try {
+                    Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), ProfileFragment.imageUri);
+                    fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
+                    String imageurl = getRealPathFromURI(ProfileFragment.imageUri);
+                    ((ProfileFragment)fragment).addViewPicture(ProfileFragment.imageUri, imageurl);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            } else if (requestCode == 2) {
+                final Intent dataGet = data;
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        final Uri selectedImage = dataGet.getData();
+                        String[] filePath = { MediaStore.Images.Media.DATA };
+                        Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+                        if(c!=null) {
+                            c.moveToFirst();
+                            int columnIndex = c.getColumnIndex(filePath[0]);
+                            final String picturePath = c.getString(columnIndex);
+                            final Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ((ProfileFragment)fragment).addViewPicture( selectedImage, picturePath);
+                                }
+                            });
+                            c.close();
+                        }
+
+                    }
+                }).run();
+            }
+        }
+    }
+
+    public String getRealPathFromURI(Uri contentUri) {
+        String[] proj = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(contentUri, proj, null, null, null);
+        if(cursor!=null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String result = cursor.getString(column_index);
+            cursor.close();
+            return result;
+        }
+        return "";
+    }
+
 }

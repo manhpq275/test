@@ -11,15 +11,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogLikeCallback;
-import asia.ienter.matching.interfaces.IMessagesCallback;
+import asia.ienter.matching.interfaces.IGetListUserSearch;
 import asia.ienter.matching.interfaces.ITopViewCallback;
-import asia.ienter.matching.models.TopView;
+import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.models.enums.ClientType;
+import asia.ienter.matching.services.HomeServices;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.activities.AdvanceSearchActivity;
 import asia.ienter.matching.views.activities.HomeActivity;
@@ -36,14 +39,15 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
 
 
     private static final String TAG = "TopFragment";
-    ArrayList<TopView> topViewArrayList;
+    ArrayList<UserView> topViewArrayList;
     TopAdapter topAdapter;
     public boolean isGrid = true;
-    private ArrayList<TopView> mUsers = new ArrayList<>();
+    private ArrayList<UserView> mUsers = new ArrayList<>();
     HomeActivity homeActivity;
     @InjectView(R.id.recycleTop)  RecyclerView recycleTopView;
 
 
+    int page = 0;
 
     public static TopFragment newInstance(Bundle args) {
         TopFragment myFragment = new TopFragment();
@@ -58,7 +62,8 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
         initView();
         MLog.d(TAG,"onCreateView()");
         if(getUserVisibleHint()){
-            loadDataFromApi();
+            isGrid = true;
+            showPullRefresh();
         }
         return mView;
     }
@@ -67,7 +72,8 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
     public void setUserVisibleHint(boolean visibleHint){
         super.setUserVisibleHint(visibleHint);
         if(!visibleHint) return;
-        loadDataFromApi();
+        isGrid = true;
+        showPullRefresh();
     }
     private boolean isLoading;
     private int visibleThreshold = 5;
@@ -88,7 +94,6 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
             @Override
             public void onRefresh() {
                 showPullRefresh();
-                loadDataFromApi();
             }
         });
 
@@ -121,16 +126,8 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
                             public void run() {
                                 MLog.e(TAG, "Load More Data");
 
-                                //Load data
-                                int index = topViewArrayList.size();
-                                int end = index + 5;
-                                for (int i = index; i < end; i++) {
-                                    TopView user = new TopView(""+i,"Name " + i,1);
-                                    user.setAndroid_version_name("Name " + i);
-                                    user.setAndroid_image_url(android_image_urls[4]);
-                                    topViewArrayList.add(user);
-                                }
-                                topAdapter.onNotifyDataSetChanged(topViewArrayList);
+                                loadDataFromApi();
+                               // topAdapter.onNotifyDataSetChanged(topViewArrayList);
                                 isLoading = false;
                                 hideLoading();
                             }
@@ -141,51 +138,58 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
         });
 
 
-
+        rlNoInternetConnection = (RelativeLayout)mView.findViewById(R.id.rlNoInternetConnection);
+        rlNoInternetConnection2 = (RelativeLayout)mView.findViewById(R.id.rlNoInternetConnection2);
 
     }
 
-    private final String android_version_names[] = {
-            "Donut",
-            "Eclair",
-            "Froyo",
-            "Gingerbread",
-            "Honeycomb",
-            "Ice Cream Sandwich",
-            "Jelly Bean",
-            "KitKat",
-            "Lollipop",
-            "Marshmallow"
-    };
-
-    private final String android_image_urls[] = {
-            "http://api.learn2crack.com/android/images/donut.png",
-            "http://api.learn2crack.com/android/images/eclair.png",
-            "http://api.learn2crack.com/android/images/froyo.png",
-            "http://api.learn2crack.com/android/images/ginger.png",
-            "http://api.learn2crack.com/android/images/honey.png",
-            "http://api.learn2crack.com/android/images/icecream.png",
-            "http://api.learn2crack.com/android/images/jellybean.png",
-            "http://api.learn2crack.com/android/images/kitkat.png",
-            "http://api.learn2crack.com/android/images/lollipop.png",
-            "http://api.learn2crack.com/android/images/marshmallow.png"
-    };
+public void showPullRefresh(){
+    super.showPullRefresh();
+    page=0;
+    isLoading = false;
+    topViewArrayList.clear();
+    if(!hasInternet()){
+        recycleTopView.setVisibility(View.INVISIBLE);
+        return;
+    }
+    loadDataFromApi();
+}
 
     @Override
     protected void loadDataFromApi() {
         MLog.d(TAG,"loadDataFromApi()");
         showLoading();
-        topViewArrayList.clear();
-        for(int i=0;i<android_version_names.length;i++){
-            TopView androidVersion = new TopView(""+i,"Name "+i,0);
-            androidVersion.setAndroid_version_name(android_version_names[i]);
-            androidVersion.setAndroid_image_url(android_image_urls[i]);
-            topViewArrayList.add(androidVersion);
+        page++;
+        if(page==1){
+            recycleTopView.setVisibility(View.INVISIBLE);
         }
-      //  topViewArrayList.add(null);
-        topAdapter = new TopAdapter(this,topViewArrayList);
-        recycleTopView.setAdapter(topAdapter);
-        hideLoading();
+
+        HomeServices.getInstance().getUserListMatching(1,page, ClientType.AndroidApp, new IGetListUserSearch() {
+            @Override
+            public void onError(ArrayList errors) {
+
+            }
+
+            @Override
+            public void onSuccess(ArrayList<UserView> items) {
+                hideLoading();
+                recycleTopView.setVisibility(View.VISIBLE);
+                if(items==null){
+                        isLoading = true;
+                        page--;
+                }else{
+                    if(items.size()>0){
+                        for(int i=0;i<items.size();i++){
+                            topViewArrayList.add(items.get(i));
+                        }
+                        topAdapter = new TopAdapter(TopFragment.this,topViewArrayList);
+                        recycleTopView.setAdapter(topAdapter);
+                    }
+                }
+
+            }
+        });
+
     }
 
 
@@ -214,7 +218,7 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
 
 
     @Override
-    public void OnItemClickRecycleView(TopView topView) {
+    public void OnItemClickRecycleView(UserView topView) {
         MLog.e(TAG,"Item click RecycleView");
         Intent profile = new Intent(mContext, MyPageActivity.class);
         profile.putExtra("ID",10);
@@ -224,7 +228,7 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
     @Override
     public boolean OnItemClickLike(int position) {
         MLog.e(TAG,"Item click Like");
-        TopView topView = topViewArrayList.get(position);
+        UserView topView = topViewArrayList.get(position);
         new DialogLike(mContext, new IDialogLikeCallback() {
 
             @Override

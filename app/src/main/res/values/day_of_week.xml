@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dayOfWeek_0">Cả tuần </string>
+    <string name="dayOfWeek_1">Thứ hai </string>
+    <string name="dayOfWeek_2">Thứ ba </string>
+    <string name="dayOfWeek_3">Thứ tư </string>
+    <string name="dayOfWeek_4">Thứ năm </string>
+    <string name="dayOfWeek_5">Thứ sáu </string>
+    <string name="dayOfWeek_6">Thứ bảy </string>
+    <string name="dayOfWeek_7">Chủ nhật </string>
+</resources>

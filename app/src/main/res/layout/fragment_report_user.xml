@@ -1,40 +1,132 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="@dimen/height_action_bar"
-                  android:orientation="horizontal" android:background="@color/text_color_menu_active" android:gravity="center"
-                  android:clickable="true">
-
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="&lt;-"
-            android:id="@+id/btnAboutApp" android:layout_margin="10dp"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Report User"
-            android:id="@+id/textView9" android:layout_weight="1" android:gravity="center"
-            android:textColor="#ffffff"/>
-        <Button
-            android:layout_width="40dp"
-            android:layout_height="40dp"
-            android:text="..."
-            android:id="@+id/btnSetting" android:layout_margin="10dp"
-            android:visibility="invisible"/>
-    </LinearLayout>
-    <LinearLayout
-        android:orientation="vertical"
+              android:layout_height="match_parent"
+              android:clickable="true">
+    <android.support.v7.widget.CardView
+        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" android:gravity="center" android:background="#fff">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Confirm Report"
-            android:id="@+id/btnConfirmReport" android:layout_gravity="center_horizontal"/>
-    </LinearLayout>
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Card.NoMargins.NoClick">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_action_bar"
+            android:orientation="horizontal"
+            android:background="@color/text_color_menu_active"
+            android:gravity="center">
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="&lt;-"
+                android:id="@+id/btnBackReport" android:layout_margin="10dp"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Báo cáo vi phạm"
+                android:layout_weight="1" android:gravity="center"
+                android:textColor="#ffffff"/>
+            <Button
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:text="..."
+                android:id="@+id/btnSetting" android:layout_margin="10dp"
+                android:visibility="invisible"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ffffff" android:id="@+id/layoutScrollView">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" android:gravity="center" android:background="#fff">
+            <android.support.v7.widget.CardView
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.Card.NoMargins.NoClick"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="8dp" android:layout_marginRight="8dp"
+                android:layout_marginTop="10dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" >
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:gravity="center">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="* Lý do vi phạm"
+                            android:layout_margin="12dp" android:textColor="@color/colorAccent"
+                            android:layout_weight="1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:text="+"
+                            android:textSize="20dp" android:textStyle="bold" android:paddingLeft="8dp"
+                            android:paddingRight="8dp" android:paddingTop="6dp"
+                            android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
+                            android:clickable="true" android:id="@+id/txtAddReport"
+                            android:layout_margin="6dp"/>
+                    </LinearLayout>
+                    <asia.ienter.matching.utils.custom.TagGroup
+                        android:id="@+id/tagGroupReport"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        style="@style/TagGroup"
+                        app:atg_textSize="16sp"
+                        android:layout_weight="1" android:layout_marginLeft="4dp"
+                        android:layout_marginRight="4dp" android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <android.support.v7.widget.CardView
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/AppTheme.Card.NoMargins.NoClick"
+                android:layout_marginRight="8dp"
+                android:layout_marginLeft="8dp">
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/layoutMyOpinion">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:text="* Ý kiến cá nhân"
+                        android:layout_margin="12dp" android:textColor="@color/colorAccent"/>
+                    <LinearLayout android:orientation="vertical" android:layout_width="match_parent"
+                                  android:layout_height="1dp" android:background="#d8d8d8"
+                                  android:layout_marginRight="4dp" android:layout_marginLeft="4dp"/>
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textMultiLine"
+                        android:ems="10"
+                        android:id="@+id/edtMyOpinions"
+                        android:background="@android:color/transparent"
+                        android:hint="Nhập lý do cá nhân của bạn..." android:gravity="top"
+                        android:padding="8dp" android:minLines="10" android:layout_margin="6dp"/>
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Xác nhận"
+                android:id="@+id/btnConfirmReport"/>
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

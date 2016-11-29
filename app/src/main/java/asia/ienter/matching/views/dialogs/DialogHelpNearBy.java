@@ -28,6 +28,12 @@ public class DialogHelpNearBy {
                 hide();
             }
         });
+        dialog.findViewById(R.id.btnStartSearching).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                hide();
+            }
+        });
     }
 
     public void show() {

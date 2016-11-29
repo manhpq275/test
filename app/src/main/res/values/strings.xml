@@ -4,20 +4,7 @@
     <string name="hash_key">ga0RGNYHvNM5d0SLGQfpQWAPGJ8=</string>
     <string name="dialog_content_login">Matching App gặp vấn đề khi đăng nhập vào facebook. Hãy thực hiện lại sau một lúc nữa!</string>
 
-    <string-array name="about_string_array">
-        <item>about 1</item>
-        <item>about 2</item>
-        <item>about 3</item>
-        <item>about 4</item>
-        <item></item>
-        <item>about 5</item>
-        <item>about 6</item>
-        <item>about 7</item>
-        <item>about 8</item>
-        <item></item>
-        <item>about 10</item>
-        <item>about 11</item>
-    </string-array>
+
 
     <string-array name="setting_string_array">
         <item>setting 1</item>
@@ -34,20 +21,20 @@
         <item>setting 11</item>
     </string-array>
     <string name="menu_matching_text_button">Matching</string>
-    <string name="menu_near_by_text_button">Near By</string>
-    <string name="menu_message_menu">Messages</string>
-    <string name="menu_profile_text_button">Profile</string>
+    <string name="menu_near_by_text_button">Tìm quanh đây</string>
+    <string name="menu_message_menu">Tin nhắn</string>
+    <string name="menu_profile_text_button">Trang cá nhân</string>
     <string name="liked">Event 8/3: Gift for everyone</string>
-    <string name="txtResetButton">Reset</string>
+    <string name="txtResetButton">Mặc định</string>
     <string name="txtMatching">Matching</string>
-    <string name="txtSearching">Finding people near by you about 50km</string>
-    <string name="txt_help_near_by">Automatic matching system  for you based on your location</string>
-    <string name="txtRange">You can change range search near by</string>
-    <string name="txtContacts">Contacts</string>
-    <string name="txtInvitations">Invitations</string>
-    <string name="txtMyRequest">My Requests</string>
+    <string name="txtSearching">Tìm kiếm người sử dụng ở gần bạn (phạm vi 50km)</string>
+    <string name="txt_help_near_by">Tìm quanh đây giúp bạn tìm được người sử dụng gần bạn mà có chung về các sở thích, tính cách</string>
+    <string name="txtRange">Bạn có thể thay đổi phạm vi tìm kiếm</string>
+    <string name="txtContacts">Liên hệ</string>
+    <string name="txtInvitations">Yêu cầu kết bạn</string>
+    <string name="txtMyRequest">Yêu cầu của bạn</string>
     <string name="txt_like_or_not">People send request</string>
-    <string name="txtGotoChat">Go to chat</string>
+    <string name="txtGotoChat">Đi tới CHAT</string>
     <string name="txt_advance_search">Tìm kiếm nâng cao</string>
     <string name="txt_is_avatar">Có ảnh đại diện</string>
     <string name="txt_is_description">Có giới thiệu bản thân</string>
@@ -81,8 +68,85 @@
     <string name="txtAll">Tất cả</string>
     <string name="btn_close">Hủy bỏ</string>
     <string name="btn_done">Xong</string>
+    <string name="add_tag"></string>
+    <string name="menu_block">Chặn người dùng này</string>
+    <string name="menu_report">Báo cáo vi phạm</string>
 
+    <string name="showDetail">Xem chi tiết...</string>
+    <string name="birthday">Ngày sinh</string>
+    <string name="yearOld">Tuổi</string>
+    <string name="txtAppSettings">Cài đặt</string>
+    <string name="txt_active_yearsOld">Xác nhận tuổi</string>
+    <string name="txt_none_active">Chưa xác nhận</string>
+    <string name="txt_active">Đã xác nhận</string>
+    <string name="txt_change_pass">Thay đổi mật khẩu</string>
+    <string name="txt_invite_fb_friends">Mời bạn bè Facebook</string>
+    <string name="txt_revice_email">Nhận Email thông báo</string>
+    <string name="txt_max_like">Giới hạn nhận \"Yêu thích\"</string>
+    <string name="txt_max_special_like">Giới hạn nhận \"Đặc biệt Yêu thích\"</string>
+    <string name="txt_block_list">Danh sách chặn</string>
+    <string name="txt_anonymous">Ẩn danh với mọi người</string>
+    <string name="txt_logout">Đăng xuất</string>
+    <string name="txt_reset_setting">Phục hồi mặc định</string>
+    <string name="txtDeleteAccount">Xoá tài khoản</string>
+    <string name="txt_appVersion">Phiên bản của App</string>
+    <string name="txtLicense">Giấy phép</string>
+    <string name="txt_howToActiveYearsOld">Để xác nhận tuổi của bạn là tuổi thật: Bạn vui lòng chụp lại hai mặt chứng minh nhân dân và gửi về Email matchingApp@gmail.com. Sau đó chúng tôi sẽ tiến hành xác thực cho bạn</string>
+    <string name="txt_password_description">Mật khẩu được sử dụng trong các trường hợp bảo mật thông tin tài khoản, bảo mật cho các hình thức thanh toán. </string>
+    <string name="txt_new_password">Mật khẩu mới</string>
+    <string name="txt_new_password2">Nhập lại mật khẩu mới</string>
+    <string name="txt_error_RePass">Mật khẩu nhập lại chưa đúng.</string>
+    <string name="txt_error_Pass_null">Bạn không được để trống.</string>
+    <string name="txt_start_searching">Bắt đầu tìm kiếm</string>
+    <string name="txt_your_range">Khoảng cách:</string>
+    <string name="txt_search_accuracy">Bạn có thể tăng độ chính xác cho việc tìm kiếm bằng cách thay đổi các thông tin cá nhân của bạn</string>
+    <string name="txt_goToProfile">Tới trang cá nhân</string>
+    <string name="txt_old_password">Mật khẩu hiện tại</string>
+    <string name="txt_cam_ket_1">* Các thông tin của người dùng sẽ được bảo mật trên ứng dụng. \n* Chính vì đăng nhập bằng Facebook nên thông tin hay hoạt động của bạn sẽ không được public lên tường của facebook.</string>
+    <string name="txt_cam_ket_2">* Hình ảnh cá nhân được lấy từ facebook-trang cá nhân. Từ đó cũng xác định được khuôn mặt và độ tuổi. \n* Các thông tin về ngày tháng năm sinh phải được đăng ký với CMTND hoặc giấy lái xe.</string>
+    <string name="txt_cam_ket_3">* Tất cả các hình ảnh đăng lên đều được kiểm duyệt. Nếu nội dung ko phù hợp sẽ bị xoá hoặc chặn tài khoản đó.</string>
+    <string name="txt_cam_ket_4">* Những thông tin cá nhân của người dùng sẽ được bảo mật và chúng tôi sẽ không sử dụng vào mục đích riêng.</string>
+    <string name="txt_an_toan_1">* Tất các tài khoản facebook khi đăn nhập lần đầu đều yêu cầu nhập mã xác nhận. \n*Tài khoản facebook cần có trên 10 bạn trong danh sách bạn bè mới đạt yêu cầu tạo tài khoản. \n*Các thông tin của người dùng được đăng lên sẽ được kiểm duyệt liên tục(24/7/365). \n*Khi thấy có một tài khoản nào đó có dấu hiệu sai phạm, thì hãy sử dung báo cáo lại cho chung tôi.</string>
 
+    <string name="txt_an_toan_2">* Các tình huống cần lưu ý: \n1. Phát hiện ra dấu hiện nguy hiểm cần báo cáo lại ngay cho chúng tôi
+    \n2. Chỉ nên nói chuyện với nhưng ai có những sở thích giống với bản thân mình.
+    \n3. Nên cẩn thận với những thông tin cá nhân của mình.
+    \n4. Cần bảo về tài khoản của mình cẩn thận. Không nên cho người khác mượn.
+    \n5. Nên chọn một nơi an toàn cho lần hẹn đầu tiên.
+    \n6. Không nên sử dụng rượu hay chất kích thích trong lần đầu tiên.
+    \n7. Cần cân nhắc kỹ trước khi đi hẹn hò ở xa. </string>
+
+    <string name="txt_cam_1">**Hãy thông báo những tài khoản vi phạm**</string>
+    <string name="txt_cam_2">*Thực hiện các bước sau để báo cáo vi phạm một người:
+    \n 1. Vào trang cá nhân của cá nhân đó
+    \n 2. Lựa chọn vào Menu ở góc trên phải và lựa chọn "Báo cáo vi "</string>phạm
+
+    <string name="txt_cam_3">*Các điều vi phạm
+    \n . Người sử dụng không đủ 18 tuổi
+    \n . Đăng ký thông tin sai lệch và giả mạo
+    \n . Sử dụng ứng dụng cho mục đích thương mại
+    \n . Dẫn đến các ứng dụng, các trang web khác.
+    \n . Mục đích tống tiền
+    \n . Quấy rối hoặc gây sự
+    \n . Vu không và lạm dụng lời nói
+    \n . Vi phạm bản quyền người khác
+    \n . Vi phạm luật pháp, hành vi sai trái.</string>
+    <string name="txt_qa_1">
+        **Q: Ứng dụng hỗ trợ cho cả hai hệ điều hành iOS/Android không? Hỗ trợ cho Android từ version bao nhiêu?
+    \n
+    \n**A: Hiện tại bản iOS đang được phát triển. Android hỗ trợ từ 4.0 trở lên</string>
+    <string name="txt_qa_2">
+        **Q: Làm sao có thể đảm bảo mọi thông tin trong ứng dụng là thật?
+        \n
+        \n**A: Tất cả thông tin đều đường sử dụng qua thông tin Facebook. Một số thông tin sẽ được chúng tôi confirm trong 24h(CMTND/Hộ chiếu/Bằng lái xe)
+    </string>
+    <string name="txt_app_introdution_1">Ứng dụng Matching giúp chúng ta tìm được thấy nhau trong toàn bộ đất nước Việt Nam. Dù bạn có ở đâu, nhưng chỉ bằng một thao tác có thể đem hai người đến bên nhau trong một nốt nhạc. Thật là kỳ diệu!!</string>
+    <string name="txt_app_introdution_2">*Hãy mạnh dạn, tự tin vào bản thân mình. Tìm cho mình một nửa đích thực, ứng dụng sẽ là công cụ để hai người tìm đến với nhau*</string>
+    <string name="txt_weight">Cân nặng</string>
+    <string name="txtTuoi">Tuổi</string>
+    <string name="txt_cm">cm</string>
+    <string name="txtKg">kg</string>
+    <string name="txt_noInternet">Kết nối tới máy chủ gặp vấn đề. Vui lòng quay lại sau hoặc kéo xuống để thử lại!</string>
     <string-array name="advance_search_string_array">
         <item>filter 1</item>
         <item>filter 2</item>
@@ -125,5 +189,7 @@
         <item>20 人</item>
         <item>30 人</item>
     </string-array>
+
+
 
 </resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="maxLike_0">Không giới hạn</string>
+    <string name="maxLike_10">10 Yêu thích</string>
+    <string name="maxLike_15">15 Yêu thích</string>
+    <string name="maxLike_20">20 Yêu thích</string>
+    <string name="maxLike_30">30 Yêu thích</string>
+</resources>

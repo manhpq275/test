@@ -36,7 +36,7 @@
 
         <Button
             android:id="@+id/btnReset"
-            android:layout_width="50dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_margin="12dp"
             android:textColor="@color/white"
@@ -65,6 +65,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/lnAvatar"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/filter_item_height"
                     android:background="@drawable/dr_bg_item_advance_search"
@@ -96,89 +97,91 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/filter_item_height"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/filter_item_padding"-->
+                            <!--android:text="@string/txt_is_description"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="@dimen/filter_item_textSize" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<CheckBox-->
+                                <!--android:id="@+id/cbDescription"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="@dimen/filter_item_height"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="@dimen/filter_item_padding"-->
+                            <!--android:text="@string/txt_online_ago"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="@dimen/filter_item_textSize" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="horizontal">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvOnlineAgo"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/filter_item_height"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/filter_item_padding"
-                            android:text="@string/txt_is_description"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/filter_item_textSize" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <CheckBox
-                                android:id="@+id/cbDescription"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="@dimen/filter_item_height"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/filter_item_padding"
-                            android:text="@string/txt_online_ago"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="@dimen/filter_item_textSize" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="horizontal">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-
-                <LinearLayout
+                    android:id="@+id/lnYearsOld"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -209,6 +212,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tvYearsOld"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/filter_item_padding"
@@ -219,49 +223,50 @@
                     </LinearLayout>
                 </LinearLayout>
 
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_address"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvAddress"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_address"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvAddress"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
+                    android:id="@+id/lnHomeLand"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -305,6 +310,7 @@
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/lnHeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -335,6 +341,7 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/tvHeight"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/filter_item_padding"
@@ -345,7 +352,9 @@
                     </LinearLayout>
                 </LinearLayout>
 
+
                 <LinearLayout
+                    android:id="@+id/lnWeight"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@color/white"
@@ -363,7 +372,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="16dp"
-                            android:text="@string/txt_language"
+                            android:text="@string/txt_weight"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@android:color/black"
                             android:textSize="15dp" />
@@ -376,8 +385,7 @@
                             android:orientation="vertical">
 
                             <TextView
-                                
-                                android:id="@+id/tvLanguages"
+                                android:id="@+id/tvWeight"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="@dimen/filter_item_padding"
@@ -388,910 +396,960 @@
                     </LinearLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_externality"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvExternality"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_blood_group"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvBloodGroup"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_job"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_gd"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_level"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvLevel"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_genitive"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_like_form"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_forte"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_drink_wine"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvDrinkWine"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_is_smoke"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvSmoke"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_siblings"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_live_with"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_holiday"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_marry_time"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvMarryTime"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_meeting_time"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_marriage_history"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvMarriedHistory"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/married_0"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_is_children"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvChildren"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/children_0"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_what_impressive"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_is_matching_group"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_who_pay_matching"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:id="@+id/tvMatchingPay"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text="@string/txt_likes"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
-                            android:gravity="center|right"
-                            android:orientation="vertical">
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginRight="@dimen/filter_item_padding"
-                                android:gravity="center|right"
-                                android:text="@string/txtAll"
-                                android:textSize="@dimen/filter_item_textSize" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="60dp"
-                        android:background="@drawable/dr_bg_item_advance_search"
-                        android:gravity="center|left"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:text=""
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@android:color/black"
-                            android:textSize="15dp" />
-
-                       </LinearLayout>
-                </LinearLayout>
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_language"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!---->
+                                <!--android:id="@+id/tvLanguages"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_externality"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvExternality"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_blood_group"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvBloodGroup"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_job"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_gd"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_level"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvLevel"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_genitive"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_like_form"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_forte"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_drink_wine"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvDrinkWine"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_is_smoke"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvSmoke"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_siblings"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_live_with"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_holiday"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_marry_time"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvMarryTime"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_meeting_time"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_marriage_history"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvMarriedHistory"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/married_0"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_is_children"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvChildren"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/children_0"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_what_impressive"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_is_matching_group"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_who_pay_matching"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:id="@+id/tvMatchingPay"-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text="@string/txt_likes"-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                        <!--<LinearLayout-->
+                            <!--android:layout_width="match_parent"-->
+                            <!--android:layout_height="match_parent"-->
+                            <!--android:layout_weight="1"-->
+                            <!--android:gravity="center|right"-->
+                            <!--android:orientation="vertical">-->
+
+                            <!--<TextView-->
+                                <!--android:layout_width="wrap_content"-->
+                                <!--android:layout_height="wrap_content"-->
+                                <!--android:layout_marginRight="@dimen/filter_item_padding"-->
+                                <!--android:gravity="center|right"-->
+                                <!--android:text="@string/txtAll"-->
+                                <!--android:textSize="@dimen/filter_item_textSize" />-->
+                        <!--</LinearLayout>-->
+                    <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
+                <!--<LinearLayout-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:background="@color/white"-->
+                    <!--android:gravity="center"-->
+                    <!--android:orientation="vertical">-->
+
+                    <!--<LinearLayout-->
+                        <!--android:layout_width="match_parent"-->
+                        <!--android:layout_height="60dp"-->
+                        <!--android:background="@drawable/dr_bg_item_advance_search"-->
+                        <!--android:gravity="center|left"-->
+                        <!--android:orientation="horizontal">-->
+
+                        <!--<TextView-->
+                            <!--android:layout_width="wrap_content"-->
+                            <!--android:layout_height="wrap_content"-->
+                            <!--android:layout_marginLeft="16dp"-->
+                            <!--android:text=""-->
+                            <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                            <!--android:textColor="@android:color/black"-->
+                            <!--android:textSize="15dp" />-->
+
+                       <!--</LinearLayout>-->
+                <!--</LinearLayout>-->
 
             </LinearLayout>
         </android.support.v7.widget.CardView>
 
     </ScrollView>
 
-    <Button
+
+
+    <TextView
         android:id="@+id/btnMatching"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_menu_bar"
+        android:layout_height="60dp"
+        android:textSize="@dimen/text_size_large"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textAllCaps="true"
+        android:background="@color/colorAccent"
         android:layout_alignParentBottom="true"
         android:text="@string/txtMatching" />
 

@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IMessagesCallback;
 import asia.ienter.matching.interfaces.ITopViewCallback;
-import asia.ienter.matching.models.TopView;
+import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.activities.ChatActivity;
 import asia.ienter.matching.views.activities.MyPageActivity;
@@ -36,10 +36,10 @@ import butterknife.OnClick;
 public class MessagesFragment extends BaseFragment implements ITopViewCallback,IMessagesCallback {
 
     private static final String TAG = "MessagesFragment";
-    ArrayList<TopView> topViewArrayList;
+    ArrayList<UserView> topViewArrayList;
     MessageListAdapter adapter;
     public boolean isGrid = true;
-    private ArrayList<TopView> mUsers = new ArrayList<>();
+    private ArrayList<UserView> mUsers = new ArrayList<>();
 
     public int getTabSelected() {
         return tabSelected;
@@ -152,15 +152,15 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                             MLog.e(TAG, "Load More Data");
 
                             //Load data
-                            int index = topViewArrayList.size();
-                            int end = index + 5;
-                            for (int i = index; i < end; i++) {
-                                TopView user = new TopView(""+i,"Name " + i,2);
-                                user.setAndroid_version_name("Name " + i);
-                                user.setAndroid_image_url(android_image_urls[4]);
-                                topViewArrayList.add(user);
-                            }
-                            adapter.onNotifyDataSetChanged(topViewArrayList);
+//                            int index = topViewArrayList.size();
+//                            int end = index + 5;
+//                            for (int i = index; i < end; i++) {
+//                                TopView user = new TopView(""+i,"Name " + i,2);
+//                                user.setAndroid_version_name("Name " + i);
+//                                user.setAndroid_image_url(android_image_urls[4]);
+//                                topViewArrayList.add(user);
+//                            }
+//                            adapter.onNotifyDataSetChanged(topViewArrayList);
                             isLoading = false;
                             hideLoading();
                         }
@@ -180,12 +180,12 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         MLog.d(TAG,"loadDataFromApi()");
         showLoading();
         topViewArrayList.clear();
-        for(int i=0;i<android_version_names.length;i++){
-            TopView androidVersion = new TopView(""+i,"Name "+i,0);
-            androidVersion.setAndroid_version_name(android_version_names[i]);
-            androidVersion.setAndroid_image_url(android_image_urls[i]);
-            topViewArrayList.add(androidVersion);
-        }
+//        for(int i=0;i<android_version_names.length;i++){
+//            TopView androidVersion = new TopView(""+i,"Name "+i,0);
+//            androidVersion.setAndroid_version_name(android_version_names[i]);
+//            androidVersion.setAndroid_image_url(android_image_urls[i]);
+//            topViewArrayList.add(androidVersion);
+//        }
         //  topViewArrayList.add(null);
         adapter = new MessageListAdapter(this,topViewArrayList);
         recycleTopView.setAdapter(adapter);
@@ -194,7 +194,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
 
     DialogChat dialogChat;
     @Override
-    public void OnItemClickRecycleView(TopView topView) {
+    public void OnItemClickRecycleView(UserView topView) {
         MLog.e(TAG,"Item click RecycleView");
         if(tabSelected==1){
             dialogChat =  new DialogChat(mContext,this);
@@ -211,11 +211,11 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     @Override
     public boolean OnItemClickLike(int position) {
         MLog.e(TAG,"Item click Like");
-        TopView topView = topViewArrayList.get(position);
-        int isLiked = topView.isLike();
-        if(isLiked==0) isLiked = 1;
-        if(isLiked==1) isLiked = 0;
-        topViewArrayList.get(position).setLike(isLiked);
+        UserView topView = topViewArrayList.get(position);
+//        int isLiked = topView.isLike();
+//        if(isLiked==0) isLiked = 1;
+//        if(isLiked==1) isLiked = 0;
+//        topViewArrayList.get(position).setLike(isLiked);
 
         new DialogLikeMe(mContext,this).show();
         MLog.e(TAG,"Item click Like 2");

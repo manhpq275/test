@@ -7,6 +7,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -42,7 +43,7 @@ public class SettingNearByActivity extends AppCompatActivity {
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_setting_nearby);
 
-        Button backButton = (Button) findViewById(R.id.btnBack);
+        ImageView backButton = (ImageView) findViewById(R.id.btnBack);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -50,12 +51,12 @@ public class SettingNearByActivity extends AppCompatActivity {
             }
         });
         ButterKnife.inject(this);
-        tvRange.setText("Your Range: "+String.valueOf(advanceSearchView.getDistance())+"km");
+        tvRange.setText(getString(R.string.txt_your_range)+String.valueOf(advanceSearchView.getDistance())+"km");
         seekBar.setProgress(advanceSearchView.getDistance());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                tvRange.setText("Your Range: "+String.valueOf(progress)+"km");
+                tvRange.setText(getString(R.string.txt_your_range)+String.valueOf(progress)+"km");
                 advanceSearchView.setDistance(progress);
             }
 

@@ -15,10 +15,11 @@ public class UserApis extends BaseApi<UserView>{
     }
 
     public UserApis() {
-        super("api/user");
+        super("");
     }
 
-    public String loginApiUrl(String email, String password, ClientType clientType) {
-        return String.format(AppConstants.API_USER_LOGIN_PATTERN, this.getBaseUrl(), "?email=" + email, "&password="+ password, "&clientType="+ clientType);
+
+    public String changePassword() {
+        return String.format(AppConstants.API_USER_CHANGE_PASSWORD, this.getBaseUrl());
     }
 }

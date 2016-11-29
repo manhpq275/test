@@ -1,10 +1,15 @@
 package asia.ienter.matching.views.fragments;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+
+import asia.ienter.matching.R;
 
 /**
  * Created by phamquangmanh on 9/15/16.
@@ -16,7 +21,7 @@ public abstract class BaseFragment extends Fragment {
     protected ProgressBar mProgressBarLoading;
     protected ProgressBar mProgressBarLoadingMore;
     protected SwipeRefreshLayout mSwipeRefresh;
-    protected View mViewData;
+    protected RelativeLayout rlNoInternetConnection,rlNoInternetConnection2;
 
     protected abstract void initView();
 
@@ -30,6 +35,7 @@ public abstract class BaseFragment extends Fragment {
             showLoading();
             loadDataFromApi();
         }
+
     }
 
     protected void showLoading(){
@@ -55,4 +61,30 @@ public abstract class BaseFragment extends Fragment {
         if(mProgressBarLoadingMore!=null)   mProgressBarLoadingMore.setVisibility(View.GONE);
         if(mSwipeRefresh!=null)             mSwipeRefresh.setRefreshing(false);
     }
+
+    protected boolean hasInternet(){
+        boolean result = false;
+        if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.GONE);
+        showLoading();
+        ConnectivityManager ConnectionManager=(ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        result =  (networkInfo != null && networkInfo.isConnected()==true ) ?  true : false;
+        hideLoading();
+        if(result){
+            if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.GONE);
+            if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.GONE);
+        }else{
+            if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.VISIBLE);
+            if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.VISIBLE);
+            rlNoInternetConnection.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showPullRefresh();
+                }
+            });
+        }
+        return result;
+    }
+
+
 }

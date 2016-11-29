@@ -5,7 +5,6 @@ import android.content.Context;
 import android.graphics.Point;
 import android.graphics.Typeface;
 import android.text.TextUtils;
-import android.util.Size;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -14,6 +13,8 @@ import com.android.volley.toolbox.Volley;
 import java.util.HashMap;
 
 import asia.ienter.matching.models.AdvanceSearchView;
+import asia.ienter.matching.models.User;
+import asia.ienter.matching.services.MCAppLifecycleHandler;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.MLog;
 
@@ -31,6 +32,7 @@ public class MCApp extends Application {
     public static Point screenSize;
 
     private static String accessToken = "";
+    private static User userInstance = new User();
 
     public static Context getAppContext() {
         return sInstance.getApplicationContext();
@@ -51,9 +53,20 @@ public class MCApp extends Application {
         sInstance = this;
         typeface = getFont(Config.FONTS);
         typefaceHome = getFont(Config.FONTS_HOME);
+        registerActivityLifecycleCallbacks(new MCAppLifecycleHandler());
+
     }
 
+    public static User getUserInstance(){
+        if(userInstance==null){
+            userInstance = new User();
+        }
+        return userInstance;
+    }
 
+    public static void setUserInstance(User user){
+        userInstance = user;
+    }
 
     public static MCApp getInstance(){
         return sInstance;
@@ -102,7 +115,7 @@ public class MCApp extends Application {
     }
 
     public static AdvanceSearchView getAdvanceSearchView(){
-        if(advanceSearchView == null) advanceSearchView = new AdvanceSearchView("","");
+        if(advanceSearchView == null) advanceSearchView = new AdvanceSearchView();
         return advanceSearchView;
     }
 
@@ -113,4 +126,6 @@ public class MCApp extends Application {
     public static String getAccessToken(){
         return accessToken;
     }
+
+
 }

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_alignParentTop="true"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:id="@+id/rlTitle"
+        android:background="@color/menu_background_color">
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_item_height"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/text_size_title"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:text="Title"/>
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="@dimen/filter_item_height"
+            android:layout_height="@dimen/filter_item_height"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:src="@mipmap/btn_back_accent"/>
+        <TextView
+            android:id="@+id/tvDone"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/filter_item_height"
+            android:textColor="@android:color/white"
+            android:background="@color/colorAccent"
+            android:gravity="center"
+            android:layout_margin="@dimen/button_text_padding"
+            android:textAllCaps="true"
+            android:paddingLeft="@dimen/button_text_padding"
+            android:paddingRight="@dimen/button_text_padding"
+            android:text="@string/btn_done"/>
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/listDialog"
+        android:layout_below="@+id/rlTitle"
+        android:layout_alignParentBottom="true"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <GridView
+        android:id="@+id/gridDialog"
+        android:layout_below="@+id/rlTitle"
+        android:layout_alignParentBottom="true"
+        android:dividerHeight="0dp"
+        android:divider="@null"
+        android:background="@android:color/white"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:visibility="gone"
+        android:numColumns="3"
+        android:gravity="center"
+        android:stretchMode="columnWidth"
+        android:listSelector="@color/transparent"/>
+</RelativeLayout>
+

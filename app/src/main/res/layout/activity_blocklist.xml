@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layoutContent"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/actionBar"
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_alignParentTop="true"
+            android:background="@color/white"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/txt_block_list"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+            <ImageView
+                android:id="@+id/btnBack"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="12dp"
+                android:src="@mipmap/btn_back_accent"/>
+
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/background_advance_search"
+            android:orientation="vertical"></LinearLayout>
+
+        <ScrollView
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/actionBar">
+
+
+            <android.support.v7.widget.CardView
+                style="@style/AppTheme.Card.NoMargins.NoClick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/lnQK"
+
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/filter_item_height"
+                        android:background="@color/background_advance_search"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <asia.ienter.matching.utils.custom.CircleImageView
+                            android:padding="5dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/m_avatar1"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/filter_item_padding"
+                            android:text="Quỳnh Kun"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/filter_item_textSize" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/xoaQK"
+                                android:background="@color/colorAccent"
+                                android:textColor="@color/white"
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:textStyle="bold"
+                                android:text = "Xóa"
+                                android:layout_marginRight="@dimen/filter_item_padding"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnYX"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/filter_item_height"
+                        android:background="@color/background_advance_search"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <asia.ienter.matching.utils.custom.CircleImageView
+                            android:padding="5dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/m_avatar3"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/filter_item_padding"
+                            android:text="Yến Xôi"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/filter_item_textSize" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/xoaYX"
+                                android:background="@color/colorAccent"
+                                android:textColor="@color/white"
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:textStyle="bold"
+                                android:text = "Xóa"
+                                android:layout_marginRight="@dimen/filter_item_padding"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lnTB"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/filter_item_height"
+                        android:background="@color/background_advance_search"
+                        android:gravity="center|left"
+                        android:orientation="horizontal">
+
+                        <asia.ienter.matching.utils.custom.CircleImageView
+                            android:padding="5dp"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:src="@mipmap/m_avatar2"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/filter_item_padding"
+                            android:text="Thanh Bi"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/filter_item_textSize" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center|right"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/xoaTB"
+                                android:background="@color/colorAccent"
+                                android:textColor="@color/white"
+                                android:layout_width="50dp"
+                                android:layout_height="30dp"
+                                android:textStyle="bold"
+                                android:text = "Xóa"
+                                android:layout_marginRight="@dimen/filter_item_padding"
+                                android:gravity="center" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+
+
+
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+        </ScrollView>
+
+
+    </LinearLayout>
+</LinearLayout>

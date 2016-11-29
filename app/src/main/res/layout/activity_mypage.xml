@@ -4,37 +4,47 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:id="@+id/layoutContent">
-    <LinearLayout android:layout_width="match_parent"
-                  android:layout_height="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="vertical">
-        <LinearLayout android:layout_width="match_parent"
-                      android:layout_height="@dimen/height_action_bar"
-            android:orientation="horizontal" android:background="@color/text_color_menu_active" android:gravity="center">
-
-            <Button
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="&lt;-"
-                android:id="@+id/btnAboutApp" android:layout_margin="10dp"/>
-            <TextView
+        <android.support.v7.widget.CardView
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.Card.NoMargins.NoClick">
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="マイページ"
-                android:id="@+id/textView9" android:layout_weight="1" android:gravity="center"
-                android:textColor="#ffffff"/>
-            <Button
-                android:layout_width="40dp"
-                android:layout_height="40dp"
-                android:text="..."
-                android:id="@+id/btnSetting" android:layout_margin="10dp"
-                />
-        </LinearLayout>
-        <include
-            layout="@layout/content_my_page"
+                android:layout_height="@dimen/height_action_bar"
+                android:orientation="horizontal"
+                android:background="@color/text_color_menu_active"
+                android:gravity="center">
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="&lt;-"
+                    android:id="@+id/btnAboutApp" android:layout_margin="10dp"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="マイページ"
+                    android:id="@+id/txtTitleScreen" android:layout_weight="1" android:gravity="center"
+                    android:textColor="#ffffff"/>
+                <Button
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:text="..."
+                    android:id="@+id/btnSetting" android:layout_margin="10dp"/>
+            </LinearLayout>
+        </android.support.v7.widget.CardView>
+        <android.support.v4.view.ViewPager
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="1" android:layout_marginBottom="50dp"/>
+            android:id="@+id/mainViewPager"
+            android:layout_weight="1">
+
+        </android.support.v4.view.ViewPager>
     </LinearLayout>
     <LinearLayout
         android:orientation="vertical"

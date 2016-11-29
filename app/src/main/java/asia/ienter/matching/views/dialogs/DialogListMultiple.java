@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 import asia.ienter.matching.R;
-import asia.ienter.matching.interfaces.IDialogListCallBack;
+import asia.ienter.matching.interfaces.IDialogListMultipleCallBack;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.adapters.DialogListAdapter;
 
@@ -29,7 +29,7 @@ public class DialogListMultiple {
     DialogListAdapter listAdapter;
     ArrayList<Integer> listItemSelected;
 
-    public DialogListMultiple(Context context, ArrayList<Integer> itemSelecteds, final IDialogListCallBack callback) {
+    public DialogListMultiple(Context context, ArrayList<Integer> itemSelecteds, final IDialogListMultipleCallBack callback) {
         this.context = context;
         this.listItemSelected = itemSelecteds;
         dialog = new Dialog(this.context, R.style.DialogSlideUp);
@@ -48,9 +48,9 @@ public class DialogListMultiple {
         tvDone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                for (int i = 0; i <= listItemSelected.size(); i++) {
-                    callback.onClickItem(listItemSelected.get(i));
-                }
+                MLog.d(DialogListMultiple.class,"tvDone listItemSelected = "+listItemSelected.size());
+
+                callback.onClickItem(listItemSelected);
                 callback.onClickDone();
                 hide();
             }
@@ -60,13 +60,21 @@ public class DialogListMultiple {
             @Override
             public void onItemClick(AdapterView<?> adpterView, View view, int position,
                                     long id) {
-//                listAdapter.setOnClickItem(position);
-//                listAdapter.notifyDataSetChanged();
-                int indexOf = listItemSelected.indexOf(position);
-                if (indexOf >= 0) {
-                    listItemSelected.remove(indexOf);
+                listAdapter.setOnClickItem(position);
+                listAdapter.notifyDataSetChanged();
+                boolean isRemove = false;
+                for(int i=0;i<listItemSelected.size();i++){
+                    if(position==listItemSelected.get(i)){
+                        listItemSelected.remove(i);
+                        isRemove = true;
+                        break;
+                    }
                 }
-                listItemSelected.add(position);
+                if(!isRemove) listItemSelected.add(position);
+                for(int i=0;i<listItemSelected.size();i++){
+                    MLog.d(DialogListMultiple.class,"onClick listItemSelected = "+listItemSelected.get(i));
+                }
+
             }
         });
 
@@ -82,12 +90,13 @@ public class DialogListMultiple {
     public void show(String title, String dataString[]) {
         this.listItems = dataString;
         tvTitle.setText(title);
-        MLog.d(DialogListMultiple.class,"listItemSelected.size() = "+dataString[0]);
         listAdapter = new DialogListAdapter(context, listItems, true);
 
-//        for (int i = 0; i <= listItemSelected.size(); i++) {
-//            listAdapter.setOnClickItem(listItemSelected.get(i));
-//        }
+        for (int i = 0; i < listItemSelected.size(); i++) {
+
+            MLog.d(DialogListMultiple.class,"Show listItemSelected.size() = "+listItemSelected.get(i));
+            listAdapter.setOnClickItem(listItemSelected.get(i));
+        }
         lv.setAdapter(listAdapter);
         if (dialog != null)
             dialog.show();

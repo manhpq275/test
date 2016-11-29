@@ -80,12 +80,15 @@ public class DialogListAdapter extends BaseAdapter {
 
     public void setOnClickItem(int position) {
         if (multipleChoice) {
-            int indexOf = listSelected.indexOf(position);
-            if (indexOf >= 0) {
-                listSelected.remove(indexOf);
-            } else {
-                listSelected.add(position);
+            boolean isRemove = false;
+            for(int i=0;i<listSelected.size();i++){
+                if(position==listSelected.get(i)){
+                    listSelected.remove(i);
+                    isRemove = true;
+                    break;
+                }
             }
+            if(!isRemove) listSelected.add(position);
         } else {
             mSelectedItem = position;
         }

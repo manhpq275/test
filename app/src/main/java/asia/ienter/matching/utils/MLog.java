@@ -9,31 +9,31 @@ public class MLog {
 
     public static void e(Class<?> clazz, String msg) {
         if (Config.ISLOG)
-            e(clazz.getSimpleName(), msg);
+            e(clazz.getSimpleName(), msg==null?"":msg);
     }
 
     public static void d(Class<?> clazz, String msg) {
         if (Config.ISLOG)
-            d(clazz.getSimpleName(), msg);
+            d(clazz.getSimpleName(), msg==null?"":msg);
     }
 
     public static void e(String tag, String msg) {
         if (Config.ISLOG)
-            Log.e(tag, msg);
+            Log.e(tag, msg==null?"":msg);
     }
 
     public static void d(String tag, String msg) {
         if (Config.ISLOG)
-            Log.d(tag, msg);
+            Log.d(tag, msg==null?"":msg);
     }
 
     public static void e(String msg) {
         if (Config.ISLOG)
-            d("MCApp", msg);
+            d("MCApp", msg==null?"":msg);
     }
 
     public static void d(String msg) {
         if (Config.ISLOG)
-            d("MCApp", msg);
+            d("MCApp", msg==null?"":msg);
     }
 }

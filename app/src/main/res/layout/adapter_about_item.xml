@@ -3,41 +3,42 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="wrap_content" android:id="@+id/layoutContent">
-
-    <FrameLayout
-        android:orientation="horizontal"
+    <android.support.v7.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="80dp" android:gravity="center">
-        <LinearLayout
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Card.NoMargins.NoClick" android:layout_marginTop="2dp"
+        android:layout_marginBottom="2dp">
+        <FrameLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <TextView
+            android:layout_height="60dp" android:gravity="center">
+            <LinearLayout
+                android:orientation="horizontal"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Medium Text"
-                android:id="@+id/txtAboutTitle" android:textColor="@color/black"
-                android:layout_gravity="center" android:layout_marginLeft="16dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text=">"
-                android:id="@+id/textView10" android:layout_gravity="center"
-                android:layout_marginRight="16dp" android:textColor="#000"/>
-        </LinearLayout>
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" android:background="#d8d8d8"
-            android:id="@+id/layoutNoContent" android:visibility="gone">
-        </LinearLayout>
-    </FrameLayout>
-    <LinearLayout
-        android:orientation="vertical"
-        android:layout_width="match_parent"
-        android:layout_height="1dp" android:background="#d8d8d8">
-    </LinearLayout>
+                android:layout_height="match_parent">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Medium Text"
+                    android:id="@+id/txtAboutTitle" android:textColor="@color/black"
+                    android:layout_gravity="center" android:layout_marginLeft="16dp"
+                    android:layout_weight="1" android:textSize="16sp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text=">"
+                    android:id="@+id/textView10" android:layout_gravity="center"
+                    android:layout_marginRight="16dp" android:textColor="#000"
+                    android:textSize="16sp"/>
+            </LinearLayout>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:background="#d8d8d8"
+                android:id="@+id/layoutNoContent" android:visibility="gone">
+            </LinearLayout>
+        </FrameLayout>
+    </android.support.v7.widget.CardView>
 </LinearLayout>

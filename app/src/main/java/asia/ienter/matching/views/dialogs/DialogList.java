@@ -72,7 +72,7 @@ public class DialogList {
     public void show(String title, String dataString[]){
         this.listItems = dataString;
         tvTitle.setText(title);
-        listAdapter = new DialogListAdapter(context,listItems,true);
+        listAdapter = new DialogListAdapter(context,listItems,false);
         listAdapter.setOnClickItem(this.itemSelected);
         lv.setAdapter(listAdapter);
         if (dialog != null)

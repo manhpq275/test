@@ -21,7 +21,7 @@ public abstract class BaseApi<T extends BaseView> {
     private String baseUrl;
 
     public BaseApi(String baseUrl) {
-        this.baseUrl = baseUrl;
+        this.baseUrl = Config.BASE_URL + baseUrl;
     }
 
     public String getItemApiUrl(String id) {

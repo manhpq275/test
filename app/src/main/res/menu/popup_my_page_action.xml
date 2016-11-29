@@ -3,10 +3,10 @@
 
     <item
         android:id="@+id/block_user"
-        android:title="Block"/>
+        android:title="@string/menu_block"/>
 
     <item
         android:id="@+id/report_user"
-        android:title="Report"/>
+        android:title="@string/menu_report"/>
 
 </menu>

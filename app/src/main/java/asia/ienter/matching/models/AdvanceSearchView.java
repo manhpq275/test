@@ -8,19 +8,53 @@ import java.util.ArrayList;
  * Created by phamquangmanh on 10/31/16.
  */
 public class AdvanceSearchView extends BaseView {
-    public AdvanceSearchView(String id, String name) {
-        super(id, name);
-    }
 
     private boolean isAvatar=false;
     private boolean isDescription=false;
-    private long onlineAgo=0;
+    private int onlineAgo=0;
     private int minYearOld=0;
     private int maxYearOld=0;
     private int address=0;
     private int homeLand=0;
-    private int height=0;
-    private ArrayList<Integer> languages = null;
+    private int minHeight=0;
+
+    public int getMinWeight() {
+        return minWeight;
+    }
+
+    public void setMinWeight(int minWeight) {
+        this.minWeight = minWeight;
+    }
+
+    public int getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(int maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+    private int minWeight=0;
+    private int maxWeight=0;
+
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    public void setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
+    }
+
+    public int getMinHeight() {
+        return minHeight;
+    }
+
+    public void setMinHeight(int minHeight) {
+        this.minHeight = minHeight;
+    }
+
+    private int maxHeight=0;
+    private ArrayList<Integer> languages = new ArrayList<>();
     private int externality=0;
     private int bloodGroup=0;
     private int job=0;
@@ -69,11 +103,11 @@ public class AdvanceSearchView extends BaseView {
         isDescription = description;
     }
 
-    public long getOnlineAgo() {
+    public int getOnlineAgo() {
         return onlineAgo;
     }
 
-    public void setOnlineAgo(long onlineAgo) {
+    public void setOnlineAgo(int onlineAgo) {
         this.onlineAgo = onlineAgo;
     }
 
@@ -109,13 +143,6 @@ public class AdvanceSearchView extends BaseView {
         this.homeLand = homeLand;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
 
     public ArrayList<Integer> getLanguages() {
         return languages;

@@ -10,14 +10,9 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
-import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
-import asia.ienter.matching.interfaces.IMessagesCallback;
 import asia.ienter.matching.interfaces.IMsgTemplateCallback;
-import asia.ienter.matching.interfaces.ITopViewCallback;
-import asia.ienter.matching.models.TopView;
 import asia.ienter.matching.views.adapters.MsgTemplateAdapter;
-import asia.ienter.matching.views.adapters.SettingAdapter;
 import asia.ienter.matching.views.dialogs.DialogTmpMessage;
 import butterknife.ButterKnife;
 import butterknife.InjectView;

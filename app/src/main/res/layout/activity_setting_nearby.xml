@@ -7,50 +7,56 @@
     android:orientation="vertical">
 
 
-        <LinearLayout
-            android:id="@+id/actionBar"
-            android:layout_alignParentTop="true"
+    <RelativeLayout
+        android:id="@+id/actionBar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_alignParentTop="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+
+
+        <TextView
+            android:id="@+id/textView9"
             android:layout_width="match_parent"
-            android:layout_height="?actionBarSize"
-            android:background="@color/white"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:text="@string/txt_advance_search"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textColor="@color/black"
+            android:textStyle="bold" />
 
-            <Button
-                android:id="@+id/btnBack"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@color/white"
-                android:text="&lt;-" />
+        <ImageView
+            android:id="@+id/btnBack"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="12dp"
+            android:src="@mipmap/btn_back_accent"/>
+    </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="MATCHING APP"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:textColor="@color/black" />
 
-        </LinearLayout>
-
-<LinearLayout
-    android:paddingTop="10dp"
+    <LinearLayout
+    android:paddingTop="20dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
         android:gravity="center"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/txtRange"/>
 
     <TextView
+
+        android:paddingBottom="10dp"
         android:gravity="center"
         android:id="@+id/txtRange"
+        android:textColor="@color/black"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Your Range: 0km"/>
@@ -65,6 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:text="0km"
+            android:textColor="@color/black"
             android:gravity="center"/>
         <SeekBar
             android:layout_margin="10dp"
@@ -72,6 +79,7 @@
             android:layout_height="wrap_content"
             android:id="@+id/seekBar"
             android:max="50"
+            android:textColor="@color/black"
             android:layout_gravity="center_horizontal"
             android:layout_weight="1"/>
         <TextView
@@ -83,17 +91,25 @@
             android:gravity="center"/>
     </LinearLayout>
     <TextView
-        android:paddingTop="50dp"
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Increased accuracy for search"/>I
+        android:textColor="@color/black"
+        android:text="@string/txt_search_accuracy"/>I
     <Button
         android:id="@+id/btnGoToProfile"
         android:layout_gravity="center"
+        android:background="@color/colorAccent"
+        android:textColor="@color/white"
+        android:padding="10dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Go to Profile"
+        android:text="@string/txt_goToProfile"
         />
 
 

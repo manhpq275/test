@@ -12,7 +12,8 @@ public enum OnlineAgo {
     All(0),
     OneDay(1),
     ThreeDay(2),
-    Weekend(3);
+    Weekend(3),
+    Undefined(4);
     private int value;
     OnlineAgo(int value) {
         this.value = value;

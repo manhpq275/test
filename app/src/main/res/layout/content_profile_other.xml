@@ -1,0 +1,521 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/AppTheme.Card.NoMargins.NoClick">
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Thông tin cá nhân:"
+            android:layout_margin="4dp" android:textStyle="bold"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutHomeTown">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Quê quán"
+                android:layout_weight="1"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:id="@+id/txtHomeTown"
+                android:textSize="16sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutHeight">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Chiều cao"
+                android:layout_weight="1"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtUserHeight"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutWeight">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Cân nặng"
+                android:layout_weight="1"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtUserWeight"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutNgoaiHinh">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Ngoại hình"
+                android:layout_weight="1"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtBodyForm"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutNhomMau">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Nhóm máu"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtBloodType"/>
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_margin="6dp"
+            android:background="@drawable/dr_bg_item_information" android:id="@+id/layoutLanguage">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Ngôn ngữ:"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="+"
+                    android:textSize="20dp" android:textStyle="bold" android:paddingLeft="8dp"
+                    android:paddingRight="8dp" android:paddingTop="6dp"
+                    android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
+                    android:clickable="true" android:id="@+id/txtAddLanguage"
+                    android:layout_marginTop="3dp"/>
+            </LinearLayout>
+            <asia.ienter.matching.utils.custom.TagGroup
+                android:id="@+id/tagGroupLanguages"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                style="@style/TagGroup"
+                app:atg_textSize="16sp"
+                />
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:text="Giáo dục, nghề nghiệp" android:layout_margin="4dp"
+                  android:textStyle="bold"/>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutCompany">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Công ty"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtCompany"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutNoiLamViec">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Nơi làm việc"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtWorkingPlace"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutMucThuNhap">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Mức thu nhập"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtIncome"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_margin="4dp"
+                  android:textStyle="bold" android:text="Tính cách và cuộc sống"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_margin="6dp"
+            android:background="@drawable/dr_bg_item_information" android:id="@+id/layoutTinhCach">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Tính cách dặc trưng:"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="+"
+                    android:textSize="20dp" android:textStyle="bold" android:paddingLeft="8dp"
+                    android:paddingRight="8dp" android:paddingTop="6dp"
+                    android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
+                    android:clickable="true" android:id="@+id/txtChangeGenitive"
+                    android:layout_marginTop="3dp"/>
+            </LinearLayout>
+            <asia.ienter.matching.utils.custom.TagGroup
+                android:id="@+id/tagGenitive"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                style="@style/TagGroup"
+                app:atg_textSize="16sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Uống rượu"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Khong"
+                android:textSize="16sp"
+                android:visibility="invisible"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:textSize="16sp"
+                android:id="@+id/chkDrinking"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Hút thuốc"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Khong"
+                android:textSize="16sp"
+                android:visibility="invisible"
+                />
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:textSize="16sp"
+                android:id="@+id/chkSmoking"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutSongCungAi">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Sống cùng ai"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtWhoLivingWith"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutNgayNghi">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Ngày nghỉ"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtDayOff"/>
+        </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:layout_margin="4dp" android:textStyle="bold"
+                  android:text="Tình yêu và hôn nhân"/>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_margin="6dp"
+            android:background="@drawable/dr_bg_item_information" android:id="@+id/layoutKieuNguoi">
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="Mẫu người yêu thích:"
+                    android:textSize="16sp"
+                    android:layout_weight="1"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:text="+"
+                    android:textSize="20dp" android:textStyle="bold" android:paddingLeft="8dp"
+                    android:paddingRight="8dp" android:paddingTop="6dp"
+                    android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
+                    android:clickable="true" android:id="@+id/txtAddAttraction"
+                    android:layout_marginTop="3dp"/>
+            </LinearLayout>
+            <asia.ienter.matching.utils.custom.TagGroup
+                android:id="@+id/tagGroupTypePeople"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="5dp"
+                android:layout_gravity="center"
+                style="@style/TagGroup"
+                app:atg_textSize="16sp"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutWhenMarriage">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Thời gian muốn cưới"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtWhenMarriage"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Hẹn hò với hai người"
+                android:textSize="16sp"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:checked="true"
+                android:textSize="16sp"
+                android:id="@+id/chkCoupleDate"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Có con riêng"
+                android:textSize="16sp"/>
+            <CheckBox
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text=""
+                android:textSize="16sp"
+                android:id="@+id/chkHavingChilds"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutCostFirstDate">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Chi phí cho lần hẹn đầu tiên"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtCostFirstDate"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
+            android:gravity="center" android:background="@drawable/dr_bg_item_information"
+            android:id="@+id/layoutWhoWillPay">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:layout_weight="1" android:text="Ai sẽ trả tiền lần hẹn đầu"
+                android:textSize="16sp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Nhấp để thay đổi"
+                android:textSize="16sp"
+                android:id="@+id/txtWhoWillPay"
+                />
+        </LinearLayout>
+    </LinearLayout>
+</android.support.v7.widget.CardView>
