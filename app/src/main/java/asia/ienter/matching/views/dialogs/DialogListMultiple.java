@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -14,6 +13,7 @@ import java.util.ArrayList;
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogListMultipleCallBack;
 import asia.ienter.matching.utils.MLog;
+import asia.ienter.matching.utils.custom.RippleView;
 import asia.ienter.matching.views.adapters.DialogListAdapter;
 
 /**
@@ -25,7 +25,7 @@ public class DialogListMultiple {
     String listItems[];
     ListView lv;
     TextView tvDone, tvTitle;
-    ImageView btnBack;
+    RippleView btnBack;
     DialogListAdapter listAdapter;
     ArrayList<Integer> listItemSelected;
 
@@ -37,7 +37,7 @@ public class DialogListMultiple {
         lv = (ListView) dialog.findViewById(R.id.listDialog);
         tvDone = (TextView) dialog.findViewById(R.id.tvDone);
         tvTitle = (TextView) dialog.findViewById(R.id.tvTitle);
-        btnBack = (ImageView) dialog.findViewById(R.id.btnBack);
+        btnBack = (RippleView) dialog.findViewById(R.id.btnBackFragment);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

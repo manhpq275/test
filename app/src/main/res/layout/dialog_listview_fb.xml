@@ -9,25 +9,33 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/title_height"
         android:id="@+id/rlTitle"
-        android:background="@color/menu_background_color">
+        android:background="@color/text_color_menu_active">
         <TextView
             android:id="@+id/tvTitle"
             android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/filter_item_height"
-            android:textColor="@android:color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/text_size_title"
             android:textStyle="bold"
             android:textAllCaps="true"
             android:gravity="center"
             android:text="Title"/>
-        <ImageView
-            android:id="@+id/btnBack"
-            android:layout_width="@dimen/filter_item_height"
-            android:layout_height="@dimen/filter_item_height"
-            android:paddingTop="12dp"
-            android:paddingBottom="12dp"
-            android:src="@mipmap/btn_back_accent"/>
+        <asia.ienter.matching.utils.custom.RippleView
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:text="&lt;-"
+            android:id="@+id/btnBackFragment"
+            android:background="@color/transparent" android:clickable="true"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_margin="8dp"
+                android:id="@+id/imgBackActivity"
+                android:src="@drawable/ic_arrow_back_white"
+                />
+        </asia.ienter.matching.utils.custom.RippleView>
         <TextView
             android:id="@+id/tvDone"
             android:layout_alignParentRight="true"

@@ -3,68 +3,126 @@
     android:orientation="vertical"
     android:background="@color/fragment_background_color"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="150dp">
     <RelativeLayout
-        android:paddingTop="@dimen/recycle_view_padding"
-        android:paddingRight="@dimen/recycle_view_padding"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-        <ImageView
-            android:id="@+id/imAvatar"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:scaleType="fitXY"
-            />
-        <LinearLayout
-            android:id="@+id/lnInfo"
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:layout_marginLeft="100dp"
-            android:background="@android:color/white"
-            android:gravity="center_vertical"
-            android:paddingTop="@dimen/recycle_view_padding"
-            android:paddingLeft="@dimen/recycle_view_padding"
-            android:paddingBottom="@dimen/recycle_view_padding"
-            >
 
+        android:background="@android:color/white"
+
+        android:layout_marginTop="@dimen/recycle_view_padding"
+        android:layout_marginLeft="@dimen/recycle_view_padding"
+        android:layout_marginRight="@dimen/recycle_view_padding"
+
+        android:layout_width="match_parent"
+        android:layout_height="150dp">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="100dp">
+            <ImageView
+                android:id="@+id/imAvatar"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:scaleType="fitXY"
+                />
             <LinearLayout
-                android:id="@+id/lnName"
-                android:orientation="horizontal"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_centerHorizontal="true">
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:src="@mipmap/ic_online"/>
-                <TextView
-                    android:id="@+id/tvName"
-                    android:textColor="@android:color/black"
-                    android:textStyle="bold"
-                    android:text="Minh Ngoc"
-                    android:paddingLeft="5dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
-            </LinearLayout>
-            <TextView
-                android:id="@+id/tvYearsOld"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_below="@+id/lnName"
-                android:text=" 23 Years Old"/>
-        </LinearLayout>
+                android:id="@+id/lnInfo"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_marginLeft="100dp"
+                android:gravity="center_vertical"
+                android:paddingTop="@dimen/recycle_view_padding"
+                android:paddingLeft="@dimen/recycle_view_padding"
+                android:paddingBottom="@dimen/recycle_view_padding"
+                >
 
+                <LinearLayout
+                    android:id="@+id/lnName"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:layout_centerHorizontal="true">
+                    <ImageView
+                        android:layout_width="15dp"
+                        android:layout_height="15dp"
+                        android:src="@mipmap/ic_online"/>
+                    <TextView
+                        android:id="@+id/tvName"
+                        android:textColor="@android:color/black"
+                        android:text="Minh Ngoc"
+                        android:paddingLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lnInfo2"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingBottom="10dp"
+                    android:layout_centerHorizontal="true">
+                    <TextView
+                        android:id="@+id/tvYearsOld"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/lnName"
+                        android:textColor="@android:color/black"
+                        android:text="23 Tuổi"/>
+                    <TextView
+                        android:id="@+id/tvAddress"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@+id/lnName"
+                        android:paddingLeft="15dp"
+                        android:textColor="@android:color/black"
+                        android:text="Hà Nội"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lnLastChat"
+                    android:orientation="horizontal"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_centerHorizontal="true">
+                    <TextView
+                        android:id="@+id/lastChat"
+                        android:text="@string/txtLastChat"
+                        android:paddingLeft="5dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
 
     </RelativeLayout>
     <ImageView
         android:id="@+id/btnLike"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:src="@mipmap/btn_matched"
+
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+    <ImageView
+        android:id="@+id/btnRemove"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:src="@mipmap/btn_like_full"
-        android:layout_centerVertical="true"
+        android:padding="12dp"
+        android:layout_margin="5dp"
+        android:src="@mipmap/btn_remove"
+
+        android:layout_alignParentTop="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

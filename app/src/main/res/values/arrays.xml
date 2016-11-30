@@ -36,6 +36,6 @@
     <string-array name="media_selection">
         <item>Thư viện Facebook</item>
         <item>Chụp Camera</item>
-        <item>Thư viện máy</item>
+        <item>Thư viện hình ảnh</item>
     </string-array>
 </resources>

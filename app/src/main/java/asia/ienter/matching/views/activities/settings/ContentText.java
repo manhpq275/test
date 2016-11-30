@@ -2,17 +2,12 @@ package asia.ienter.matching.views.activities.settings;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import asia.ienter.matching.R;
-import asia.ienter.matching.views.adapters.AboutAdapter;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
+import butterknife.OnClick;
 
 /**
  * Created by phamquangmanh on 11/15/16.
@@ -31,13 +26,6 @@ public class ContentText extends AppCompatActivity {
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_active_years_old);
         ButterKnife.inject(this);
-        Button backButton = (Button) findViewById(R.id.btnBack);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
         getBunlde();
     }
 
@@ -45,6 +33,12 @@ public class ContentText extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         this.overridePendingTransition(R.anim.hold, R.anim.exit_to_right);
+    }
+
+    @OnClick(R.id.layoutBackActivity)
+    public void onClickBackActivity() {
+        onBackPressed();
+
     }
 
     private void getBunlde(){

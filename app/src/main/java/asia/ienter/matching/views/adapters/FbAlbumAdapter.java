@@ -8,8 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.squareup.picasso.Picasso;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -84,7 +84,8 @@ public class FbAlbumAdapter extends BaseAdapter {
 
         FbAlbum item = listItem.get(position);
         holder.albumsName.setText(item.getName());
-        Picasso.with(mContext).load(item.getCover_id()).resize(80, 80).into(holder.thumbnail);
+        //Picasso.with(mContext).load(item.getCover_id()).resize(80, 80).into(holder.thumbnail);
+        Glide.with(mContext).load(item.getCover_id()).asBitmap().into(holder.thumbnail);
         return convertView;
     }
 

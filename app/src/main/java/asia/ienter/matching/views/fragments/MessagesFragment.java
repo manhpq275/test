@@ -14,14 +14,21 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
+import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
+import asia.ienter.matching.interfaces.IGetListUserSearch;
 import asia.ienter.matching.interfaces.IMessagesCallback;
 import asia.ienter.matching.interfaces.ITopViewCallback;
 import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.models.enums.ClientType;
+import asia.ienter.matching.services.UserServices;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.activities.ChatActivity;
+import asia.ienter.matching.views.activities.HomeActivity;
 import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.adapters.MessageListAdapter;
 import asia.ienter.matching.views.dialogs.DialogChat;
@@ -36,10 +43,17 @@ import butterknife.OnClick;
 public class MessagesFragment extends BaseFragment implements ITopViewCallback,IMessagesCallback {
 
     private static final String TAG = "MessagesFragment";
+    private static final int TAB_CONTACT = 1;
+    private static final int TAB_INVITETION = 2;
+    private static final int TAB_MYREQUEST = 3;
     ArrayList<UserView> topViewArrayList;
+    ArrayList<UserView> topViewArrayList_like_me;
+    ArrayList<UserView> topViewArrayList_me_like;
     MessageListAdapter adapter;
-    public boolean isGrid = true;
-    private ArrayList<UserView> mUsers = new ArrayList<>();
+    private int pageContact = 0;
+    private int pageLikeMe =0;
+    private int pageMeLike=0;
+    private HomeActivity homeActivity;
 
     public int getTabSelected() {
         return tabSelected;
@@ -49,7 +63,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         this.tabSelected = tabSelected;
     }
 
-    private int tabSelected = 2;
+    private int tabSelected = -1;
     @InjectView(R.id.recycleTop)
     RecyclerView recycleTopView;
 
@@ -67,33 +81,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         myFragment.setArguments(args);
         return myFragment;
     }
-    private final String android_version_names[] = {
-            "Donut",
-            "Eclair",
-            "Froyo",
-            "Gingerbread",
-            "Honeycomb",
-            "Ice Cream Sandwich",
-            "Jelly Bean",
-            "KitKat",
-            "Lollipop",
-            "Marshmallow"
-    };
 
-    private final String android_image_urls[] = {
-            "http://api.learn2crack.com/android/images/donut.png",
-            "http://api.learn2crack.com/android/images/eclair.png",
-            "http://api.learn2crack.com/android/images/froyo.png",
-            "http://api.learn2crack.com/android/images/ginger.png",
-            "http://api.learn2crack.com/android/images/honey.png",
-            "http://api.learn2crack.com/android/images/icecream.png",
-            "http://api.learn2crack.com/android/images/jellybean.png",
-            "http://api.learn2crack.com/android/images/kitkat.png",
-            "http://api.learn2crack.com/android/images/lollipop.png",
-            "http://api.learn2crack.com/android/images/marshmallow.png"
-    };
-
-    @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -103,19 +91,17 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         initView();
         MLog.d(TAG,"onCreateView()");
         if(getUserVisibleHint()){
-            loadDataFromApi();
+            onTabChange(TAB_CONTACT);
         }
         return mView;
     }
-    private boolean isLoading;
+    private boolean isLoading = true;
     private int visibleThreshold = 5;
     private int lastVisibleItem, totalItemCount;
 
     @Override
     protected void initView() {
-
-        ButterKnife.inject(this,mView);
-
+        homeActivity = (HomeActivity)getActivity();
         //Load Progress
         mProgressBarLoading = (ProgressBar) mView.findViewById(R.id.mProgressLoading);
         mProgressBarLoadingMore = (ProgressBar) mView.findViewById(R.id.mProgressLoadingMore);
@@ -125,15 +111,17 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
             @Override
             public void onRefresh() {
                 showPullRefresh();
-                loadDataFromApi();
             }
         });
 
         topViewArrayList = new ArrayList<>();
+        topViewArrayList_like_me = new ArrayList<>();
+        topViewArrayList_me_like = new ArrayList<>();
         recycleTopView.setHasFixedSize(true);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(mContext,1);
         recycleTopView.setLayoutManager(layoutManager);
         final LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recycleTopView.getLayoutManager();
+
         recycleTopView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -151,16 +139,8 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                         public void run() {
                             MLog.e(TAG, "Load More Data");
 
-                            //Load data
-//                            int index = topViewArrayList.size();
-//                            int end = index + 5;
-//                            for (int i = index; i < end; i++) {
-//                                TopView user = new TopView(""+i,"Name " + i,2);
-//                                user.setAndroid_version_name("Name " + i);
-//                                user.setAndroid_image_url(android_image_urls[4]);
-//                                topViewArrayList.add(user);
-//                            }
-//                            adapter.onNotifyDataSetChanged(topViewArrayList);
+                            loadDataFromApi();
+                            // topAdapter.onNotifyDataSetChanged(topViewArrayList);
                             isLoading = false;
                             hideLoading();
                         }
@@ -171,30 +151,131 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         });
 
 
-
-
     }
 
     @Override
     protected void loadDataFromApi() {
-        MLog.d(TAG,"loadDataFromApi()");
+        MLog.d(TAG,"loadDataFromApi() Started");
         showLoading();
-        topViewArrayList.clear();
-//        for(int i=0;i<android_version_names.length;i++){
-//            TopView androidVersion = new TopView(""+i,"Name "+i,0);
-//            androidVersion.setAndroid_version_name(android_version_names[i]);
-//            androidVersion.setAndroid_image_url(android_image_urls[i]);
-//            topViewArrayList.add(androidVersion);
-//        }
-        //  topViewArrayList.add(null);
-        adapter = new MessageListAdapter(this,topViewArrayList);
-        recycleTopView.setAdapter(adapter);
-        hideLoading();
+
+
+
+
+        switch (getTabSelected()){
+            case TAB_CONTACT:
+
+                pageContact++;
+                if(pageContact==1){
+                    recycleTopView.setVisibility(View.INVISIBLE);
+                }
+                UserServices.getInstance().getUserListMatched(MCApp.getUserInstance().getUserId(), pageContact, ClientType.AndroidApp, new IGetListUserSearch() {
+                    @Override
+                    public void onError(ArrayList errors) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<UserView> items) {
+                        hideLoading();
+                        recycleTopView.setVisibility(View.VISIBLE);
+                        MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
+                        if(items==null){
+                            isLoading = true;
+                            pageContact--;
+                        }else{
+                            if(items.size()>0){
+                                MLog.d(TAG,"List = "+new Gson().toJson(items));
+                                topViewArrayList.addAll(items);
+                                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList);
+                                recycleTopView.setAdapter(adapter);
+                            }
+                        }
+
+
+                        hideLoading();
+                    }
+                });
+                break;
+            case TAB_INVITETION:
+
+                pageLikeMe++;
+                if(pageLikeMe==1){
+                    recycleTopView.setVisibility(View.INVISIBLE);
+                }
+                UserServices.getInstance().getUserListLikeMe(MCApp.getUserInstance().getUserId(), pageLikeMe, ClientType.AndroidApp, new IGetListUserSearch() {
+                    @Override
+                    public void onError(ArrayList errors) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<UserView> items) {
+                        hideLoading();
+                        recycleTopView.setVisibility(View.VISIBLE);
+                        MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
+                        if(items==null){
+                            isLoading = true;
+                            pageLikeMe--;
+                        }else{
+                            if(items.size()>0){
+                                MLog.d(TAG,"List = "+new Gson().toJson(items));
+                                topViewArrayList_like_me.addAll(items);
+                                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList_like_me);
+                                recycleTopView.setAdapter(adapter);
+                            }
+                        }
+
+
+                    }
+                });
+                break;
+            case TAB_MYREQUEST:
+
+                pageMeLike++;
+                if(pageMeLike==1){
+                    recycleTopView.setVisibility(View.INVISIBLE);
+                }
+                UserServices.getInstance().getUserListMeLike(MCApp.getUserInstance().getUserId(), pageMeLike, ClientType.AndroidApp, new IGetListUserSearch() {
+                    @Override
+                    public void onError(ArrayList errors) {
+
+                    }
+
+                    @Override
+                    public void onSuccess(ArrayList<UserView> items) {
+                        hideLoading();
+                        recycleTopView.setVisibility(View.VISIBLE);
+                        MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
+                        if(items==null){
+                            isLoading = true;
+                            pageMeLike--;
+                        }else{
+                            if(items.size()>0){
+                                MLog.d(TAG,"List = "+new Gson().toJson(items));
+                                topViewArrayList_me_like.addAll(items);
+                                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList_me_like);
+                                recycleTopView.setAdapter(adapter);
+                            }
+                        }
+                    }
+                });
+                break;
+        }
+
+
+
+
+
+
+
+
+
+
     }
 
     DialogChat dialogChat;
     @Override
-    public void OnItemClickRecycleView(UserView topView) {
+    public void OnItemClickRecycleView(UserView topView, int position) {
         MLog.e(TAG,"Item click RecycleView");
         if(tabSelected==1){
             dialogChat =  new DialogChat(mContext,this);
@@ -209,13 +290,9 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     }
 
     @Override
-    public boolean OnItemClickLike(int position) {
+    public boolean OnItemClickLike(View btnLike,int position) {
         MLog.e(TAG,"Item click Like");
         UserView topView = topViewArrayList.get(position);
-//        int isLiked = topView.isLike();
-//        if(isLiked==0) isLiked = 1;
-//        if(isLiked==1) isLiked = 0;
-//        topViewArrayList.get(position).setLike(isLiked);
 
         new DialogLikeMe(mContext,this).show();
         MLog.e(TAG,"Item click Like 2");
@@ -243,6 +320,9 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     }
 
     private void onTabChange(int tabSelected){
+        if(getTabSelected()==tabSelected) return;
+
+        isLoading=false;
         switch (tabSelected){
             case 1:
                 tab1.setBackgroundResource(R.drawable.dr_bg_left_conner_active);
@@ -262,24 +342,23 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         }
 
         setTabSelected(tabSelected);
-        adapter = new MessageListAdapter(this,topViewArrayList);
-        recycleTopView.setAdapter(adapter);
+        loadDataFromApi();
     }
 
 
     @OnClick(R.id.tab1)
     public void onClickTab1(){
-        onTabChange(1);
+        onTabChange(TAB_CONTACT);
     }
 
     @OnClick(R.id.tab2)
     public void onClickTab2(){
-        onTabChange(2);
+        onTabChange(TAB_INVITETION);
     }
 
     @OnClick(R.id.tab3)
     public void onClickTab3(){
-        onTabChange(3);
+        onTabChange(TAB_MYREQUEST);
     }
 
     public void onLockClick(boolean isLock) {
@@ -290,5 +369,50 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
             tab1.setEnabled(true);
             tab2.setEnabled(true);
         }
+    }
+
+    @Override
+    public void showPullRefresh(){
+        super.showPullRefresh();
+        isLoading=false;
+
+        switch (getTabSelected()){
+            case TAB_CONTACT:
+                pageContact=0;
+                topViewArrayList.clear();
+                recycleTopView.setAdapter(null);
+                if(!hasInternet()){
+                    recycleTopView.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                loadDataFromApi();
+                break;
+            case TAB_INVITETION:
+                pageLikeMe=0;
+                topViewArrayList_like_me.clear();
+                recycleTopView.setAdapter(null);
+                if(!hasInternet()){
+                    recycleTopView.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                loadDataFromApi();
+                break;
+            case TAB_MYREQUEST:
+                pageMeLike=0;
+                topViewArrayList_me_like.clear();
+                recycleTopView.setAdapter(null);
+                if(!hasInternet()){
+                    recycleTopView.setVisibility(View.INVISIBLE);
+                    return;
+                }
+                loadDataFromApi();
+                break;
+        }
+
+
+
+
+
+
     }
 }

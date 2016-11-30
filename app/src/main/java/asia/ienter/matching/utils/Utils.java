@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.Random;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.models.ErrorView;
@@ -156,4 +158,17 @@ public class Utils {
         getDeepChildOffset(mainParent, parentGroup.getParent(), parentGroup, accumulatedOffset);
     }
 
+    public static int randInt(int max) {
+
+
+        long currentTime = System.currentTimeMillis() / 1000;
+
+        String rand = String.valueOf(currentTime % max);
+
+        // nextInt is normally exclusive of the top value,
+        // so add 1 to make it inclusive
+        int randomNum = Integer.parseInt(rand);
+
+        return randomNum;
+    }
 }

@@ -9,11 +9,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.utils.Config;
+import asia.ienter.matching.utils.Utils;
 import asia.ienter.matching.views.fragments.TopFragment;
 
 /**
@@ -40,23 +44,12 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
         }else{
              view = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_top_item_list, parent, false);
         }
-
-
         return new ViewHolder(view);
     }
 
 
     @Override
     public void onBindViewHolder(TopAdapter.ViewHolder holder, int position) {
-//        holder.tvName.setText(topViewArrayList.get(position).getUserName());
-//        Picasso.with(mContext).load(Config.BASE_URL+topViewArrayList.get(position).getImageUser()).error(R.mipmap.img_like).into(holder.imAvatar);
-//        holder.tvYearsOld.setText(mContext.getString(R.string.yearOld).toString() +": "+ Utils.birthDayToYearsOld(topViewArrayList.get(position).getBirthDay()));
-//
-//        if(!mTopFragment.isGrid){
-//            holder.tvHeight.setText(mContext.getString(R.string.txt_height)+": "+topViewArrayList.get(position).getHeight() + "cm");
-//            holder.tvJob.setText(mContext.getString(R.string.txt_job)+": "+topViewArrayList.get(position).getJob());
-//        }
-
         holder.bind(position,mTopFragment);
     }
 
@@ -102,17 +95,32 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
 
         }
         public void bind(final int position,final TopFragment listener) {
-            //final UserView item = topViewArrayList.get(position);
-            final UserView item = new UserView();
+            final UserView item = topViewArrayList.get(position);
+            //final UserView item = new UserView();
+
+            tvName.setText(item.getUserName());
+            Picasso.with(mContext).load(Config.BASE_URL+item.getImageUser()).error(R.mipmap.img_like).into(imAvatar);
+            tvYearsOld.setText(mContext.getString(R.string.yearOld).toString() +": "+ Utils.birthDayToYearsOld(item.getBirthDay()));
+
+            if(!mTopFragment.isGrid){
+                tvHeight.setText(mContext.getString(R.string.txt_height)+": "+item.getHeight() + "cm");
+                tvJob.setText(mContext.getString(R.string.txt_job)+": "+item.getJob());
+            }
+
+            if(item.getMyLike()==0&&item.getMyLikeSpecial()==0){
+                setLike(btnLike,0);
+            }else{
+                setLike(btnLike,1);
+            }
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    listener.OnItemClickRecycleView(item);
+                    listener.OnItemClickRecycleView(item, position);
                 }
             });
             btnLike.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
-                    setLike(btnLike,false);
-                    listener.OnItemClickLike(position);
+                    listener.OnItemClickLike(btnLike,position);
                 }
             });
         }
@@ -124,9 +132,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
         topViewArrayList.addAll(datas);
         notifyDataSetChanged();
     }
-
-    public void setLike(ImageView btnLike,boolean isLike){
-        if(isLike){
+    public void setLike(ImageView btnLike, int isLike){
+        if(isLike==0){
             if(mTopFragment.isGrid){
                 btnLike.setImageResource(R.mipmap.btn_like);
             }else{
@@ -141,6 +148,5 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
         }
 
     }
-
 
 }

@@ -3,24 +3,34 @@ package asia.ienter.matching.views.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.google.gson.Gson;
 
+import java.util.ArrayList;
+
+import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
+import asia.ienter.matching.interfaces.ICommonViewCallback;
+import asia.ienter.matching.interfaces.IGetListUserSearch;
+import asia.ienter.matching.models.CommonView;
+import asia.ienter.matching.models.User;
+import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.models.enums.ClientType;
+import asia.ienter.matching.services.HomeServices;
+import asia.ienter.matching.services.UserServices;
 import asia.ienter.matching.utils.MLog;
-import asia.ienter.matching.utils.custom.CircleImageView;
+import asia.ienter.matching.utils.ReplaceFragment;
+import asia.ienter.matching.utils.Utils;
 import asia.ienter.matching.views.activities.HomeActivity;
-import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.activities.SettingNearByActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -31,6 +41,15 @@ import butterknife.OnClick;
  */
 public class NearByFragment extends BaseFragment {
 
+    public static final int REQUEST_FROM_NEAR_BY = 10000;
+    public static final int RESULT_CODE_PROFILE = 10001;
+    int page = 1;
+    UserView userRandom = null;
+
+    FragmentManager fragmentManager;
+    ReplaceFragment replaceFragment;
+    boolean isLoading = false;
+
     public static NearByFragment newInstance() {
 
         Bundle args = new Bundle();
@@ -40,16 +59,6 @@ public class NearByFragment extends BaseFragment {
         return fragment;
     }
 
-    private final String list_image_user[] = {
-            "http://www.artsfon.com/large/201608/86256.jpg",
-            "https://lh4.googleusercontent.com/-XplyTa1Za-I/VMSgIyAYkHI/AAAAAAAADxM/oL-rD6VP4ts/w1184-h666/Android-Lollipop-wallpapers-Google-Now-Wallpaper-2.png",
-            "http://i-cdn.phonearena.com/images/articles/145581-image/January.jpg",
-            "http://freedesignfile.com/upload/2016/05/Modern-material-design-background-vector-19.jpg",
-            "http://www.myfreephotoshop.com/wp-content/uploads/2014/06/9113.jpg"
-    };
-    private CircleImageView imgProfile;
-    private ImageView changeCover;
-    private LinearLayout layoutShowImage;
 
     @InjectView(R.id.rlSearching)
     RelativeLayout rlSearching;
@@ -57,92 +66,162 @@ public class NearByFragment extends BaseFragment {
     @InjectView(R.id.rlResult)
     RelativeLayout rlResult;
 
+    @InjectView(R.id.tvSearching)
+    TextView tvSearching;
 
+    private Fragment fragment;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         mView = inflater.inflate(R.layout.fragment_nearby, container, false);
+
         mContext = this.getContext();
-        ButterKnife.inject(this,mView);
-        test();
+        ButterKnife.inject(this, mView);
+
+        if(getUserVisibleHint()){
+            fragmentManager = getChildFragmentManager();
+            replaceFragment = new ReplaceFragment();
+            animationLoading();
+        }
+
         return mView;
     }
 
     @Override
     protected void initView() {
-        rlSearching.setVisibility(View.GONE);
-        rlResult.setVisibility(View.VISIBLE);
-        imgProfile = (CircleImageView) mView.findViewById(R.id.imgProfileUser);
-        Picasso.with(mContext).load("https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcT87f6LTPcdzho8Q5aNfn8wPiA0MKcr45om_g4_A1S-hx2xdr7S5g")
-                .resize(240, 120).into(imgProfile);
-        ImageView imgBackground = (ImageView) mView.findViewById(R.id.imgBackground);
-        Picasso.with(mContext).load("http://protiumdesign.com/wp-content/uploads/2015/04/Material-Design-Background-1024.jpg")
-                .resize(400, 300).into(imgBackground);
-        changeCover = (ImageView) mView.findViewById(R.id.imgChangeCover);
-        buildSlideShowImage();
-
-
+        tvSearching.setText(getString(R.string.txtSearching,MCApp.getAdvanceSearchView().getDistance()));
+        rlSearching.setVisibility(View.VISIBLE);
+        rlResult.setVisibility(View.GONE);
     }
 
     @Override
     protected void loadDataFromApi() {
+        MLog.d(NearByFragment.class, "loadDataFromApi() Started");
+        HomeServices.getInstance().getUserListSearch(MCApp.getUserInstance().getUserId(), MCApp.getAdvanceSearchView(), page, ClientType.AndroidApp, new IGetListUserSearch() {
+            @Override
+            public void onError(ArrayList errors) {
+                onLoadError();
+            }
+
+            @Override
+            public void onSuccess(ArrayList<UserView> items) {
+                hideLoading();
+                if(items==null){
+
+                    return;
+                }
+                MLog.d(NearByFragment.class, "loadDataFromApi() = " + new Gson().toJson(items));
+                {
+                    if (items.size() > 0) {
+                        userRandom = items.get(Utils.randInt(items.size()));
+                    }
+                }
+
+            }
+        });
+
 
     }
-    private void buildSlideShowImage() {
-        layoutShowImage = (LinearLayout) mView.findViewById(R.id.layoutShowImage);
-        for(int i=0;i<list_image_user.length;i++){
-            View slideView = LayoutInflater.from(mContext).inflate(R.layout.layout_image, null);
-            ImageView iv = (ImageView) slideView.findViewById(R.id.imgView);
-            Picasso.with(mContext).load(list_image_user[i]).resize(100, 100).into(iv);
-            layoutShowImage.addView(slideView);
-        }
-        View addMore = LayoutInflater.from(mContext).inflate(R.layout.layout_add_more_image, null);
-        layoutShowImage.addView(addMore);
-    }
+
 
     @OnClick(R.id.btnCancel)
-    public void onClickCancel(){
-        Toast.makeText(mContext,"Click Cancel",Toast.LENGTH_SHORT).show();
+    public void onClickCancel() {
         rlSearching.setVisibility(View.VISIBLE);
         rlResult.setVisibility(View.GONE);
-        test();
+        animationLoading();
     }
 
     @OnClick(R.id.btnAgree)
-    public void onClickAgree(){
-        Toast.makeText(mContext,"Click Agree",Toast.LENGTH_SHORT).show();
+    public void onClickAgree() {
+        if(userRandom.getMyLike()==1){
+            userRandom.setMyLike(0);
+        }else{
+            userRandom.setMyLike(1);
+        }
+        UserServices.getInstance().sendLike(userRandom, ClientType.AndroidApp, new ICommonViewCallback() {
+            @Override
+            public void onError(ArrayList errors) {
+                if(userRandom.getMyLike()==1){
+                    userRandom.setMyLike(0);
+                }else{
+                    userRandom.setMyLike(1);
+                }
+            }
+
+            @Override
+            public void onSuccess(CommonView item) {
+
+            }
+        });
         rlSearching.setVisibility(View.VISIBLE);
         rlResult.setVisibility(View.GONE);
-        test();
+
+        animationLoading();
     }
 
-    private void test(){
-
+    private void animationLoading() {
+        userRandom=null;
+        initView();
+        loadDataFromApi();
+        if(isLoading) return;
+        isLoading = true;
         Handler handler = new Handler();
+        try{
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
+                if(userRandom==null) return;
+                rlResult.setVisibility(View.INVISIBLE);
+                MLog.d(NearByFragment.class,"(userRandom()) = "+userRandom.getUserID());
 
-                initView();
+                if(getUserVisibleHint())
+
+                    try{
+                        if(fragment!=null)
+                            fragmentManager.beginTransaction().remove(fragment).commitAllowingStateLoss();
+                        fragment = ProfileFragment.newInstance(false,userRandom.getUserID());
+                        fragmentManager.beginTransaction().add(R.id.tabNearBy_content,fragment).commitAllowingStateLoss();
+                    }catch (IllegalStateException e){
+                        System.out.print(e.getLocalizedMessage());
+                    }
+
+                isLoading = false;
+                rlSearching.setVisibility(View.GONE);
+                rlResult.setVisibility(View.VISIBLE);
+
+                //    replaceFragment.replace(fragmentManager,fragment,R.id.tabNearBy_content);
+
             }
         }, 5000);
+        }catch (IllegalArgumentException e) {
+            System.out.print(e.getLocalizedMessage());
+        }
     }
 
-    public void onSettingNearBy(){
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        // TODO: Add code to remove fragment here
+        super.onSaveInstanceState(outState);
+    }
+
+    public void onSettingNearBy() {
         Intent profile = new Intent(mContext, SettingNearByActivity.class);
-        startActivityForResult(profile,REQUEST_FROM_NEAR_BY);
+        startActivityForResult(profile, REQUEST_FROM_NEAR_BY);
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == NearByFragment.REQUEST_FROM_NEAR_BY) {
-            if(resultCode==RESULT_CODE_PROFILE){
-                ((HomeActivity)getActivity()).changeTab(3);
+            if (resultCode == RESULT_CODE_PROFILE) {
+                ((HomeActivity) getActivity()).changeTab(3);
+            } else if (resultCode == SettingNearByActivity.BACK_FROM_NEARBY_SETTING) {
+                tvSearching.setText(getString(R.string.txtSearching,MCApp.getAdvanceSearchView().getDistance()));
+                animationLoading();
             }
         }
     }
-    public static final int REQUEST_FROM_NEAR_BY = 10000;
-    public static final int RESULT_CODE_PROFILE = 10001;
+
+
 }

@@ -17,44 +17,44 @@ import butterknife.OnClick;
  */
 public class BlockList extends AppCompatActivity {
 
-    @InjectView(R.id.lnQK)
-    LinearLayout lnQK;
-
-    @InjectView(R.id.lnYX)
-    LinearLayout lnYX;
-
-    @InjectView(R.id.lnTB)
-    LinearLayout lnTB;
+//    @InjectView(R.id.lnQK)
+//    LinearLayout lnQK;
+//
+//    @InjectView(R.id.lnYX)
+//    LinearLayout lnYX;
+//
+//    @InjectView(R.id.lnTB)
+//    LinearLayout lnTB;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
-        setContentView(R.layout.activity_blocklist);
+//        setContentView(R.layout.activity_blocklist);
 
-        ButterKnife.inject(this);
-        ImageView backButton = (ImageView) findViewById(R.id.btnBack);
+//        ButterKnife.inject(this);
+//        ImageView backButton = (ImageView) findViewById(R.id.btnBack);
     }
 
-    @OnClick(R.id.xoaQK)
-    public void xoaQK(){
-        lnQK.setVisibility(View.INVISIBLE);
-    }
-
-    @OnClick(R.id.xoaYX)
-    public void xoaYX(){
-        lnYX.setVisibility(View.INVISIBLE);
-    }
-
-    @OnClick(R.id.xoaTB)
-    public void xoaTB(){
-        lnTB.setVisibility(View.INVISIBLE);
-    }
-
-    @OnClick(R.id.btnBack)
-    public void onClickBack(){
-        onBackPressed();
-    }
+//    @OnClick(R.id.xoaQK)
+//    public void xoaQK(){
+//        lnQK.setVisibility(View.INVISIBLE);
+//    }
+//
+//    @OnClick(R.id.xoaYX)
+//    public void xoaYX(){
+//        lnYX.setVisibility(View.INVISIBLE);
+//    }
+//
+//    @OnClick(R.id.xoaTB)
+//    public void xoaTB(){
+//        lnTB.setVisibility(View.INVISIBLE);
+//    }
+//
+//    @OnClick(R.id.btnBack)
+//    public void onClickBack(){
+//        onBackPressed();
+//    }
 
 }

@@ -45,7 +45,7 @@ public class SplashActivity extends AppCompatActivity {
                         @Override
                         public void onFailed() {
                             //re-try
-                            Toast.makeText(getApplicationContext(), "Đặng nhập thất bại!", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Đăng nhập thất bại!", Toast.LENGTH_SHORT).show();
                             handleChangeScreen(TYPE_LOGIN);
                         }
                     });

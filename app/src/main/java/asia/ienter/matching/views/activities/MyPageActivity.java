@@ -6,14 +6,21 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogLikeCallback;
+import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.ReplaceFragment;
 import asia.ienter.matching.views.adapters.MatchingProfileAdapter;
@@ -30,8 +37,10 @@ public class MyPageActivity extends AppCompatActivity {
     private ReplaceFragment fragmentHandle;
     private MatchingProfileAdapter adapterViewPager;
     private static final String TAG = "MyPageActivity";
-    @InjectView(R.id.btnSetting) Button btnSettingOption;
-    @InjectView(R.id.mainViewPager) ViewPager viewPagerProfile;
+    private ArrayList<UserView> listUserView = new ArrayList<>();
+    @InjectView(R.id.imgMoreOption)     ImageView btnSettingOption;
+    @InjectView(R.id.mainViewPager)     ViewPager viewPagerProfile;
+    @InjectView(R.id.txtTitleScreen)    TextView titleScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,17 +48,22 @@ public class MyPageActivity extends AppCompatActivity {
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_mypage);
         ButterKnife.inject(this);
-        fragmentHandle = new ReplaceFragment();
-        Button btnGoAbout = (Button) findViewById(R.id.btnAboutApp);
-        btnGoAbout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
-        adapterViewPager = new MatchingProfileAdapter(getSupportFragmentManager());
-        viewPagerProfile.setAdapter(adapterViewPager);
-//        buildSlideShowImage();
+        initView();
+    }
+
+    private void initView() {
+        Bundle bundle = getIntent().getExtras();
+        if(bundle!=null) {
+            String arrayUser = bundle.getString("UserArray");
+            listUserView = new Gson().fromJson(arrayUser, new TypeToken<List<UserView>>(){}.getType());
+            int position = bundle.getInt("UserPosition");
+            fragmentHandle = new ReplaceFragment();
+            adapterViewPager = new MatchingProfileAdapter(getSupportFragmentManager(), listUserView);
+            viewPagerProfile.setAdapter(adapterViewPager);
+            viewPagerProfile.setCurrentItem(position);
+            titleScreen.setText(listUserView.get(position).getUserName());
+            viewPagerProfile.addOnPageChangeListener(new ViewPagerChange());
+        }
     }
 
 
@@ -57,6 +71,11 @@ public class MyPageActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         this.overridePendingTransition(R.anim.hold, R.anim.exit_to_right);
+    }
+
+    @OnClick(R.id.layoutBackActivity)
+    public void onGoBackActivity(){
+        onBackPressed();
     }
 
     @OnClick(R.id.layoutLike)
@@ -78,7 +97,7 @@ public class MyPageActivity extends AppCompatActivity {
         MLog.e(TAG, "Item click Like 2");
     }
 
-    @OnClick(R.id.btnSetting)
+    @OnClick(R.id.layoutMoreOption)
     public void onClickOption(){
         showPopupSelectImage(btnSettingOption);
     }
@@ -111,7 +130,7 @@ public class MyPageActivity extends AppCompatActivity {
     }
 
     private void handleReportUser() {
-        fragmentHandle.replaceWithAnimation(getSupportFragmentManager(), ReportUserFragment.newInstance(), R.id.layoutContent,
+        fragmentHandle.replaceWithAnimation(getSupportFragmentManager(), ReportUserFragment.newInstance(listUserView.get(viewPagerProfile.getCurrentItem())), R.id.layoutContent,
                 R.anim.enter_from_right,
                 R.anim.hold,
                 R.anim.hold,
@@ -130,5 +149,23 @@ public class MyPageActivity extends AppCompatActivity {
                         onBackPressed();
                     }
                 }).show();
+    }
+
+    private class ViewPagerChange implements ViewPager.OnPageChangeListener{
+
+        @Override
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+        }
+
+        @Override
+        public void onPageSelected(int position) {
+            titleScreen.setText(listUserView.get(position).getUserName());
+        }
+
+        @Override
+        public void onPageScrollStateChanged(int state) {
+
+        }
     }
 }

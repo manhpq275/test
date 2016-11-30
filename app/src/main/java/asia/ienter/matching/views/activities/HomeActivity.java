@@ -48,11 +48,12 @@ public class HomeActivity extends FragmentActivity {
     private static final int TAB_MESSAGES = 2;
     private static final int TAB_PROFILE = 3;
 
-    private int mTabSelect;
+    private int mTabSelect=-1;
     private FragmentManager fragmentManager;
     private Fragment fragment;
+    ReplaceFragment replaceFragment;
     private boolean isShowMenu =true;
-
+    private ProfileFragment fragmentProfile = ProfileFragment.newInstance(true, null);
     Context context;
     @InjectView(R.id.menuBar)   LinearLayout lnMenuBar;
     @InjectView(R.id.tabMatching)   TextView tabMatching;
@@ -98,12 +99,13 @@ public class HomeActivity extends FragmentActivity {
 
     private void initView() {
         this.context = this;
+        replaceFragment = new ReplaceFragment();
+        fragmentManager = getSupportFragmentManager();
         this.setScreenSize();
         if(SharedPreference.getInstance().getBoolean("GiftCode", true)) {
             new DialogGift(this).show();
             SharedPreference.getInstance().putBoolean("GiftCode", false);
         }
-
     }
 
     public void getBundleData() {
@@ -147,10 +149,9 @@ public class HomeActivity extends FragmentActivity {
     }
 
     public void changeTab(int position) {
+        if(mTabSelect==position) return;
         mTabSelect = position;
         changeBackgroundTab(mTabSelect);
-        fragmentManager = getSupportFragmentManager();
-        ReplaceFragment replaceFragment = new ReplaceFragment();
         MLog.d(TAG, "changeTab()");
         switch (position) {
             case TAB_MATCHING:
@@ -162,11 +163,11 @@ public class HomeActivity extends FragmentActivity {
                 replaceFragment.replace(fragmentManager, fragment, R.id.home_content_fragment);
                 break;
             case TAB_MESSAGES:
-                fragment =  new MessagesFragment();
+                fragment =  MessagesFragment.newInstance(null);
                 replaceFragment.replace(fragmentManager,fragment, R.id.home_content_fragment);
                 break;
             case TAB_PROFILE:
-                fragment =  ProfileFragment.newInstance(true);
+                fragment =  fragmentProfile;
                 replaceFragment.replace(fragmentManager, fragment, R.id.home_content_fragment);
                 break;
         }
@@ -318,43 +319,42 @@ public class HomeActivity extends FragmentActivity {
     }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK) {
             if (requestCode == 1) {
                 try {
                     Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), ProfileFragment.imageUri);
                     fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
-                    String imageurl = getRealPathFromURI(ProfileFragment.imageUri);
-                    ((ProfileFragment)fragment).addViewPicture(ProfileFragment.imageUri, imageurl);
+                    final String imageurl = getRealPathFromURI(ProfileFragment.imageUri);
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ProfileFragment)fragment).addViewPicture(ProfileFragment.imageUri, imageurl);
+                        }
+                    });
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
 
             } else if (requestCode == 2) {
                 final Intent dataGet = data;
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        final Uri selectedImage = dataGet.getData();
-                        String[] filePath = { MediaStore.Images.Media.DATA };
-                        Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
-                        if(c!=null) {
-                            c.moveToFirst();
-                            int columnIndex = c.getColumnIndex(filePath[0]);
-                            final String picturePath = c.getString(columnIndex);
-                            final Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    ((ProfileFragment)fragment).addViewPicture( selectedImage, picturePath);
-                                }
-                            });
-                            c.close();
+                final Uri selectedImage = dataGet.getData();
+                String[] filePath = { MediaStore.Images.Media.DATA };
+                Cursor c = getContentResolver().query(selectedImage, filePath, null, null, null);
+                if(c!=null) {
+                    c.moveToFirst();
+                    int columnIndex = c.getColumnIndex(filePath[0]);
+                    final String picturePath = c.getString(columnIndex);
+                    final Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ((ProfileFragment)fragment).addViewPicture( selectedImage, picturePath);
                         }
-
-                    }
-                }).run();
+                    });
+                    c.close();
+                }
             }
         }
     }

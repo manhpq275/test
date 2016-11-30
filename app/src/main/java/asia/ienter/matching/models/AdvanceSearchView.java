@@ -9,51 +9,20 @@ import java.util.ArrayList;
  */
 public class AdvanceSearchView extends BaseView {
 
+    final public static int DEFAULT_YEARS_OLD = 15;
+    final public static int DEFAULT_HEIGHT = 100;
+    final public static int DEFAULT_WEIGHT = 30;
     private boolean isAvatar=false;
     private boolean isDescription=false;
     private int onlineAgo=0;
     private int minYearOld=0;
-    private int maxYearOld=0;
+    private int maxYearOld=DEFAULT_YEARS_OLD;
     private int address=0;
     private int homeLand=0;
     private int minHeight=0;
-
-    public int getMinWeight() {
-        return minWeight;
-    }
-
-    public void setMinWeight(int minWeight) {
-        this.minWeight = minWeight;
-    }
-
-    public int getMaxWeight() {
-        return maxWeight;
-    }
-
-    public void setMaxWeight(int maxWeight) {
-        this.maxWeight = maxWeight;
-    }
-
+    private int maxHeight=DEFAULT_HEIGHT;
     private int minWeight=0;
-    private int maxWeight=0;
-
-    public int getMaxHeight() {
-        return maxHeight;
-    }
-
-    public void setMaxHeight(int maxHeight) {
-        this.maxHeight = maxHeight;
-    }
-
-    public int getMinHeight() {
-        return minHeight;
-    }
-
-    public void setMinHeight(int minHeight) {
-        this.minHeight = minHeight;
-    }
-
-    private int maxHeight=0;
+    private int maxWeight=DEFAULT_WEIGHT;
     private ArrayList<Integer> languages = new ArrayList<>();
     private int externality=0;
     private int bloodGroup=0;
@@ -77,6 +46,41 @@ public class AdvanceSearchView extends BaseView {
     private int matchingPay=0;
     private ArrayList<Integer> likes= null;
 
+    public int getMinWeight() {
+        return minWeight;
+    }
+
+    public void setMinWeight(int minWeight) {
+        this.minWeight = minWeight;
+    }
+
+    public int getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(int maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
+
+    public int getMaxHeight() {
+        return maxHeight;
+    }
+
+    public void setMaxHeight(int maxHeight) {
+        this.maxHeight = maxHeight;
+    }
+
+    public int getMinHeight() {
+        return minHeight;
+    }
+
+    public void setMinHeight(int minHeight) {
+        this.minHeight = minHeight;
+    }
+
+
+
     public int getDistance() {
         return distance;
     }
@@ -85,7 +89,7 @@ public class AdvanceSearchView extends BaseView {
         this.distance = distance;
     }
 
-    private int distance =0;
+    private int distance =50;
 
     public boolean isAvatar() {
         return isAvatar;

@@ -19,8 +19,8 @@ public class HomeApi extends BaseApi<UserView>{
         super("");
     }
 
-    public String getListUserMatched(int userId,int page) {
-        return String.format(AppConstants.API_HOME_GET_LIST_MATCHING_PATTERN, this.getBaseUrl(),userId,page);
+    public String getListUserSearch(int page) {
+        return String.format(AppConstants.API_HOME_GET_LIST_SEARCH_PATTERN, this.getBaseUrl(),page);
     }
 
     public String appStatus(){

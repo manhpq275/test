@@ -20,6 +20,7 @@
     <color name="blue_A700">#2962FF</color>
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
+    <color name="rippelColor">#FFFFFF</color>
 
     <color name="black_transparent">#80000000</color>
     <color name="background_advance_search">#f7f7f2</color>

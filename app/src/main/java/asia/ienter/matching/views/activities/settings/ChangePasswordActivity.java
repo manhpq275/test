@@ -1,9 +1,7 @@
 package asia.ienter.matching.views.activities.settings;
 
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.Editable;
@@ -12,9 +10,6 @@ import android.text.TextWatcher;
 import com.rengwuxian.materialedittext.MaterialEditText;
 
 import asia.ienter.matching.R;
-import asia.ienter.matching.utils.MLog;
-import asia.ienter.matching.utils.SharedPreference;
-import asia.ienter.matching.views.activities.LoginActivity;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
 import butterknife.OnClick;
@@ -40,7 +35,7 @@ public class ChangePasswordActivity extends AppCompatActivity {
         initView();
     }
 
-    @OnClick(R.id.btnBack)
+    @OnClick(R.id.layoutBackActivity)
     public void onClickBackButton() {
         onBackPressed();
     }

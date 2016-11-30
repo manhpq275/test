@@ -6,8 +6,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RatingBar;
 
 import asia.ienter.matching.R;
+import asia.ienter.matching.utils.SharedPreference;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by hoangtuan on 9/21/16.
@@ -32,7 +36,7 @@ public class AboutDetailFragment extends BaseFragment {
             position = bundle.getInt("AboutPosition");
         }
         handlePositionAbout(inflater, position, container);
-        //mView = inflater.inflate(R.layout.fragment_about_detail, container, false);
+        ButterKnife.inject(this, mView);
         mContext = this.getContext();
         initView();
         return mView;
@@ -64,15 +68,33 @@ public class AboutDetailFragment extends BaseFragment {
         return null;
     }
 
+    @OnClick(R.id.btnBackFragment)
+    public void onClickBackActivity() {
+        getActivity().onBackPressed();
+
+    }
+
     @Override
     protected void initView() {
-        Button btnBack = (Button) mView.findViewById(R.id.btnBack);
-        btnBack.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                getActivity().onBackPressed();
-            }
-        });
+        if(position == 4){
+            final RatingBar ratingApp = (RatingBar) mView.findViewById(R.id.ratingBarApplication);
+            ratingApp.setRating(SharedPreference.getInstance().getFloat("RatingApp", 0f));
+//            ratingApp.setOnRatingBarChangeListener(new RatingBar.OnRatingBarChangeListener() {
+//                @Override
+//                public void onRatingChanged(RatingBar ratingBar, float rating, boolean fromUser) {
+//                    SharedPreference.getInstance().putFloat("RatingApp", rating);
+//                }
+//            });
+
+            Button btnConfirm = (Button) mView.findViewById(R.id.btnConfirm);
+            btnConfirm.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    SharedPreference.getInstance().putFloat("RatingApp", ratingApp.getRating());
+                    getActivity().onBackPressed();
+                }
+            });
+        }
     }
 
     @Override

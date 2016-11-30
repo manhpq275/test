@@ -13,15 +13,19 @@ import android.widget.Toast;
 
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogListMultipleCallBack;
+import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.models.enums.Languages;
 import asia.ienter.matching.models.enums.Report;
+import asia.ienter.matching.services.UserServices;
 import asia.ienter.matching.utils.Utils;
+import asia.ienter.matching.utils.custom.CircleImageView;
 import asia.ienter.matching.utils.custom.TagGroup;
 import asia.ienter.matching.views.dialogs.DialogListMultiple;
 import butterknife.ButterKnife;
@@ -33,13 +37,17 @@ import butterknife.OnTouch;
  * Created by hoangtuan on 10/5/16.
  */
 public class ReportUserFragment extends BaseFragment {
-    @InjectView(R.id.tagGroupReport) TagGroup mTagReport;
-    @InjectView(R.id.txtAddReport) TextView txtAddReport;
-    @InjectView(R.id.edtMyOpinions) EditText edtOpinion;
-    public static ReportUserFragment newInstance() {
+    @InjectView(R.id.tagGroupReport)    TagGroup mTagReport;
+    @InjectView(R.id.txtAddReport)      TextView txtAddReport;
+    @InjectView(R.id.txtUserName)       TextView txtUserName;
+    @InjectView(R.id.edtMyOpinions)     EditText edtOpinion;
+    @InjectView(R.id.imgProfilePicture) CircleImageView imgUserProfile;
 
+
+    private UserView userView;
+    public static ReportUserFragment newInstance(UserView userView) {
         Bundle args = new Bundle();
-
+        args.putSerializable("UserView", userView);
         ReportUserFragment fragment = new ReportUserFragment();
         fragment.setArguments(args);
         return fragment;
@@ -58,6 +66,15 @@ public class ReportUserFragment extends BaseFragment {
     @Override
     protected void initView() {
         if(isAdded()) {
+            Bundle bundle = getArguments();
+            if(bundle!=null){
+                userView = (UserView)bundle.getSerializable("UserView");
+                txtUserName.setText(userView.getUserName());
+                if(userView.getImageUser()!=null && !userView.getImageUser().isEmpty()) {
+                    Glide.with(mContext).load(userView.getImageUser()).asBitmap().into(imgUserProfile);
+                }
+            }
+
             mTagReport.setOnTagClickListener(new TagGroup.OnTagClickListener() {
                 @Override
                 public void onTagClick(String tag) {
@@ -65,6 +82,11 @@ public class ReportUserFragment extends BaseFragment {
                 }
             });
         }
+    }
+
+    @OnClick(R.id.layoutBackActivity)
+    public void onGoBackActivity(){
+        getActivity().onBackPressed();
     }
 
     private void handleRemoveTag(String tag) {
@@ -120,11 +142,6 @@ public class ReportUserFragment extends BaseFragment {
         dialogList.show(getString(R.string.txt_language), listItems);
     }
 
-    @OnClick(R.id.btnBackReport)
-    public void onClickBack(){
-        getActivity().onBackPressed();
-    }
-
     @OnClick(R.id.btnConfirmReport)
     public void onClickConfirmReport(){
         showDiaLogConfirmReport();
@@ -148,10 +165,26 @@ public class ReportUserFragment extends BaseFragment {
                 .onPositive(new MaterialDialog.SingleButtonCallback() {
                     @Override
                     public void onClick(MaterialDialog dialog, DialogAction which) {
-                        Toast.makeText(getActivity(), "Đã báo cáo vi phạm", Toast.LENGTH_SHORT).show();
-                        getActivity().finish();
+                        handleReportViolation();
+
                     }
                 }).show();
+    }
+
+    private void handleReportViolation() {
+        UserServices.getInstance().makeReportViolation(userView.getUserID(), edtOpinion.getText().toString(), new UserServices.IReportUserCallback() {
+            @Override
+            public void onSuccess() {
+                Toast.makeText(getActivity(), "Đã báo cáo vi phạm!", Toast.LENGTH_SHORT).show();
+                getActivity().finish();
+            }
+
+            @Override
+            public void onError() {
+                Toast.makeText(getActivity(), "Đã có lỗi trong lúc thực hiện!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override

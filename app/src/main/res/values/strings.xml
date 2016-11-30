@@ -27,12 +27,14 @@
     <string name="liked">Event 8/3: Gift for everyone</string>
     <string name="txtResetButton">Mặc định</string>
     <string name="txtMatching">Matching</string>
-    <string name="txtSearching">Tìm kiếm người sử dụng ở gần bạn (phạm vi 50km)</string>
+    <string name="txtSearching">Tìm kiếm người sử dụng ở gần bạn (phạm vi %s km)</string>
     <string name="txt_help_near_by">Tìm quanh đây giúp bạn tìm được người sử dụng gần bạn mà có chung về các sở thích, tính cách</string>
     <string name="txtRange">Bạn có thể thay đổi phạm vi tìm kiếm</string>
     <string name="txtContacts">Liên hệ</string>
-    <string name="txtInvitations">Yêu cầu kết bạn</string>
-    <string name="txtMyRequest">Yêu cầu của bạn</string>
+    <!--<string name="txtInvitations">Yêu cầu kết bạn</string>-->
+    <string name="txtInvitations">Nhận thích</string>
+    <!--<string name="txtMyRequest">Yêu cầu của bạn</string>-->
+    <string name="txtMyRequest">Gửi thích</string>
     <string name="txt_like_or_not">People send request</string>
     <string name="txtGotoChat">Đi tới CHAT</string>
     <string name="txt_advance_search">Tìm kiếm nâng cao</string>
@@ -71,7 +73,7 @@
     <string name="add_tag"></string>
     <string name="menu_block">Chặn người dùng này</string>
     <string name="menu_report">Báo cáo vi phạm</string>
-
+    <string name="tap_to_change">Bấm để thay đổi</string>
     <string name="showDetail">Xem chi tiết...</string>
     <string name="birthday">Ngày sinh</string>
     <string name="yearOld">Tuổi</string>
@@ -147,6 +149,9 @@
     <string name="txt_cm">cm</string>
     <string name="txtKg">kg</string>
     <string name="txt_noInternet">Kết nối tới máy chủ gặp vấn đề. Vui lòng quay lại sau hoặc kéo xuống để thử lại!</string>
+    <string name="txtLastChat">Hãy bắt đầu trò chuyện</string>
+    <string name="txtSpecialLike">Đặc biệt yêu thích</string>
+    <string name="txtLike">Yêu thích</string>
     <string-array name="advance_search_string_array">
         <item>filter 1</item>
         <item>filter 2</item>

@@ -5,11 +5,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.views.adapters.AboutAdapter;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /**
  * Created by hoangtuan on 9/23/16.
@@ -23,19 +23,19 @@ public class AboutActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_about);
+        ButterKnife.inject(this);
         aboutAdapter = new AboutAdapter(AboutActivity.this);
         recyclerView = (RecyclerView) findViewById(R.id.listAbout);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
         recyclerView.setAdapter(aboutAdapter);
-        Button backButton = (Button) findViewById(R.id.btnBack);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
+    }
+
+    @OnClick(R.id.layoutBackActivity)
+    public void onClickBackActivity() {
+        onBackPressed();
+
     }
 
     @Override

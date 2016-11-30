@@ -19,12 +19,12 @@
             android:background="@color/text_color_menu_active">
             <ImageView
                 android:id="@+id/leftBtnTopBar"
-                android:layout_width="@dimen/height_action_bar"
-                android:layout_height="@dimen/height_action_bar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:padding="@dimen/padding_icon_action_bar"
                 android:src="@mipmap/btn_gridview"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_margin="5dp"/>
             <TextView
                 android:layout_height="match_parent"
                 android:layout_width="wrap_content"
@@ -38,12 +38,12 @@
                 />
             <ImageView
                 android:id="@+id/rightBtnTopBar"
-                android:layout_width="@dimen/height_action_bar"
-                android:layout_height="@dimen/height_action_bar"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
                 android:src="@mipmap/btn_search_advance"
                 android:padding="@dimen/padding_search_icon_action_bar"
                 android:layout_gravity="center_vertical"
-                />
+                android:layout_margin="5dp"/>
         </LinearLayout>
     </android.support.v7.widget.CardView>
 
@@ -73,7 +73,7 @@
         android:gravity="center">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -87,7 +87,7 @@
             />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -100,7 +100,7 @@
             android:gravity="center" />
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"
@@ -113,7 +113,7 @@
             android:padding="@dimen/padding_menu_tab_item"
             />
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:textAppearance="?android:attr/textAppearanceMedium"

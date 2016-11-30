@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 
 import java.util.ArrayList;
 
@@ -58,7 +58,8 @@ public class FbGridAlbumAdapter extends BaseAdapter {
         params.width = MCApp.getScreenSize().x/3;
         params.height = MCApp.getScreenSize().x/3;
         viewHolder.imageView.setLayoutParams(params);
-        Picasso.with(mContext).load(listItems.get(position).getPictureUrl()).resize(MCApp.getScreenSize().x / 3, MCApp.getScreenSize().x / 3).into(viewHolder.imageView);
+        //Picasso.with(mContext).load(listItems.get(position).getPictureUrl()).resize(MCApp.getScreenSize().x / 3, MCApp.getScreenSize().x / 3).into(viewHolder.imageView);
+        Glide.with(mContext).load(listItems.get(position).getPictureUrl()).asBitmap().into(viewHolder.imageView);
         return convertView;
     }
 

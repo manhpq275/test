@@ -19,17 +19,24 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.apis.UserApis;
+import asia.ienter.matching.interfaces.ICommonViewCallback;
+import asia.ienter.matching.interfaces.IGetListUserSearch;
 import asia.ienter.matching.interfaces.ILoginCallback;
+import asia.ienter.matching.models.CommonView;
 import asia.ienter.matching.models.ErrorView;
 import asia.ienter.matching.models.User;
 import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.models.enums.AppStatus;
 import asia.ienter.matching.models.enums.ClientType;
+import asia.ienter.matching.models.enums.MCErrorCode;
+import asia.ienter.matching.models.enums.Status;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.CustomStringRequest;
 import asia.ienter.matching.utils.MLog;
@@ -229,7 +236,7 @@ public class UserServices extends BaseService<UserView> {
                 Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
                 Map<String,String> params = gson.fromJson(gson.toJson(user), stringStringMap);
                 params.put("AccessToken", FacebookService.getInstance().getTokenString());
-                Log.i("Data to server", params.toString());
+
                 return params;
             }
         };
@@ -245,8 +252,259 @@ public class UserServices extends BaseService<UserView> {
         void onSuccess();
     }
 
+    public interface IGetUserInformationFromIDCallBack{
+        void onSuccess(User userInfomation);
+    }
+
     public interface ILoginServerCallback{
         void onSuccess();
         void onFailed();
     }
+
+    public void getUserListMatched(final String userID, int page, ClientType clientType, final IGetListUserSearch callback) {
+        MLog.d(UserServices.class, "======>API : " +  UserApis.getInstance().getListUserMatched(userID,page));
+
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.GET,
+                UserApis.getInstance().getListUserMatched(userID,page), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                try {
+                    JSONObject jsonObject = new JSONObject(new JSONObject(response).getString("data"));
+                    MLog.d(UserServices.class,"UserList = "+ jsonObject.getString("UserList").toString());
+                    ArrayList<UserView> userViews = new Gson().fromJson(jsonObject.getString("UserList").toString(), new TypeToken<List<UserView>>(){}.getType());
+
+                    try {
+                        callback.onSuccess(userViews);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        StringWriter trace = new StringWriter();
+                        ex.printStackTrace(new PrintWriter(trace));
+                        callback.onError(new ArrayList<>(Arrays.asList(new ErrorView(ex.getMessage(), MCErrorCode.GeneralError.getValue()))));
+                    }
+                    MLog.d(UserServices.class,"LIST = " + gson.toJson(userViews));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onSuccess(null);
+                }
+
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(UserServices.class, "======>Error: " + errors);
+
+                callback.onError(errors);
+            }
+        }){
+
+
+
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
+
+    public void getUserInformation(final String userIDView, final IGetUserInformationFromIDCallBack callBack){
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.PUT, UserApis.getInstance().getDetailUser(), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Log.i("data", response);
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    Gson gson = new Gson();
+                    User newUser = gson.fromJson(jsonObject.getJSONObject("data").toString(), User.class);
+                    callBack.onSuccess(newUser);
+                } catch (Exception ex) {
+                    ex.printStackTrace();
+                    StringWriter trace = new StringWriter();
+                    ex.printStackTrace(new PrintWriter(trace));
+                    //callback.onError(new ArrayList<>(Arrays.asList(new ErrorView(ex.getMessage(), MCErrorCode.GeneralError.getValue()))));
+                }
+            }
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                //callback.onError(errors);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                Log.i("Access Token", FacebookService.getInstance().getTokenString());
+                params.put("AccessToken",FacebookService.getInstance().getTokenString());
+                params.put("MyUserID", SharedPreference.getInstance(MCApp.getAppContext()).getString("sUserID", ""));
+                params.put("OtherUserID",userIDView);
+                return params;
+            }
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
+
+    public void makeReportViolation(final String ReportedUserId, final String contentViolation, final IReportUserCallback callBack){
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.PUT, UserApis.getInstance().getReportUser(), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Log.i("data", response);
+                callBack.onSuccess();
+            }
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                callBack.onError();
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("AccessToken",FacebookService.getInstance().getTokenString());
+                params.put("MyUserID", MCApp.getUserInstance().getUserId());
+                params.put("OtherUserID",ReportedUserId);
+                params.put("Violation","1");
+                params.put("Content",contentViolation);
+                return params;
+            }
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
+
+    public interface IReportUserCallback{
+        void onSuccess();
+        void onError();
+    }
+
+    public void getUserListLikeMe(final String userID, int page, ClientType clientType, final IGetListUserSearch callback) {
+        MLog.d(UserServices.class, "======>API : " +  UserApis.getInstance().getListUserLikeMe(userID,page));
+
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.GET,
+                UserApis.getInstance().getListUserLikeMe(userID,page), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                try {
+                    JSONObject jsonObject = new JSONObject(new JSONObject(response).getString("data"));
+                    MLog.d(UserServices.class,"UserList = "+ jsonObject.getString("UserList").toString());
+                    ArrayList<UserView> userViews = new Gson().fromJson(jsonObject.getString("UserList").toString(), new TypeToken<List<UserView>>(){}.getType());
+
+                    try {
+                        callback.onSuccess(userViews);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        StringWriter trace = new StringWriter();
+                        ex.printStackTrace(new PrintWriter(trace));
+                        callback.onError(new ArrayList<>(Arrays.asList(new ErrorView(ex.getMessage(), MCErrorCode.GeneralError.getValue()))));
+                    }
+                    MLog.d(UserServices.class,"LIST = " + gson.toJson(userViews));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onSuccess(null);
+                }
+
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(UserServices.class, "======>Error: " + errors);
+
+                callback.onError(errors);
+            }
+        }){
+
+
+
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
+
+    public void getUserListMeLike(final String userID, int page, ClientType clientType, final IGetListUserSearch callback) {
+        MLog.d(UserServices.class, "======>API : " +  UserApis.getInstance().getListUserMeLike(userID,page));
+
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.GET,
+                UserApis.getInstance().getListUserMeLike(userID,page), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                try {
+                    JSONObject jsonObject = new JSONObject(new JSONObject(response).getString("data"));
+                    MLog.d(UserServices.class,"UserList = "+ jsonObject.getString("UserList").toString());
+                    ArrayList<UserView> userViews = new Gson().fromJson(jsonObject.getString("UserList").toString(), new TypeToken<List<UserView>>(){}.getType());
+
+                    try {
+                        callback.onSuccess(userViews);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        StringWriter trace = new StringWriter();
+                        ex.printStackTrace(new PrintWriter(trace));
+                        callback.onError(new ArrayList<>(Arrays.asList(new ErrorView(ex.getMessage(), MCErrorCode.GeneralError.getValue()))));
+                    }
+                    MLog.d(UserServices.class,"LIST = " + gson.toJson(userViews));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onSuccess(null);
+                }
+
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(UserServices.class, "======>Error: " + errors);
+
+                callback.onError(errors);
+            }
+        }){
+
+
+
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
+
+
+    public void sendLike(final UserView userView, ClientType clientType, final ICommonViewCallback callback) {
+        MLog.d(UserServices.class,"sendLike = "+ new Gson().toJson(userView));
+        MLog.d(UserServices.class,"sendLikeAPI = "+ UserApis.getInstance().sendLike());
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.POST,
+                UserApis.getInstance().sendLike(), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                    MLog.d(UserServices.class,"response = "+ response);
+                    CommonView commonView = new Gson().fromJson(response,CommonView.class);
+
+                    if(Status.fromInteger(commonView.getStatus())== Status.LoginFailed){
+                        ArrayList<ErrorView> errors = new ArrayList<>();
+                        errors.add(new Gson().fromJson(response,ErrorView.class));
+                        callback.onError(errors);
+                    }else{
+                        try {
+                            callback.onSuccess(commonView);
+                        } catch (Exception ex) {
+                            ex.printStackTrace();
+                            StringWriter trace = new StringWriter();
+                            ex.printStackTrace(new PrintWriter(trace));
+                            callback.onError(new ArrayList<>(Arrays.asList(new ErrorView(ex.getMessage(), MCErrorCode.GeneralError.getValue()))));
+                        }
+                        MLog.d(UserServices.class,"LIST = " + gson.toJson(commonView));
+                    }
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(UserServices.class, "======>Error: " + errors);
+
+                callback.onError(errors);
+            }
+        }){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("AccessToken",FacebookService.getInstance().getTokenString());
+                params.put("MyUserID", MCApp.getUserInstance().getUserId());
+                params.put("OtherUserID",userView.getUserID());
+                params.put("MyLike",String.valueOf(userView.getMyLike()));
+                params.put("MySpecialLike",String.valueOf(userView.getMyLikeSpecial()));
+                MLog.d(UserServices.class,"sendLikeParams = "+ params);
+                return params;
+            }
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
+
 }

@@ -1,11 +1,11 @@
 package asia.ienter.matching.models;
 
-import java.util.Date;
+import java.io.Serializable;
 
 /**
  * Created by phamquangmanh on 10/28/16.
  */
-public class UserView extends BaseView {
+public class UserView extends BaseView implements Serializable {
     public String getImageUser() {
         return ImageUser;
     }
@@ -28,14 +28,6 @@ public class UserView extends BaseView {
 
     public void setUserName(String userName) {
         UserName = userName;
-    }
-
-    public String getAccessToken() {
-        return AccessToken;
-    }
-
-    public void setAccessToken(String accessToken) {
-        AccessToken = accessToken;
     }
 
     public String getFirstName() {
@@ -127,11 +119,11 @@ public class UserView extends BaseView {
     }
 
     public int getMyLikeSpecial() {
-        return MyLikeSpecial;
+        return MySpecialLike;
     }
 
     public void setMyLikeSpecial(int myLikeSpecial) {
-        MyLikeSpecial = myLikeSpecial;
+        MySpecialLike = myLikeSpecial;
     }
 
     public int getOtherLikeSpecial() {
@@ -145,7 +137,6 @@ public class UserView extends BaseView {
     String ImageUser;
     String UserID;
     String UserName;
-    String AccessToken;
     String FirstName;
     String LastName;
     int Gender;
@@ -157,7 +148,7 @@ public class UserView extends BaseView {
     String Other;
     int MyLike;
     int OtherLike;
-    int MyLikeSpecial;
+    int MySpecialLike;
     int OtherLikeSpecial;
 
 }

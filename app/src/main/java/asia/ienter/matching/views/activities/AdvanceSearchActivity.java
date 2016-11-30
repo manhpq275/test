@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.afollestad.materialdialogs.MaterialDialog;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,20 +14,10 @@ import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogListCallBack;
 import asia.ienter.matching.interfaces.IDialogListMultipleCallBack;
 import asia.ienter.matching.models.AdvanceSearchView;
-import asia.ienter.matching.models.enums.BloodGroup;
-import asia.ienter.matching.models.enums.Children;
-import asia.ienter.matching.models.enums.Externality;
-import asia.ienter.matching.models.enums.Languages;
-import asia.ienter.matching.models.enums.Level;
-import asia.ienter.matching.models.enums.LoveCost;
-import asia.ienter.matching.models.enums.MarriedHistory;
-import asia.ienter.matching.models.enums.MarryTime;
-import asia.ienter.matching.models.enums.OnlineAgo;
 import asia.ienter.matching.models.enums.Regions;
-import asia.ienter.matching.models.enums.SmokeWine;
+import asia.ienter.matching.utils.AppConstants;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.dialogs.DialogList;
-import asia.ienter.matching.views.dialogs.DialogListMultiple;
 import asia.ienter.matching.views.dialogs.DialogWheel;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -75,6 +63,7 @@ public class AdvanceSearchActivity extends AppCompatActivity {
         pauseView = findViewById(R.id.PauseView);
         ButterKnife.inject(this);
         initView();
+        loadData();
     }
 
     private void initView(){
@@ -84,10 +73,13 @@ public class AdvanceSearchActivity extends AppCompatActivity {
     private void loadData(){
         cbAvatar.setChecked(advanceSearchView.isAvatar());
        // tvAddress.setText(Regions.fromInteger(advanceSearchView.getAddress()).toString());
+        String tmpHeight = (advanceSearchView.getMaxHeight()==AdvanceSearchView.DEFAULT_HEIGHT) ? getString(R.string.txtAll) : advanceSearchView.getMinHeight()+"-"+advanceSearchView.getMaxHeight()+" "+getString(R.string.txt_cm);
+        String tmpWeight = (advanceSearchView.getMaxWeight()==AdvanceSearchView.DEFAULT_WEIGHT) ? getString(R.string.txtAll) : advanceSearchView.getMinWeight()+"-"+advanceSearchView.getMaxWeight()+" "+getString(R.string.txtKg);
+        String tmpYearsOld = (advanceSearchView.getMaxYearOld()==AdvanceSearchView.DEFAULT_YEARS_OLD) ? getString(R.string.txtAll) : advanceSearchView.getMinYearOld()+"-"+advanceSearchView.getMaxYearOld()+" "+getString(R.string.txtTuoi);
         tvHomeLand.setText(Regions.fromInteger(advanceSearchView.getHomeLand()).toString());
-        tvHeight.setText(advanceSearchView.getMinHeight()+"-"+advanceSearchView.getMaxHeight()+" "+getString(R.string.txt_cm));
-        tvWeight.setText(advanceSearchView.getMinWeight()+"-"+advanceSearchView.getMaxWeight()+" "+getString(R.string.txtKg));
-        tvYearsOld.setText(advanceSearchView.getMinYearOld()+"-"+advanceSearchView.getMaxYearOld()+" "+getString(R.string.txtTuoi));
+        tvHeight.setText(tmpHeight);
+        tvWeight.setText(tmpWeight);
+        tvYearsOld.setText(tmpYearsOld);
 
 //        cbDescription.setChecked(advanceSearchView.isDescription());
 //        tvExternality.setText(Externality.fromInteger(advanceSearchView.getExternality()).toString());
@@ -116,7 +108,6 @@ public class AdvanceSearchActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        MCApp.setAdvanceSearchView(advanceSearchView);
         super.onPause();
         this.overridePendingTransition(R.anim.hold, R.anim.exit_to_right);
     }
@@ -197,19 +188,22 @@ public class AdvanceSearchActivity extends AppCompatActivity {
         advanceSearchView.setAvatar(cbAvatar.isChecked());
     }
 
-    @OnClick(R.id.btnBack)
+    @OnClick(R.id.layoutBackActivity)
     public void onClickBack(){
         onBackPressed();
     }
 
     @OnClick(R.id.btnMatching)
     public void onClickMatching(){
+        MCApp.setAdvanceSearchView(advanceSearchView);
+        setResult(AppConstants.BACK_FROM_ADVANCE_SEARCH_TO_HOME_RESULT_MATCHING);
         onBackPressed();
     }
 
     @OnClick(R.id.btnReset)
     public void onClickReset(){
         advanceSearchView = new AdvanceSearchView();
+        setResult(AppConstants.BACK_FROM_ADVANCE_SEARCH_TO_HOME_RESULT_BACK);
         loadData();
     }
 
@@ -228,6 +222,7 @@ public class AdvanceSearchActivity extends AppCompatActivity {
         DialogWheel dialogList = new DialogWheel(this,minHeight,maxHeight, new IDialogListMultipleCallBack() {
             @Override
             public void onClickBack() {
+                pauseView.setVisibility(View.GONE);
             }
 
             @Override
@@ -240,7 +235,9 @@ public class AdvanceSearchActivity extends AppCompatActivity {
             @Override
             public void onClickDone() {
                 pauseView.setVisibility(View.GONE);
-                tvHeight.setText(advanceSearchView.getMinHeight()+"-"+advanceSearchView.getMaxHeight()+" "+getString(R.string.txt_cm));
+                String tmpHeight = (advanceSearchView.getMaxHeight()==AdvanceSearchView.DEFAULT_HEIGHT) ? getString(R.string.txtAll) : advanceSearchView.getMinHeight()+"-"+advanceSearchView.getMaxHeight()+" "+getString(R.string.txt_cm);
+
+                tvHeight.setText(tmpHeight);
             }
         });
         dialogList.show(getString(R.string.txt_height), listItems);
@@ -274,7 +271,9 @@ public class AdvanceSearchActivity extends AppCompatActivity {
             @Override
             public void onClickDone() {
                 pauseView.setVisibility(View.GONE);
-                tvYearsOld.setText(advanceSearchView.getMinYearOld()+"-"+advanceSearchView.getMaxYearOld()+" "+getString(R.string.txtTuoi));
+                String tmpYearsOld = (advanceSearchView.getMaxYearOld()==AdvanceSearchView.DEFAULT_YEARS_OLD) ? getString(R.string.txtAll) : advanceSearchView.getMinYearOld()+"-"+advanceSearchView.getMaxYearOld()+" "+getString(R.string.txtTuoi);
+
+                tvYearsOld.setText(tmpYearsOld);
             }
         });
         dialogList.show(getString(R.string.txt_years_old), listItems);
@@ -310,7 +309,9 @@ public class AdvanceSearchActivity extends AppCompatActivity {
             @Override
             public void onClickDone() {
                 pauseView.setVisibility(View.GONE);
-                tvWeight.setText(advanceSearchView.getMinWeight()+"-"+advanceSearchView.getMaxWeight()+" "+getString(R.string.txtKg));
+                String tmpWeight = (advanceSearchView.getMaxWeight()==AdvanceSearchView.DEFAULT_WEIGHT) ? getString(R.string.txtAll) : advanceSearchView.getMinWeight()+"-"+advanceSearchView.getMaxWeight()+" "+getString(R.string.txtKg);
+
+                tvWeight.setText(tmpWeight);
             }
         });
         dialogList.show(getString(R.string.txt_weight), listItems);

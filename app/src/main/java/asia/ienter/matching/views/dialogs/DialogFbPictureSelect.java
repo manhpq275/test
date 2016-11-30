@@ -6,7 +6,6 @@ import android.content.DialogInterface;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -17,6 +16,7 @@ import java.util.ArrayList;
 import asia.ienter.matching.R;
 import asia.ienter.matching.models.FbPicture;
 import asia.ienter.matching.services.FacebookService;
+import asia.ienter.matching.utils.custom.RippleView;
 import asia.ienter.matching.views.adapters.FbAlbumAdapter;
 import asia.ienter.matching.views.adapters.FbGridAlbumAdapter;
 
@@ -27,7 +27,7 @@ public class DialogFbPictureSelect {
     private Context context;
     private Dialog dialog;
     private TextView txtDone, tvTitle;
-    private ImageView btnBack;
+    private RippleView btnBack;
     private ListView lvAlbums;
     private GridView gridPicture;
     private FbGridAlbumAdapter gridAlbumAdapter;
@@ -40,7 +40,7 @@ public class DialogFbPictureSelect {
         dialog.setContentView(R.layout.dialog_listview_fb);
         txtDone = (TextView) dialog.findViewById(R.id.tvDone);
         tvTitle = (TextView) dialog.findViewById(R.id.tvTitle);
-        btnBack = (ImageView) dialog.findViewById(R.id.btnBack);
+        btnBack = (RippleView) dialog.findViewById(R.id.btnBackFragment);
         btnBack.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

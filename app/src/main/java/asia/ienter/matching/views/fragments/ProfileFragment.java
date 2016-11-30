@@ -10,6 +10,7 @@ import android.provider.MediaStore;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextUtils;
@@ -25,7 +26,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.afollestad.materialdialogs.MaterialDialog;
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.wdullaer.materialdatetimepicker.date.DatePickerDialog;
 
 import java.util.ArrayList;
@@ -45,7 +46,6 @@ import asia.ienter.matching.models.enums.Languages;
 import asia.ienter.matching.models.enums.LoveCost;
 import asia.ienter.matching.models.enums.MarryTime;
 import asia.ienter.matching.models.enums.Regions;
-import asia.ienter.matching.services.FacebookService;
 import asia.ienter.matching.services.UserServices;
 import asia.ienter.matching.utils.AppConstants;
 import asia.ienter.matching.utils.MLog;
@@ -75,6 +75,9 @@ public class ProfileFragment extends BaseFragment{
     private int whatChangePicture = -1;
     private boolean isMainProfile = false;
     private User mainUser = MCApp.getUserInstance()==null?new User():MCApp.getUserInstance();
+    private String defaultString = "";
+    @InjectView(R.id.mSwipeRefresh)     SwipeRefreshLayout mSwipeRefresh;
+    @InjectView(R.id.scrollViewMain)    ScrollView mScrollView;
     @InjectView(R.id.layoutUserAge)     LinearLayout layoutUserAge;
     @InjectView(R.id.layoutActionAbout) LinearLayout layoutActionAbout;
     @InjectView(R.id.layoutUserPlace)   LinearLayout layoutUserPlace;
@@ -120,9 +123,16 @@ public class ProfileFragment extends BaseFragment{
     @InjectView(R.id.tagGroupHobby)     TagGroup mTagHobby;
 
     public static Uri imageUri;
-    public static ProfileFragment newInstance(boolean isMainProfile) {
+
+    /**
+     *
+     * @param isMainProfile true if view on main user/ false if view on others
+     * @return
+     */
+    public static ProfileFragment newInstance(boolean isMainProfile, String userId) {
         Bundle args = new Bundle();
         args.putBoolean("IsMainProfile", isMainProfile);
+        args.putString("UserId", userId);
         ProfileFragment fragment = new ProfileFragment();
         fragment.setArguments(args);
         return fragment;
@@ -141,58 +151,66 @@ public class ProfileFragment extends BaseFragment{
     @Override
     protected void initView() {
         Bundle bundle = getArguments();
+        String userId = null;
         if(bundle!=null){
             isMainProfile = bundle.getBoolean("IsMainProfile");
-        }
-        layoutAddPicture.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                whatChangePicture = 0;
-                showDialogSelectMedia(0);
+            userId = bundle.getString("UserId");
+            if(isMainProfile){
+                defaultString = getActivity().getResources().getString(R.string.tap_to_change);
             }
-        });
-        handleVisibilyView();
+        }
+
+        if(isMainProfile) {
+            buildViewShowDetail();
+        }else{
+            mSwipeRefresh.setRefreshing(true);
+            handleVisibilyView();
+            UserServices.getInstance().getUserInformation(userId, new UserServices.IGetUserInformationFromIDCallBack() {
+                @Override
+                public void onSuccess(User userInfomation) {
+                    mainUser = userInfomation;
+                    buildViewShowDetail();
+                    mSwipeRefresh.setRefreshing(false);
+                    mScrollView.setVisibility(View.VISIBLE);
+                }
+            });
+        }
+    }
+
+    private void buildViewShowDetail(){
         handleHeaderProfile();
         handleBasicInformation();
         handleOtherInformation();
+        mSwipeRefresh.setEnabled(false);
     }
 
     /**
      * Xu ly profile xem o che do nao
      */
     private void handleVisibilyView() {
-        if(!isMainProfile){
-            imgChangeCover.setVisibility(View.GONE);
-            imgChangePicProfile.setVisibility(View.GONE);
-            layoutAddPicture.setVisibility(View.INVISIBLE);
-            txtAddHobby.setVisibility(View.GONE);
-            txtAddLanguage.setVisibility(View.GONE);
-            txtAddGenitive.setVisibility(View.GONE);
-            txtAddAttraction.setVisibility(View.GONE);
-            chkDrinking.setEnabled(false);
-            chkSmoking.setEnabled(false);
-            chkCoupleDate.setEnabled(false);
-            chkHavingChilds.setEnabled(false);
-            ediChangeAbout.setEnabled(false);
-            ediChangeAbout.setFocusable(false);
-            TextView txtTitle = (TextView) getActivity().findViewById(R.id.txtTitleScreen);
-            txtTitle.setText(mainUser.getUserName());
-        }
+        mScrollView.setVisibility(View.INVISIBLE);
+        imgChangeCover.setVisibility(View.GONE);
+        imgChangePicProfile.setVisibility(View.GONE);
+        layoutAddPicture.setVisibility(View.INVISIBLE);
+        txtAddHobby.setVisibility(View.GONE);
+        txtAddLanguage.setVisibility(View.GONE);
+        txtAddGenitive.setVisibility(View.GONE);
+        txtAddAttraction.setVisibility(View.GONE);
+        chkDrinking.setEnabled(false);
+        chkSmoking.setEnabled(false);
+        chkCoupleDate.setEnabled(false);
+        chkHavingChilds.setEnabled(false);
+        ediChangeAbout.setEnabled(false);
+        ediChangeAbout.setFocusable(false);
     }
 
     private void handleHeaderProfile() {
 
         if(!mainUser.getUserCover().isEmpty()) {
-            Picasso.with(mContext).load(mainUser.getUserCover()).resize(800, 300).into(changeCover);
+            Glide.with(mContext).load(mainUser.getUserCover()).asBitmap().into(changeCover);
         }
         if(!mainUser.getUserProfilePic().isEmpty()) {
-            FacebookService.getInstance().getProfilePicture(new FacebookService.IFbGetProfilePicCallback() {
-                @Override
-                public void onSuccess(String urlPicture) {
-                    Picasso.with(mContext).load(urlPicture).resize(80, 80).into(profilePicture);
-                    mainUser.setUserProfilePic(urlPicture);
-                }
-            });
+            Glide.with(mContext).load(mainUser.getUserProfilePic()).asBitmap().into(profilePicture);
         }
         txtUserName.setText(mainUser.getUserName());
         txtUserGender.setText(mainUser.isGender() == 0 ? "Nu" : "Nam");
@@ -212,36 +230,71 @@ public class ProfileFragment extends BaseFragment{
     }
 
     private void handleOtherInformation() {
+        layoutAddPicture.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                whatChangePicture = 0;
+                showDialogSelectMedia(0);
+            }
+        });
         mTagGroupLanguages.setTags(mainUser.getLanguage());
         mTagGroupTypePeople.setTags(mainUser.getAttraction());
         mTagGenitive.setTags(mainUser.getGenitive());
 
         if(!mainUser.getHometown().isEmpty()){
             txtHomeTown.setText(mainUser.getHometown());
+        }else{
+            txtHomeTown.setText(defaultString);
         }
         if(mainUser.getHeight()!=User.INIT_VALUE){
             txtUserHeight.setText(mainUser.getHeight()+"cm");
+        }else{
+            txtUserHeight.setText(defaultString);
         }
         if(mainUser.getWeight()!=User.INIT_VALUE){
             txtUserWeight.setText(mainUser.getWeight()+"kg");
+        }else{
+            txtUserWeight.setText(defaultString);
         }
         if(!mainUser.getExtrovert().isEmpty()){
             txtBodyForm.setText(mainUser.getExtrovert());
+        }else{
+            txtBodyForm.setText(defaultString);
         }
         if(!mainUser.getBloodType().isEmpty()){
             txtBloodType.setText(mainUser.getBloodType());
+        }else{
+            txtBloodType.setText(defaultString);
         }
         if(!mainUser.getUserCompany().isEmpty()){
             txtUserCompany.setText(mainUser.getUserCompany());
+        }else{
+            txtUserCompany.setText(defaultString);
         }
         if(!mainUser.getIncome().isEmpty()){
             txtUserIncome.setText(mainUser.getIncome());
+        }else{
+            txtUserIncome.setText(defaultString);
         }
         if(!mainUser.getWhenMarriage().isEmpty()){
             txtWhenMarriage.setText(mainUser.getWhenMarriage());
+        }else{
+            txtWhenMarriage.setText(defaultString);
         }
         if(!mainUser.getCostForFirstAppointments().isEmpty()){
             txtCostForFirstDate.setText(mainUser.getCostForFirstAppointments());
+        }else{
+            txtCostForFirstDate.setText(defaultString);
+        }
+        if(!mainUser.getWhoLiveWith().isEmpty()){
+            txtWhoLivingWith.setText(mainUser.getWhoLiveWith());
+        }else{
+            txtWhoLivingWith.setText(defaultString);
+        }
+        if(!mainUser.getHoliday().isEmpty()){
+            txtDayOff.setText(mainUser.getHoliday());
+        }else{
+            txtDayOff.setText(defaultString);
         }
         chkDrinking.setChecked(mainUser.getDrinking() != 0);
         chkSmoking.setChecked(mainUser.getSmoking() != 0);
@@ -249,18 +302,28 @@ public class ProfileFragment extends BaseFragment{
     }
 
     private void handleBasicInformation() {
+        ediChangeAbout.setFocusable(false);
+        ediChangeAbout.setFocusableInTouchMode(false);
         txtUserAbout.setText(mainUser.getOther());
         if(!mainUser.getBirthday().isEmpty()&& !mainUser.getBirthday().equals("NA")){
             txtUserBirthday.setText(mainUser.getBirthday());
+        }else{
+            txtUserBirthday.setText(defaultString);
         }
         if(!mainUser.getOther().isEmpty()) {
             ediChangeAbout.append(mainUser.getOther());
+        }else{
+            ediChangeAbout.setText(defaultString);
         }
         if(!mainUser.getUserAddress().isEmpty()) {
             txtUserAddress.setText(mainUser.getUserAddress());
+        }else{
+            txtUserAddress.setText(defaultString);
         }
         if(!mainUser.getJob().isEmpty()) {
             txtUserWork.setText(mainUser.getJob());
+        }else{
+            txtUserWork.setText(defaultString);
         }
         if(!mainUser.getHobby().isEmpty()) {
             mTagHobby.setTags(mainUser.getHobby());
@@ -278,6 +341,10 @@ public class ProfileFragment extends BaseFragment{
     private void handleDeleteTagHobby(String tag) {
         mainUser.removeTagHobby(tag);
         mTagHobby.setTags(mainUser.getHobby());
+    }
+
+    public User getUser(){
+        return mainUser;
     }
 
     private void changeHobbyFragment() {
@@ -383,7 +450,7 @@ public class ProfileFragment extends BaseFragment{
         if(isMainProfile) {
             new MaterialDialog.Builder(getActivity())
                     .title("Bạn sống cùng ai?")
-                    .inputType(InputType.TYPE_CLASS_NUMBER | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS)
+                    .inputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS)
                     .input("vd. Nhập thông tin: Gia đình, bạn bè,...", "", new MaterialDialog.InputCallback() {
                         @Override
                         public void onInput(MaterialDialog dialog, CharSequence input) {
@@ -745,7 +812,7 @@ public class ProfileFragment extends BaseFragment{
         }
     }
 
-    @OnClick(R.id.layoutKieuNguoi)
+    @OnClick(R.id.layoutNgoaiHinh)
     public void onClickChangeBodyForm(){
         if(isMainProfile) {
             Externality regions[] = Externality.class.getEnumConstants();
@@ -1001,7 +1068,7 @@ public class ProfileFragment extends BaseFragment{
                         listLanguage.add(DayOfWeek.fromInteger(listSelected.get(i)).toString());
                     }
                     String holiday = TextUtils.join(",", listLanguage);
-                    mainUser.setGenitive(holiday);
+                    mainUser.setHoliday(holiday);
                     txtDayOff.setText(holiday);
                 }
             });
@@ -1137,17 +1204,20 @@ public class ProfileFragment extends BaseFragment{
     //Add new anh moi vao san pham
     public void addViewPicture(Uri imgUri, String pathImage){
         if(whatChangePicture==CHANGE_PROFILE){
-            Picasso.with(mContext).load(imgUri).resize(80, 80).into(profilePicture);
+            //Picasso.with(mContext).load(imgUri).resize(80, 80).into(profilePicture);
+            Glide.with(mContext).load(imgUri).asBitmap().into(profilePicture);
             mainUser.setUserProfilePic(pathImage);
         }else if (whatChangePicture == CHANGE_BACKGROUND){
-            Picasso.with(mContext).load(imgUri).resize(800, 300).into(changeCover);
+            //Picasso.with(mContext).load(imgUri).resize(800, 300).into(changeCover);
+            Glide.with(mContext).load(imgUri).asBitmap().into(changeCover);
             mainUser.setUserCover(pathImage);
         }else{
             final View vPicture = LayoutInflater.from(mContext).inflate(R.layout.product_picture_item, null, false);
             pictureContent.addView(vPicture, 0);
             ImageView delPicture = (ImageView) vPicture.findViewById(R.id.imgDeletePicture);
             ImageView proPicture = (ImageView) vPicture.findViewById(R.id.imgProductItem);
-            Picasso.with(mContext).load(imgUri).resize(600, 600).into(proPicture);
+            //Picasso.with(mContext).load(imgUri).resize(600, 600).into(proPicture);
+            Glide.with(mContext).load(imgUri).asBitmap().into(proPicture);
             delPicture.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {

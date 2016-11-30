@@ -17,7 +17,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Thông tin cá nhân:"
-            android:layout_margin="4dp" android:textStyle="bold"/>
+            android:layout_margin="4dp" android:textStyle="bold"
+            android:textColor="@color/text_color_menu_active"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
@@ -35,7 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:id="@+id/txtHomeTown"
                 android:textSize="16sp"
                 />
@@ -57,7 +58,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtUserHeight"/>
         </LinearLayout>
@@ -78,7 +79,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtUserWeight"/>
         </LinearLayout>
@@ -99,7 +100,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtBodyForm"/>
         </LinearLayout>
@@ -119,10 +120,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtBloodType"/>
         </LinearLayout>
+
+        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
+                  android:textAppearance="?android:attr/textAppearanceMedium"
+                  android:text="Giáo dục, nghề nghiệp" android:layout_margin="4dp"
+                  android:textStyle="bold" android:textColor="@color/text_color_menu_active"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -148,7 +154,7 @@
                     android:paddingRight="8dp" android:paddingTop="6dp"
                     android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
                     android:clickable="true" android:id="@+id/txtAddLanguage"
-                    android:layout_marginTop="3dp"/>
+                    android:layout_marginTop="3dp" android:textColor="@color/text_color_menu_active"/>
             </LinearLayout>
             <asia.ienter.matching.utils.custom.TagGroup
                 android:id="@+id/tagGroupLanguages"
@@ -161,17 +167,12 @@
                 app:atg_textSize="16sp"
                 />
         </LinearLayout>
-
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                  android:textAppearance="?android:attr/textAppearanceMedium"
-                  android:text="Giáo dục, nghề nghiệp" android:layout_margin="4dp"
-                  android:textStyle="bold"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
             android:gravity="center" android:background="@drawable/dr_bg_item_information"
-            android:id="@+id/layoutCompany">
+            android:id="@+id/layoutCompany" android:visibility="gone">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -182,7 +183,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtCompany"/>
         </LinearLayout>
@@ -192,7 +193,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
             android:gravity="center" android:background="@drawable/dr_bg_item_information"
-            android:id="@+id/layoutNoiLamViec">
+            android:id="@+id/layoutNoiLamViec"
+            android:visibility="gone">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -203,7 +205,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtWorkingPlace"/>
         </LinearLayout>
@@ -224,7 +226,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtIncome"/>
         </LinearLayout>
@@ -232,7 +234,8 @@
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium"
                   android:layout_margin="4dp"
-                  android:textStyle="bold" android:text="Tính cách và cuộc sống"/>
+                  android:textStyle="bold" android:text="Tính cách và cuộc sống"
+                  android:textColor="@color/text_color_menu_active"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -246,7 +249,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textAppearance="?android:attr/textAppearanceMedium"
-                    android:text="Tính cách dặc trưng:"
+                    android:text="Tính cách đặc trưng:"
                     android:textSize="16sp"
                     android:layout_weight="1"/>
                 <TextView
@@ -258,7 +261,7 @@
                     android:paddingRight="8dp" android:paddingTop="6dp"
                     android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
                     android:clickable="true" android:id="@+id/txtChangeGenitive"
-                    android:layout_marginTop="3dp"/>
+                    android:layout_marginTop="3dp" android:textColor="@color/text_color_menu_active"/>
             </LinearLayout>
             <asia.ienter.matching.utils.custom.TagGroup
                 android:id="@+id/tagGenitive"
@@ -345,7 +348,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtWhoLivingWith"/>
         </LinearLayout>
@@ -366,7 +369,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtDayOff"/>
         </LinearLayout>
@@ -374,7 +377,8 @@
         <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
                   android:textAppearance="?android:attr/textAppearanceMedium"
                   android:layout_margin="4dp" android:textStyle="bold"
-                  android:text="Tình yêu và hôn nhân"/>
+                  android:text="Tình yêu và hôn nhân"
+                  android:textColor="@color/text_color_menu_active"/>
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
@@ -400,7 +404,7 @@
                     android:paddingRight="8dp" android:paddingTop="6dp"
                     android:paddingBottom="6dp" android:background="@drawable/dr_layout_click"
                     android:clickable="true" android:id="@+id/txtAddAttraction"
-                    android:layout_marginTop="3dp"/>
+                    android:layout_marginTop="3dp" android:textColor="@color/text_color_menu_active"/>
             </LinearLayout>
             <asia.ienter.matching.utils.custom.TagGroup
                 android:id="@+id/tagGroupTypePeople"
@@ -429,7 +433,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtWhenMarriage"
                 />
@@ -491,7 +495,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtCostFirstDate"
                 />
@@ -501,7 +505,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/information_item_height" android:layout_margin="6dp"
             android:gravity="center" android:background="@drawable/dr_bg_item_information"
-            android:id="@+id/layoutWhoWillPay">
+            android:id="@+id/layoutWhoWillPay"
+            android:visibility="gone">
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -512,7 +517,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="Nhấp để thay đổi"
+                android:text="@string/tap_to_change"
                 android:textSize="16sp"
                 android:id="@+id/txtWhoWillPay"
                 />

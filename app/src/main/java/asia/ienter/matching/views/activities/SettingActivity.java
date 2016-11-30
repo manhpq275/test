@@ -5,17 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.facebook.AccessToken;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
 import com.facebook.login.LoginManager;
-import com.afollestad.materialdialogs.MaterialDialog;
 
 import asia.ienter.matching.R;
 import asia.ienter.matching.interfaces.IDialogListCallBack;
@@ -24,8 +22,8 @@ import asia.ienter.matching.models.enums.MaxLike;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.SharedPreference;
 import asia.ienter.matching.views.activities.settings.BlockList;
-import asia.ienter.matching.views.activities.settings.ContentText;
 import asia.ienter.matching.views.activities.settings.ChangePasswordActivity;
+import asia.ienter.matching.views.activities.settings.ContentText;
 import asia.ienter.matching.views.dialogs.DialogList;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -54,15 +52,7 @@ public class SettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_setting);
-
         ButterKnife.inject(this);
-        Button backButton = (Button) findViewById(R.id.btnBack);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
         loadData();
     }
 
@@ -102,11 +92,17 @@ public class SettingActivity extends AppCompatActivity {
 
     }
 
+    @OnClick(R.id.layoutBack)
+    public void onClickBackActivity() {
+        onBackPressed();
+
+    }
+
     private void handleLogoutFacebook(final DialogInterface dialogInterface) {
         dialogInterface.dismiss();
         final MaterialDialog progress = new MaterialDialog.Builder(this)
-                .title("Logging out..")
-                .content("Please wait")
+                .title("Thoát tài khoản!")
+                .content("Đang xử lý")
                 .progress(true, 0)
                 .show();
         if (AccessToken.getCurrentAccessToken() == null) {
@@ -123,8 +119,6 @@ public class SettingActivity extends AppCompatActivity {
                 iLogin.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(iLogin);
                 finish();
-
-
             }
         }).executeAsync();
     }
@@ -169,21 +163,6 @@ public class SettingActivity extends AppCompatActivity {
     public void onClickGetEmail() {
         cbGetEmail.setChecked(!cbGetEmail.isChecked());
         settingUserView.setGetEmail(cbGetEmail.isChecked());
-    }
-
-    private void showDialogChangePeople(final int idLayout) {
-        new MaterialDialog.Builder(this)
-                .title("Change number")
-                .items(R.array.change_number_people)
-                .itemsCallbackSingleChoice(-1, new MaterialDialog.ListCallbackSingleChoice() {
-                    @Override
-                    public boolean onSelection(MaterialDialog dialog, View view, int which, CharSequence text) {
-                        ((TextView) findViewById(idLayout)).setText(text + " >");
-                        return true;
-                    }
-                })
-                .positiveText("OK")
-                .show();
     }
 
 

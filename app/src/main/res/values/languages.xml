@@ -1,4 +1,15 @@
 <resources>
     <string name="language_1">Tiếng Anh</string>
     <string name="language_2">Tiếng Nhật</string>
+    <string name="language_3">Tiếng Việt</string>
+    <string name="language_4">Tiếng Trung</string>
+    <string name="language_5">Tiếng Lào</string>
+    <string name="language_6">Tiếng Thái</string>
+    <string name="language_7">Tiếng Tây Ban Nha</string>
+    <string name="language_8">Tiếng Nga</string>
+    <string name="language_9">Tiếng Hàn</string>
+    <string name="language_10">Tiếng Indonesia</string>
+    <string name="language_11">Tiếng Đan Mạch</string>
+    <string name="language_12">Tiếng Đức</string>
+    <string name="language_13">Tiếng Hà Lan</string>
 </resources>

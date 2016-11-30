@@ -65,12 +65,7 @@ public class User {
         return Skills==null?"":Skills;
     }
 
-    public List<String> getHobby() {
-        if(Hobby == null){
-            Hobby = "";
-        }
-        return (Hobby.isEmpty())? new ArrayList<String>() : Arrays.asList(Hobby.split(","));
-    }
+
 
 
     public String getUserAddress() {
@@ -78,7 +73,7 @@ public class User {
     }
 
     public String getHometown() {
-        return Hometown==null?"":Hometown;
+        return HomeTown==null?"":HomeTown;
     }
 
     public List<String> getLanguage() {
@@ -141,7 +136,7 @@ public class User {
     }
 
     public String getWhoLiveWith() {
-        return WhoLiveWith==null?"":WhoLiveWith;
+        return WhoLivesWith==null?"":WhoLivesWith;
     }
 
     public String getHoliday() {
@@ -204,8 +199,6 @@ public class User {
         Email = email;
     }
 
-
-
     public void setPassword(String password) {
         Password = password;
     }
@@ -235,7 +228,7 @@ public class User {
     }
 
     public void setHometown(String hometown) {
-        Hometown = hometown;
+        HomeTown = hometown;
     }
 
     public void setLanguage(String language) {
@@ -283,7 +276,7 @@ public class User {
     }
 
     public void setWhoLiveWith(String whoLiveWith) {
-        WhoLiveWith = whoLiveWith;
+        WhoLivesWith = whoLiveWith;
     }
 
     public void setHoliday(String holiday) {
@@ -364,7 +357,7 @@ public class User {
         UserID = userId;
     }
 
-    private String UserID="2";
+    private String UserID="";
     private String UserCompany="";
     private String UserCover="";
     private String UserProfilePic="";
@@ -373,18 +366,14 @@ public class User {
     private String UserName="";
     private String FirstName="";
     private String LastName="";
-    private int Gender = INIT_VALUE;
     private String Email="";
     private String BirthDay="2015-12-30";
     private String Password="";
     private String ChangedDate="1799-01-01";
-    private int Height = INIT_VALUE;
-    private int Weight = INIT_VALUE;
-    private int No;
     private String Skills="";
     private String Hobby="";
     private String Address="";
-    private String Hometown="";
+    private String HomeTown="";
     private String Language="";
     private String BloodType="";
     private String Job="";
@@ -393,20 +382,23 @@ public class User {
     private String Genitive="";
     private String Extrovert="";
     private String Attraction="";
-    private int Drinking = INIT_VALUE;
-    private int Smoking = INIT_VALUE;
     private String Sibling="";
-    private String WhoLiveWith="";
+    private String WhoLivesWith="";
     private String Holiday="";
     private String WhenMarriage="";
     private String Requirement="";
     private String MaritalStatus="";
-    private int HavingChildren = INIT_VALUE;
     private String CriteriaConsidered="";
     private String WantAppointments="";
     private String CostForFirstAppointments="";
     private String Other ="";
-
+    private int No;
+    private int Gender = INIT_VALUE;
+    private int Height = INIT_VALUE;
+    private int Weight = INIT_VALUE;
+    private int Drinking = INIT_VALUE;
+    private int Smoking = INIT_VALUE;
+    private int HavingChildren = INIT_VALUE;
     public User(){
 
     }
@@ -456,7 +448,7 @@ public class User {
         if(!birthday.isEmpty()) {
             String[] stringBrithday = birthday.split("/");
             if(Integer.parseInt(stringBrithday[2])>0) {
-                BirthDay = stringBrithday[2] + "-" + stringBrithday[1] + "-" + stringBrithday[0];
+                BirthDay = (stringBrithday[2] + "-" + stringBrithday[1] + "-" + stringBrithday[0]).trim();
             }else{
                 BirthDay = "NA";
             }
@@ -523,5 +515,12 @@ public class User {
             return result;
         }
         return new ArrayList<Integer>();
+    }
+
+    public List<String> getHobby() {
+        if(Hobby == null){
+            Hobby = "";
+        }
+        return (Hobby.isEmpty())? new ArrayList<String>() : Arrays.asList(Hobby.split(","));
     }
 }

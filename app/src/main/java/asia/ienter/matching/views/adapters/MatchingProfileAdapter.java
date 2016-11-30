@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import java.util.ArrayList;
 
+import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.views.fragments.ProfileFragment;
 
 /**
@@ -13,16 +14,16 @@ import asia.ienter.matching.views.fragments.ProfileFragment;
  */
 public class MatchingProfileAdapter extends FragmentStatePagerAdapter {
 
-    private ArrayList<Fragment> items = new ArrayList<>();
+    private ArrayList<UserView> items = new ArrayList<>();
 
-    public MatchingProfileAdapter(FragmentManager fm) {
+    public MatchingProfileAdapter(FragmentManager fm, ArrayList<UserView> listUserId) {
         super(fm);
-
+        this.items = listUserId;
     }
 
     @Override
     public Fragment getItem(int position) {
-        return ProfileFragment.newInstance(false);
+        return ProfileFragment.newInstance(false, this.items.get(position).getUserID());
     }
 
     @Override
@@ -32,7 +33,7 @@ public class MatchingProfileAdapter extends FragmentStatePagerAdapter {
 
     @Override
     public int getCount() {
-        return 6;
+        return items.size();
     }
 }
 

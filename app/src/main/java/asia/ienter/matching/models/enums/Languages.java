@@ -11,7 +11,18 @@ import asia.ienter.matching.utils.Utils;
 public enum Languages {
     All(0),
     English(1),
-    Japanese(2);
+    Japanese(2),
+    TiengViet(3),
+    TiengTrung(4),
+    TiengLao(5),
+    TiengThai(6),
+    TiengTayBanNha(7),
+    TiengNga(8),
+    TiengHan(9),
+    TiengIndonesia(10),
+    TiengDanMach(11),
+    TiengDuc(12),
+    TiengHaLan(13);
     private int value;
     Languages(int value) {
         this.value = value;

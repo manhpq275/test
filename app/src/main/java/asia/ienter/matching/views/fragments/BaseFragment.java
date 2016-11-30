@@ -27,16 +27,7 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void loadDataFromApi();
 
-    @Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-        if(mView==null) return;
-        if(isVisibleToUser){
-            showLoading();
-            loadDataFromApi();
-        }
 
-    }
 
     protected void showLoading(){
         if(mProgressBarLoading!=null)       mProgressBarLoading.setVisibility(View.VISIBLE);
@@ -74,8 +65,7 @@ public abstract class BaseFragment extends Fragment {
             if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.GONE);
             if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.GONE);
         }else{
-            if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.VISIBLE);
-            if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.VISIBLE);
+            onLoadError();
             rlNoInternetConnection.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -85,6 +75,12 @@ public abstract class BaseFragment extends Fragment {
         }
         return result;
     }
+
+    protected void onLoadError(){
+        if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.VISIBLE);
+        if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.VISIBLE);
+    }
+
 
 
 }

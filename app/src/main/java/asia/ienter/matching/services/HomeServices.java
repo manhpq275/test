@@ -2,7 +2,6 @@ package asia.ienter.matching.services;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.facebook.AccessToken;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -20,6 +19,7 @@ import java.util.Map;
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.apis.HomeApi;
 import asia.ienter.matching.interfaces.IGetListUserSearch;
+import asia.ienter.matching.models.AdvanceSearchView;
 import asia.ienter.matching.models.ErrorView;
 import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.models.enums.AppStatus;
@@ -48,11 +48,11 @@ public class HomeServices extends BaseService<UserView> {
         return sInstance;
     }
 
-    public void getUserListMatching(final int userID,int page, ClientType clientType, final IGetListUserSearch callback) {
-        MLog.d(HomeServices.class, "======>API : " +  HomeApi.getInstance().getListUserMatched(userID,page));
+    public void getUserListSearch(final String userID, final AdvanceSearchView advanceSearchView, int page, ClientType clientType, final IGetListUserSearch callback) {
+        MLog.d(HomeServices.class, "======>API : " +  HomeApi.getInstance().getListUserSearch(page));
 
-        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.GET,
-                HomeApi.getInstance().getListUserMatched(userID,page), new CustomStringRequest.IResponseStringCallback() {
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.POST,
+                HomeApi.getInstance().getListUserSearch(page), new CustomStringRequest.IResponseStringCallback() {
             @Override
             public void onSuccess(String response) {
                 Gson gson = new Gson();
@@ -84,6 +84,31 @@ public class HomeServices extends BaseService<UserView> {
                 callback.onError(errors);
             }
         }){
+
+            @Override
+            public HashMap<String,String> getParams(){
+                HashMap<String,String> params = new HashMap<>();
+                params.put("UserID",String.valueOf(userID));
+                params.put("IsImage",String.valueOf((advanceSearchView.isAvatar()==false)?0:1));
+                if(advanceSearchView.getMaxYearOld()!=AdvanceSearchView.DEFAULT_YEARS_OLD){
+                    params.put("FromYearOld",String.valueOf(advanceSearchView.getMinYearOld()));
+                    params.put("ToYearOld",String.valueOf(advanceSearchView.getMaxYearOld()));
+                }
+                if(advanceSearchView.getMaxHeight()!=AdvanceSearchView.DEFAULT_HEIGHT){
+                    params.put("FromHeight",String.valueOf(advanceSearchView.getMinHeight()));
+                    params.put("ToHeight",String.valueOf(advanceSearchView.getMaxHeight()));
+                }
+                if(advanceSearchView.getMaxWeight()!=AdvanceSearchView.DEFAULT_WEIGHT){
+                    params.put("ToWeight",String.valueOf(advanceSearchView.getMaxWeight()));
+                    params.put("FromWeight",String.valueOf(advanceSearchView.getMinWeight()));
+                }
+
+                params.put("HomeTown",String.valueOf(advanceSearchView.getHomeLand()));
+
+
+                MLog.d(HomeServices.class, "======>Params: " + params);
+                return params;
+            }
 
         };
         MCApp.getInstance().addToRequestQueue(baseStringRequest);

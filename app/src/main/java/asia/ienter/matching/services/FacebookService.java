@@ -12,6 +12,7 @@ import com.facebook.FacebookException;
 import com.facebook.GraphRequest;
 import com.facebook.GraphResponse;
 import com.facebook.HttpMethod;
+import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 
@@ -110,27 +111,32 @@ public class FacebookService {
         Bundle params = new Bundle();
         params.putString("Type","large");
         params.putString("fields", AppConstants.FACEBOOK_FIELDS);
-        new GraphRequest(
-                AccessToken.getCurrentAccessToken(),
-                "/me",
-                params,
-                HttpMethod.GET,
+        new GraphRequest(AccessToken.getCurrentAccessToken(), "/me", params, HttpMethod.GET,
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
                         Log.i("Result", response.toString());
-                        UserServices.getInstance().handleSetInformation(response.getJSONObject(), callback);
-                        UserServices.getInstance().handleLoginToServer(response, progress, new UserServices.ILoginServerCallback() {
-                            @Override
-                            public void onSuccess() {
-                                callback.onSuccess();
-                            }
-
-                            @Override
-                            public void onFailed() {
-                                progress.dismiss();
-                                callback.onFailed();
-                            }
-                        });
+                        if(!response.toString().isEmpty() && response.getJSONObject()!=null) {
+                            UserServices.getInstance().handleSetInformation(response.getJSONObject(), callback);
+                            UserServices.getInstance().handleLoginToServer(response, progress, new UserServices.ILoginServerCallback() {
+                                @Override
+                                public void onSuccess() {
+                                    FacebookService.getInstance().getProfilePicture(new FacebookService.IFbGetProfilePicCallback() {
+                                        @Override
+                                        public void onSuccess(String urlPicture) {
+                                            MCApp.getUserInstance().setUserProfilePic(urlPicture);
+                                            callback.onSuccess();
+                                        }
+                                    });
+                                }
+                                @Override
+                                public void onFailed() {
+                                    progress.dismiss();
+                                    callback.onFailed();
+                                }
+                            });
+                        }else{
+                            callback.onFailed();
+                        }
                     }
                 }
         ).executeAsync();
@@ -175,6 +181,11 @@ public class FacebookService {
                     }
                 }
         ).executeAsync();
+    }
+
+    public void deleteCacheFacebook(){
+        AccessToken.setCurrentAccessToken(null);
+        Profile.setCurrentProfile(null);
     }
 
     public interface IFbGetProfilePicCallback{

@@ -2,20 +2,12 @@ package asia.ienter.matching.views.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.models.AdvanceSearchView;
-import asia.ienter.matching.views.adapters.AdvanceSearchAdapter;
 import asia.ienter.matching.views.fragments.NearByFragment;
 import butterknife.ButterKnife;
 import butterknife.InjectView;
@@ -25,6 +17,7 @@ import butterknife.OnClick;
  * Created by hoangtuan on 9/20/16.
  */
 public class SettingNearByActivity extends AppCompatActivity {
+    public static final int BACK_FROM_NEARBY_SETTING = 20000;
     @InjectView(R.id.seekBar)
     SeekBar seekBar;
 
@@ -42,14 +35,6 @@ public class SettingNearByActivity extends AppCompatActivity {
         advanceSearchView = MCApp.getAdvanceSearchView();
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_setting_nearby);
-
-        ImageView backButton = (ImageView) findViewById(R.id.btnBack);
-        backButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onBackPressed();
-            }
-        });
         ButterKnife.inject(this);
         tvRange.setText(getString(R.string.txt_your_range)+String.valueOf(advanceSearchView.getDistance())+"km");
         seekBar.setProgress(advanceSearchView.getDistance());
@@ -87,5 +72,11 @@ public class SettingNearByActivity extends AppCompatActivity {
         setResult(NearByFragment.RESULT_CODE_PROFILE);
         onBackPressed();
 
+    }
+
+    @OnClick(R.id.layoutBackActivity)
+    public void onGoBackActivity(){
+        setResult(SettingNearByActivity.BACK_FROM_NEARBY_SETTING);
+        onBackPressed();
     }
 }

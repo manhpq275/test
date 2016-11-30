@@ -66,7 +66,7 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
-        ((TextView)findViewById(R.id.txtShowTitleSlider)).setText(Html.fromHtml("Nếu bạn thích một ai đó, và tình cờ họ cũng thích bạn thì hãy..."));
+        ((TextView)findViewById(R.id.txtShowTitleSlider)).setText(Html.fromHtml(""));
         //((TextView)findViewById(R.id.txtTextShow)).setText(Html.fromHtml("Bằng cách tiếp tục, bạn đồng ý với <b>Điều khoản dịch vụ</b> và <b>Chính sách về Quyền riêng tư</b>"));
 
         accessTokenTracker = new AccessTokenTracker() {
@@ -83,7 +83,6 @@ public class LoginActivity extends AppCompatActivity {
     @OnClick(R.id.btnLoginApp)
     public void onClickLogin(){
         if(Utils.hasInternet(LoginActivity.this)){
-//                        btnLogin.performClick();
             handleFbLogin(false);
         }else{
             showDialogFailLogin();
@@ -106,6 +105,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public void onFailed() {
                         //re-try
+                        FacebookService.getInstance().deleteCacheFacebook();
                         showDialogFailLogin();
                     }
                 });
@@ -113,11 +113,13 @@ public class LoginActivity extends AppCompatActivity {
 
             @Override
             public void oncancel() {
+                FacebookService.getInstance().deleteCacheFacebook();
                 showDialogFailLogin();
             }
 
             @Override
             public void onError() {
+                FacebookService.getInstance().deleteCacheFacebook();
                 showDialogFailLogin();
             }
         });
