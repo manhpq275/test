@@ -21,8 +21,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.io.File;
+
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
+import asia.ienter.matching.services.LocationService;
+import asia.ienter.matching.services.UserServices;
+import asia.ienter.matching.utils.AppConstants;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.ReplaceFragment;
 import asia.ienter.matching.utils.SharedPreference;
@@ -56,12 +61,20 @@ public class HomeActivity extends FragmentActivity {
     private ProfileFragment fragmentProfile = ProfileFragment.newInstance(true, null);
     Context context;
     @InjectView(R.id.menuBar)   LinearLayout lnMenuBar;
-    @InjectView(R.id.tabMatching)   TextView tabMatching;
-    @InjectView(R.id.tabNearBy)   TextView tabNearBy;
-    @InjectView(R.id.tabMessage)   TextView tabMessage;
-    @InjectView(R.id.tabProfile)   TextView tabProfile;
+
+    @InjectView(R.id.tv_tabMatching)   TextView tv_tabMatching;
+    @InjectView(R.id.tv_tabNearBy)   TextView tv_tabNearBy;
+    @InjectView(R.id.tv_tabMessage)   TextView tv_tabMessage;
+    @InjectView(R.id.tv_tabProfile)   TextView tv_tabProfile;
+
+    @InjectView(R.id.img_tabMatching)   ImageView img_tabMatching;
+    @InjectView(R.id.img_tabNearBy)   ImageView img_tabNearBy;
+    @InjectView(R.id.img_tabMessage)   ImageView img_tabMessage;
+    @InjectView(R.id.img_tabProfile)   ImageView img_tabProfile;
+
     @InjectView(R.id.leftBtnTopBar) ImageView leftBtnTopBar;
     @InjectView(R.id.rightBtnTopBar) ImageView rightBtnTopBar;
+    @InjectView(R.id.rightBtnTopBarText) TextView rightBtnTopBarText;
 
 
     @Override
@@ -94,6 +107,8 @@ public class HomeActivity extends FragmentActivity {
     }
 
     private void initService() {
+        Intent intent = new Intent(this, LocationService.class);
+        startService(intent);
         loadData();
     }
 
@@ -153,6 +168,8 @@ public class HomeActivity extends FragmentActivity {
         mTabSelect = position;
         changeBackgroundTab(mTabSelect);
         MLog.d(TAG, "changeTab()");
+        rightBtnTopBarText.setVisibility(View.GONE);
+        rightBtnTopBar.setVisibility(View.VISIBLE);
         switch (position) {
             case TAB_MATCHING:
                 fragment = TopFragment.newInstance(null);
@@ -163,6 +180,8 @@ public class HomeActivity extends FragmentActivity {
                 replaceFragment.replace(fragmentManager, fragment, R.id.home_content_fragment);
                 break;
             case TAB_MESSAGES:
+                rightBtnTopBarText.setVisibility(View.VISIBLE);
+                rightBtnTopBar.setVisibility(View.GONE);
                 fragment =  MessagesFragment.newInstance(null);
                 replaceFragment.replace(fragmentManager,fragment, R.id.home_content_fragment);
                 break;
@@ -178,34 +197,50 @@ public class HomeActivity extends FragmentActivity {
         leftBtnTopBar.setVisibility(View.VISIBLE);
         switch (mTabSelect) {
             case TAB_MATCHING:
-                setTabActive(tabMatching,true);
-                setTabActive(tabNearBy,false);
-                setTabActive(tabMessage,false);
-                setTabActive(tabProfile,false);
+                setTabActive(tv_tabMatching,true);
+                setTabActive(tv_tabNearBy,false);
+                setTabActive(tv_tabMessage,false);
+                setTabActive(tv_tabProfile,false);
+                img_tabMatching.setImageResource(R.mipmap.btn_matching_active);
+                img_tabMessage.setImageResource(R.mipmap.btn_message_no_active);
+                img_tabNearBy.setImageResource(R.mipmap.btn_nearby_no_active);
+                img_tabProfile.setImageResource(R.mipmap.btn_profile_no_active);
                 leftBtnTopBar.setImageResource(R.mipmap.btn_gridview);
                 rightBtnTopBar.setImageResource(R.mipmap.btn_search_advance);
                 break;
             case TAB_NEAR_BY:
-                setTabActive(tabMatching,false);
-                setTabActive(tabNearBy,true);
-                setTabActive(tabMessage,false);
-                setTabActive(tabProfile,false);
+                setTabActive(tv_tabMatching,false);
+                setTabActive(tv_tabNearBy,true);
+                setTabActive(tv_tabMessage,false);
+                setTabActive(tv_tabProfile,false);
+                img_tabMatching.setImageResource(R.mipmap.btn_matching_no_active);
+                img_tabMessage.setImageResource(R.mipmap.btn_message_no_active);
+                img_tabNearBy.setImageResource(R.mipmap.btn_nearby_active);
+                img_tabProfile.setImageResource(R.mipmap.btn_profile_no_active);
                 leftBtnTopBar.setImageResource(R.mipmap.btn_help);
                 rightBtnTopBar.setImageResource(R.mipmap.btn_setting);
                 break;
             case TAB_MESSAGES:
-                setTabActive(tabMatching,false);
-                setTabActive(tabNearBy,false);
-                setTabActive(tabMessage,true);
-                setTabActive(tabProfile,false);
+                img_tabMatching.setImageResource(R.mipmap.btn_matching_no_active);
+                img_tabMessage.setImageResource(R.mipmap.btn_message_active);
+                img_tabNearBy.setImageResource(R.mipmap.btn_nearby_no_active);
+                img_tabProfile.setImageResource(R.mipmap.btn_profile_no_active);
+                setTabActive(tv_tabMatching,false);
+                setTabActive(tv_tabNearBy,false);
+                setTabActive(tv_tabMessage,true);
+                setTabActive(tv_tabProfile,false);
                 leftBtnTopBar.setVisibility(View.INVISIBLE);
                 rightBtnTopBar.setImageResource(R.mipmap.btn_lock);
                 break;
             case TAB_PROFILE:
-                setTabActive(tabMatching,false);
-                setTabActive(tabNearBy,false);
-                setTabActive(tabMessage,false);
-                setTabActive(tabProfile,true);
+                img_tabMatching.setImageResource(R.mipmap.btn_matching_no_active);
+                img_tabMessage.setImageResource(R.mipmap.btn_message_no_active);
+                img_tabNearBy.setImageResource(R.mipmap.btn_nearby_no_active);
+                img_tabProfile.setImageResource(R.mipmap.btn_profile_active);
+                setTabActive(tv_tabMatching,false);
+                setTabActive(tv_tabNearBy,false);
+                setTabActive(tv_tabMessage,false);
+                setTabActive(tv_tabProfile,true);
                 leftBtnTopBar.setImageResource(R.mipmap.btn_about);
                 rightBtnTopBar.setImageResource(R.mipmap.btn_setting);
                 break;
@@ -239,6 +274,11 @@ public class HomeActivity extends FragmentActivity {
 
     private void OnClickTopViewChange(Fragment fragment){
         ((TopFragment)fragment).onChangeTopViewCallback();
+        if(((TopFragment) fragment).isGrid){
+            leftBtnTopBar.setImageResource(R.mipmap.btn_gridview);
+        }else{
+            leftBtnTopBar.setImageResource(R.mipmap.btn_listview);
+        }
     }
 
     private void OnClickNearByHelp(){
@@ -274,6 +314,24 @@ public class HomeActivity extends FragmentActivity {
 
     }
 
+    @OnClick(R.id.rightBtnTopBarText)
+    public void onClickRightBtnTopBarText(){
+        MLog.e(TAG, "Right Btn TopBar Onclick");
+        fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
+
+        if (fragment==null) return;
+        if (fragment instanceof MessagesFragment){
+            isLock = !isLock;
+            ((MessagesFragment)fragment).onLockClick(isLock);
+            if(isLock){
+                rightBtnTopBarText.setText(getString(R.string.btn_done));
+            }else{
+                rightBtnTopBarText.setText(getString(R.string.txtEdit));
+            }
+        }else return;
+
+    }
+
     @OnClick(R.id.tabMatching)
     public void onClickTabMatching(){
         MLog.e(TAG,"change tab MAtching");
@@ -289,6 +347,7 @@ public class HomeActivity extends FragmentActivity {
     @OnClick(R.id.tabMessage)
     public void onClickTabMessages(){
         MLog.e(TAG,"change tab Messages");
+
         changeTab(TAB_MESSAGES);
     }
 
@@ -321,8 +380,9 @@ public class HomeActivity extends FragmentActivity {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
         if (resultCode == RESULT_OK) {
-            if (requestCode == 1) {
+            if (requestCode == AppConstants.CALL_CAMERA) {
                 try {
                     Bitmap thumbnail = MediaStore.Images.Media.getBitmap(getContentResolver(), ProfileFragment.imageUri);
                     fragment = getSupportFragmentManager().findFragmentById(R.id.home_content_fragment);
@@ -337,7 +397,7 @@ public class HomeActivity extends FragmentActivity {
                     e.printStackTrace();
                 }
 
-            } else if (requestCode == 2) {
+            } else if (requestCode == AppConstants.CALL_GALLERY) {
                 final Intent dataGet = data;
                 final Uri selectedImage = dataGet.getData();
                 String[] filePath = { MediaStore.Images.Media.DATA };
@@ -347,6 +407,7 @@ public class HomeActivity extends FragmentActivity {
                     int columnIndex = c.getColumnIndex(filePath[0]);
                     final String picturePath = c.getString(columnIndex);
                     final Bitmap thumbnail = (BitmapFactory.decodeFile(picturePath));
+                    UserServices.getInstance().RequestMultiPart(new File(picturePath));
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {

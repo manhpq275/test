@@ -151,4 +151,14 @@ public class UserView extends BaseView implements Serializable {
     int MySpecialLike;
     int OtherLikeSpecial;
 
+    public int getStatus() {
+        return Status;
+    }
+
+    public void setStatus(int status) {
+        Status = status;
+    }
+
+    int Status;
+
 }

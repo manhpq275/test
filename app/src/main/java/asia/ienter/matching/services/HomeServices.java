@@ -25,6 +25,7 @@ import asia.ienter.matching.models.UserView;
 import asia.ienter.matching.models.enums.AppStatus;
 import asia.ienter.matching.models.enums.ClientType;
 import asia.ienter.matching.models.enums.MCErrorCode;
+import asia.ienter.matching.models.enums.OnlineStatus;
 import asia.ienter.matching.utils.CustomStringRequest;
 import asia.ienter.matching.utils.MLog;
 
@@ -114,8 +115,8 @@ public class HomeServices extends BaseService<UserView> {
         MCApp.getInstance().addToRequestQueue(baseStringRequest);
     }
 
-    public void appStatus(final int UserID, final String accessToken, final CustomStringRequest.IResponseStringCallback callback){
-        MLog.d(HomeServices.class, "======>API : " +  HomeApi.getInstance().appStatus());
+    public void appStatus(final OnlineStatus onlineStatus, final CustomStringRequest.IResponseStringCallback callback){
+        MLog.d(HomeServices.class, "leaveApp ======>API : " +  HomeApi.getInstance().appStatus());
 
         CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.PUT,
                 HomeApi.getInstance().appStatus(), new CustomStringRequest.IResponseStringCallback() {
@@ -134,14 +135,68 @@ public class HomeServices extends BaseService<UserView> {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<String, String>();
-                    params.put("AccessToken", accessToken);
-                    params.put("UserID", String.valueOf(UserID));
-                    params.put("Status", String.valueOf(AppStatus.OFFLINE.getValue()));
+                    params.put("AccessToken", MCApp.getUserInstance().getAccessToken());
+                    params.put("UserID", MCApp.getUserInstance().getUserId());
+                    params.put("Status", String.valueOf(onlineStatus.getValue()));
+                MLog.d(HomeServices.class, "leaveApp User : " +  new Gson().toJson(MCApp.getUserInstance()));
+                MLog.d(HomeServices.class, "leaveApp param : " +  new Gson().toJson(params));
                     return params;
             }
         };
         MCApp.getInstance().addToRequestQueue(baseStringRequest);
     }
 
+
+    public void getListNearBySearch(int page, ClientType clientType, final IGetListUserSearch callback) {
+        MLog.d(HomeServices.class, "======>getListNearBySearch : " +  HomeApi.getInstance().getListNearBySearch(page));
+
+        CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.POST,
+                HomeApi.getInstance().getListNearBySearch(page), new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+                Gson gson = new Gson();
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    MLog.d(HomeServices.class,"getListNearBySearch = " + new JSONObject(response).getString("UserList").toString());
+                    ArrayList<UserView> userViews = new Gson().fromJson(jsonObject.getString("UserList").toString(), new TypeToken<List<UserView>>(){}.getType());
+
+                    try {
+                        callback.onSuccess(userViews);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                        StringWriter trace = new StringWriter();
+                        ex.printStackTrace(new PrintWriter(trace));
+                        callback.onError(new ArrayList<>(Arrays.asList(new ErrorView(ex.getMessage(), MCErrorCode.GeneralError.getValue()))));
+                    }
+                    MLog.d(HomeServices.class,"getListNearBySearch LIST = " + gson.toJson(userViews));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    callback.onSuccess(null);
+                }
+
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(HomeServices.class, "======>Error: " + errors);
+
+                callback.onError(errors);
+            }
+        }){
+
+            @Override
+            public HashMap<String,String> getParams(){
+                HashMap<String,String> params = new HashMap<>();
+                params.put("UserID",MCApp.getUserInstance().getUserId());
+                params.put("Lat",String.valueOf(MCApp.getUserInstance().getLat()));
+                params.put("Long",String.valueOf(MCApp.getUserInstance().getLong()));
+                params.put("Distance",String.valueOf(MCApp.getUserInstance().getDistance()));
+                MLog.d(HomeServices.class, "======>Params: " + params);
+                return params;
+            }
+
+        };
+        MCApp.getInstance().addToRequestQueue(baseStringRequest);
+    }
 
 }

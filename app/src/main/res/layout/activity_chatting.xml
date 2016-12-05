@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@color/white">
+    <android.support.v7.widget.CardView
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.Card.NoMargins.NoClick">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:orientation="horizontal"
+            android:background="@color/text_color_menu_active"
+            android:gravity="center">
+            <asia.ienter.matching.utils.custom.RippleView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="&lt;-"
+                android:id="@+id/btnBackFragment"
+                android:background="@color/transparent" android:clickable="true"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:id="@+id/imgBackActivity"
+                    android:src="@drawable/ic_arrow_back_white"
+                    />
+            </asia.ienter.matching.utils.custom.RippleView>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="Phòng chat"
+                android:layout_weight="1" android:gravity="center"
+                android:textColor="@color/white" android:id="@+id/txtUserChatName"/>
+            <asia.ienter.matching.utils.custom.RippleView
+                android:layout_width="60dp"
+                android:layout_height="match_parent"
+                android:text="&lt;-"
+                android:id="@+id/btnOptionSelect"
+                android:background="@color/transparent" android:clickable="true"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_margin="8dp"
+                    android:src="@drawable/ic_more_vert_white"
+                    android:id="@+id/idMoreOption"/>
+            </asia.ienter.matching.utils.custom.RippleView>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/mSwipeRefresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:layout_weight="1">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" android:layout_weight="1">
+                <android.support.v7.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/listChatting"
+                    android:scrollbars="vertical" android:layout_weight="1"/>
+                <LinearLayout
+                    android:orientation="vertical"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent" android:id="@+id/layoutNoMessage"
+                    android:gravity="center" android:visibility="gone">
+                    <ImageView
+                        android:layout_width="280dp"
+                        android:layout_height="150dp"
+                        android:src="@drawable/ic_background_chat" android:scaleType="fitXY"/>
+                </LinearLayout>
+            </FrameLayout>
+        </LinearLayout>
+    </android.support.v4.widget.SwipeRefreshLayout>
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal" >
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:background="#d8d8d8"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black" android:id="@+id/btnMessTemplate"/>
+            </LinearLayout>
+            <EditText
+                android:id="@+id/edtChatContent"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.85"
+                android:hint="..."
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:background="@android:drawable/editbox_background_normal"
+                android:textColor="@color/black" android:maxLines="3"
+                android:layout_gravity="center"/>
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.2">
+
+                <Button
+                    android:id="@+id/btnSendMessage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:padding="4dp"
+                    android:text="Gửi"
+                    android:background="#d8d8d8"
+                    android:layout_margin="5dp"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

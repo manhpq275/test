@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.models.enums.OnlineStatus;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.Utils;
 import asia.ienter.matching.views.fragments.TopFragment;
@@ -65,8 +67,8 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView tvName,tvYearsOld,tvHeight,tvJob;
-        private ImageView imAvatar,btnLike;
+        private TextView tvName,tvYearsOld,tvHeight,tvJob,tvOnlineStatus;
+        private ImageView imAvatar,btnLike,imgOnlineStatus;
         private LinearLayout lnInfo;
 
         public ViewHolder(View view) {
@@ -76,6 +78,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
             imAvatar = (ImageView) view.findViewById(R.id.imAvatar);
             btnLike = (ImageView) view.findViewById(R.id.btnLike);
             lnInfo = (LinearLayout) view.findViewById(R.id.lnInfo);
+            imgOnlineStatus = (ImageView)view.findViewById(R.id.imgOnlineStatus);
 
             if(mTopFragment.isGrid){
                 ViewGroup.LayoutParams params = imAvatar.getLayoutParams();
@@ -87,6 +90,7 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
 
                 tvJob = (TextView) view.findViewById(R.id.tvJob);
                 tvHeight = (TextView) view.findViewById(R.id.tvHeight);
+                tvOnlineStatus = (TextView) view.findViewById(R.id.tvOnlineStatus);
                 ViewGroup.LayoutParams params = imAvatar.getLayoutParams();
                 params.width = MCApp.getScreenSize().x;
                 params.height = MCApp.getScreenSize().x;
@@ -101,10 +105,23 @@ public class TopAdapter extends RecyclerView.Adapter<TopAdapter.ViewHolder> {
             tvName.setText(item.getUserName());
             Picasso.with(mContext).load(Config.BASE_URL+item.getImageUser()).error(R.mipmap.img_like).into(imAvatar);
             tvYearsOld.setText(mContext.getString(R.string.yearOld).toString() +": "+ Utils.birthDayToYearsOld(item.getBirthDay()));
+            switch (OnlineStatus.fromInteger(item.getStatus())){
+                case ONLINE:
+                    imgOnlineStatus.setImageResource(R.mipmap.ico_online);
+                    break;
+                case OFFLINE:
+                    imgOnlineStatus.setImageResource(R.mipmap.ico_offline);
+                    break;
+                case AWAY:
+                    imgOnlineStatus.setImageResource(R.mipmap.ico_away);
+                    break;
 
+            }
             if(!mTopFragment.isGrid){
+
                 tvHeight.setText(mContext.getString(R.string.txt_height)+": "+item.getHeight() + "cm");
                 tvJob.setText(mContext.getString(R.string.txt_job)+": "+item.getJob());
+                tvOnlineStatus.setText(OnlineStatus.fromInteger(item.getStatus()).toString());
             }
 
             if(item.getMyLike()==0&&item.getMyLikeSpecial()==0){

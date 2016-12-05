@@ -18,6 +18,7 @@ import com.facebook.AccessToken;
 import com.facebook.AccessTokenTracker;
 import com.facebook.FacebookSdk;
 
+import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.services.FacebookService;
 import asia.ienter.matching.utils.SharedPreference;
@@ -93,6 +94,7 @@ public class LoginActivity extends AppCompatActivity {
         FacebookService.getInstance().loginFacebook(this,isLogged, new FacebookService.IFbLoginCallback() {
             @Override
             public void onSuccess() {
+                MCApp.setAccessToken(AccessToken.getCurrentAccessToken().getToken());
                 FacebookService.getInstance().getUserFacebookData(LoginActivity.this, new FacebookService.ILoginFbCallback() {
                     @Override
                     public void onSuccess() {

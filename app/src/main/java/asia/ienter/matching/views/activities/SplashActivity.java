@@ -6,12 +6,14 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
 import com.facebook.FacebookSdk;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.models.AdvanceSearchView;
 import asia.ienter.matching.services.FacebookService;
+import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.SharedPreference;
 
 /**
@@ -28,14 +30,18 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
         SharedPreference.getInstance().putBoolean("GiftCode", true);
         MCApp.setAdvanceSearchView(new AdvanceSearchView());
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
 
+                MLog.d(SplashActivity.class,"Login FB =" + SharedPreference.getInstance().getBoolean("LoginFb", false));
                 if(!SharedPreference.getInstance().getBoolean("LoginFb", false)) {
+
                     handleChangeScreen(TYPE_LOGIN);
                 }else{
+                    MCApp.setAccessToken(AccessToken.getCurrentAccessToken().getToken());
                     FacebookService.getInstance().getUserFacebookData(SplashActivity.this, new FacebookService.ILoginFbCallback() {
                         @Override
                         public void onSuccess() {

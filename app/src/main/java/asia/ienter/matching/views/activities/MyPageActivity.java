@@ -7,6 +7,7 @@ import android.support.v7.widget.PopupMenu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,8 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import asia.ienter.matching.R;
+import asia.ienter.matching.interfaces.ICommonViewCallback;
 import asia.ienter.matching.interfaces.IDialogLikeCallback;
+import asia.ienter.matching.models.CommonView;
 import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.models.enums.ClientType;
+import asia.ienter.matching.services.UserServices;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.utils.ReplaceFragment;
 import asia.ienter.matching.views.adapters.MatchingProfileAdapter;
@@ -41,7 +46,11 @@ public class MyPageActivity extends AppCompatActivity {
     @InjectView(R.id.imgMoreOption)     ImageView btnSettingOption;
     @InjectView(R.id.mainViewPager)     ViewPager viewPagerProfile;
     @InjectView(R.id.txtTitleScreen)    TextView titleScreen;
+    @InjectView(R.id.layoutLike)
+    LinearLayout layoutLike;
+    private UserView topView=null;
 
+    private int currentItemSelected = -1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +65,18 @@ public class MyPageActivity extends AppCompatActivity {
         if(bundle!=null) {
             String arrayUser = bundle.getString("UserArray");
             listUserView = new Gson().fromJson(arrayUser, new TypeToken<List<UserView>>(){}.getType());
-            int position = bundle.getInt("UserPosition");
+
+            currentItemSelected = bundle.getInt("UserPosition");
+            topView = listUserView.get(currentItemSelected);
+           layoutLike.setVisibility(View.VISIBLE);
+            if(bundle.getBoolean("SendLiked",false)){
+                layoutLike.setVisibility(View.INVISIBLE);
+            }
             fragmentHandle = new ReplaceFragment();
             adapterViewPager = new MatchingProfileAdapter(getSupportFragmentManager(), listUserView);
             viewPagerProfile.setAdapter(adapterViewPager);
-            viewPagerProfile.setCurrentItem(position);
-            titleScreen.setText(listUserView.get(position).getUserName());
+            viewPagerProfile.setCurrentItem(currentItemSelected);
+            titleScreen.setText(listUserView.get(currentItemSelected).getUserName());
             viewPagerProfile.addOnPageChangeListener(new ViewPagerChange());
         }
     }
@@ -85,12 +100,51 @@ public class MyPageActivity extends AppCompatActivity {
 
             @Override
             public void onSendLike() {
-                Toast.makeText(MyPageActivity.this, "Send Like", Toast.LENGTH_SHORT).show();
+                if(topView.getMyLike()==1){
+                    topView.setMyLike(0);
+                }else{
+                    topView.setMyLike(1);
+                }
+                UserServices.getInstance().sendLike(topView, ClientType.AndroidApp, new ICommonViewCallback() {
+                    @Override
+                    public void onError(ArrayList errors) {
+                        if(topView.getMyLike()==1){
+                            topView.setMyLike(0);
+                        }else{
+                            topView.setMyLike(1);
+                        }
+                    }
+                    @Override
+                    public void onSuccess(CommonView item) {
+
+                    }
+                });
             }
 
             @Override
             public void onSendRequest() {
-                Toast.makeText(MyPageActivity.this,"Send Request",Toast.LENGTH_SHORT).show();
+                if(topView.getMyLikeSpecial()==1){
+                    topView.setMyLikeSpecial(0);
+                }else{
+                    topView.setMyLikeSpecial(1);
+                }
+
+                UserServices.getInstance().sendLike(topView, ClientType.AndroidApp, new ICommonViewCallback() {
+                    @Override
+                    public void onError(ArrayList errors) {
+                        if(topView.getMyLikeSpecial()==1){
+                            topView.setMyLikeSpecial(0);
+                        }else{
+                            topView.setMyLikeSpecial(1);
+                        }
+
+                    }
+
+                    @Override
+                    public void onSuccess(CommonView item) {
+
+                    }
+                });
 
             }
         }).show();
@@ -160,6 +214,8 @@ public class MyPageActivity extends AppCompatActivity {
 
         @Override
         public void onPageSelected(int position) {
+            topView = listUserView.get(position);
+            currentItemSelected=position;
             titleScreen.setText(listUserView.get(position).getUserName());
         }
 
@@ -168,4 +224,6 @@ public class MyPageActivity extends AppCompatActivity {
 
         }
     }
+
+
 }

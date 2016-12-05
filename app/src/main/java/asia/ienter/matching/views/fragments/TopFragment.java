@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -53,8 +54,6 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
     private ArrayList<UserView> mUsers = new ArrayList<>();
     HomeActivity homeActivity;
     @InjectView(R.id.recycleTop)  RecyclerView recycleTopView;
-
-
     int page = 0;
 
     public static TopFragment newInstance(Bundle args) {
@@ -99,6 +98,9 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
         mProgressBarLoading = (ProgressBar) mView.findViewById(R.id.mProgressLoading);
         mProgressBarLoadingMore = (ProgressBar) mView.findViewById(R.id.mProgressLoadingMore);
         mSwipeRefresh = (SwipeRefreshLayout) mView.findViewById(R.id.mSwipeRefresh);
+        rlNoInternetConnection = (RelativeLayout) mView.findViewById(R.id.rlNoInternetConnection);
+        rlNoInternetConnection2 = (RelativeLayout) mView.findViewById(R.id.rlNoInternetConnection2);
+        rlNoData = (RelativeLayout) mView.findViewById(R.id.rlNoData);
 
         mSwipeRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
@@ -146,11 +148,6 @@ public class TopFragment extends BaseFragment implements ITopViewCallback {
                 }
             }
         });
-
-
-        rlNoInternetConnection = (RelativeLayout)mView.findViewById(R.id.rlNoInternetConnection);
-        rlNoInternetConnection2 = (RelativeLayout)mView.findViewById(R.id.rlNoInternetConnection2);
-
     }
 
 public void showPullRefresh(){
@@ -159,15 +156,16 @@ public void showPullRefresh(){
     isLoading = false;
     topViewArrayList.clear();
     recycleTopView.setAdapter(null);
-    if(!hasInternet()){
-        recycleTopView.setVisibility(View.INVISIBLE);
-        return;
-    }
+
     loadDataFromApi();
 }
 
     @Override
     protected void loadDataFromApi() {
+        if(!hasInternet()){
+            recycleTopView.setVisibility(View.INVISIBLE);
+            return;
+        }
         MLog.d(TAG,"loadDataFromApi() Started");
         showLoading();
         page++;
@@ -178,6 +176,7 @@ public void showPullRefresh(){
         HomeServices.getInstance().getUserListSearch(MCApp.getUserInstance().getUserId(), MCApp.getAdvanceSearchView(),page, ClientType.AndroidApp, new IGetListUserSearch() {
             @Override
             public void onError(ArrayList errors) {
+                hideLoading();
                 onLoadError();
             }
 
@@ -187,6 +186,9 @@ public void showPullRefresh(){
                 recycleTopView.setVisibility(View.VISIBLE);
                 MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
                 if(items==null){
+                    if(topViewArrayList.size()==0) {
+                        onLoadNoData();
+                    }
                         isLoading = true;
                         page--;
                 }else{
@@ -198,7 +200,6 @@ public void showPullRefresh(){
                         MLog.d(TAG,"loadDataFromApi()1 = "+ new Gson().toJson(items));
                     }
                 }
-
             }
         });
 
@@ -320,13 +321,6 @@ public void showPullRefresh(){
                 btnLike.setImageResource(R.mipmap.btn_liked_full);
             }
         }
-
-    }
-
-    @Override
-    public void onLoadError(){
-        hideLoading();
-        super.onLoadError();
 
     }
 

@@ -9,11 +9,13 @@ import android.text.TextUtils;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
+import com.sendbird.android.SendBird;
 
 import java.util.HashMap;
 
 import asia.ienter.matching.models.AdvanceSearchView;
 import asia.ienter.matching.models.User;
+import asia.ienter.matching.models.enums.OnlineStatus;
 import asia.ienter.matching.services.MCAppLifecycleHandler;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.MLog;
@@ -25,7 +27,7 @@ public class MCApp extends Application {
 
     private static MCApp sInstance;
     private static String TAG = "MatchingApplication";
-
+    private final String APPSendBirdID = "3C81E624-46C4-4D3C-A1D7-B874145A0E80";
     private HashMap<String, Typeface> fontMap = new HashMap<String, Typeface>();
     public static Typeface typeface;
     public static Typeface typefaceHome;
@@ -33,6 +35,17 @@ public class MCApp extends Application {
 
     private static String accessToken = "";
     private static User userInstance = new User();
+
+
+    public static OnlineStatus getAppStatus() {
+        return appStatus;
+    }
+
+    public static void setAppStatus(OnlineStatus appStatus) {
+        MCApp.appStatus = appStatus;
+    }
+
+    private static OnlineStatus appStatus = OnlineStatus.OFFLINE;
 
     public static Context getAppContext() {
         return sInstance.getApplicationContext();
@@ -53,8 +66,8 @@ public class MCApp extends Application {
         sInstance = this;
         typeface = getFont(Config.FONTS);
         typefaceHome = getFont(Config.FONTS_HOME);
+        SendBird.init(APPSendBirdID, getApplicationContext());
         registerActivityLifecycleCallbacks(new MCAppLifecycleHandler());
-
     }
 
     public static User getUserInstance(){
@@ -65,6 +78,7 @@ public class MCApp extends Application {
     }
 
     public static void setUserInstance(User user){
+        if(user.getAccessToken().isEmpty()) user.setAccessToken(accessToken);
         userInstance = user;
     }
 

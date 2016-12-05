@@ -27,4 +27,8 @@ public class HomeApi extends BaseApi<UserView>{
         return String.format(AppConstants.API_HOME_LEAVE_APP_PATTERN, this.getBaseUrl());
     }
 
+    public String getListNearBySearch(int page) {
+        //getnearbysearch
+        return String.format(AppConstants.API_HOME_GET_LIST_SEARCH_NEAR_BY, this.getBaseUrl(),page);
+    }
 }

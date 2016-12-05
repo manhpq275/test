@@ -1,10 +1,15 @@
 package asia.ienter.matching.services;
 
+import android.graphics.Bitmap;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.facebook.AccessToken;
 import com.facebook.GraphResponse;
@@ -15,9 +20,14 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
+import java.net.CookieManager;
+import java.net.HttpCookie;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -40,7 +50,9 @@ import asia.ienter.matching.models.enums.Status;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.CustomStringRequest;
 import asia.ienter.matching.utils.MLog;
+import asia.ienter.matching.utils.MultipartRequest;
 import asia.ienter.matching.utils.SharedPreference;
+import asia.ienter.matching.utils.Utils;
 
 /**
  * Created by phamquangmanh on 10/28/16.
@@ -60,6 +72,19 @@ public class UserServices extends BaseService<UserView> {
         return sInstance;
     }
 
+    public interface IGetUserInformationCallBack{
+        void onSuccess();
+    }
+
+    public interface IGetUserInformationFromIDCallBack{
+        void onSuccess(User userInfomation);
+    }
+
+    public interface ILoginServerCallback{
+        void onSuccess();
+        void onFailed();
+    }
+
     public void changePassword(final int userID,final String accessToken, ClientType clientType, final ILoginCallback callback) {
         CustomStringRequest baseStringRequest = new CustomStringRequest(Request.Method.PUT,
                 UserApis.getInstance().changePassword(),
@@ -76,7 +101,7 @@ public class UserServices extends BaseService<UserView> {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("AccessToken", accessToken);
                 params.put("UserID", String.valueOf(userID));
@@ -118,7 +143,7 @@ public class UserServices extends BaseService<UserView> {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 try {
                     params.put("AccessToken", AccessToken.getCurrentAccessToken().getToken());
@@ -164,8 +189,8 @@ public class UserServices extends BaseService<UserView> {
             if(jsonObject.has("picture")){
                 userInformation.setUserProfilePic(jsonObject.getJSONObject("picture").getJSONObject("data").getString("url"));
             }
-
             MCApp.setUserInstance(userInformation);
+            MLog.d(UserServices.class,"User = "+ new Gson().toJson(userInformation));
         } catch (JSONException e) {
             e.printStackTrace();
             callback.onFailed();
@@ -188,10 +213,22 @@ public class UserServices extends BaseService<UserView> {
                     if(!mainUser.getUserCover().isEmpty()) {
                         newUser.setUserCover(mainUser.getUserCover());
                     }
-                    if(!mainUser.getOther().isEmpty() && newUser.getOther()==null) {
+                    if(!mainUser.getOther().isEmpty() && newUser.getOther().isEmpty()) {
                         newUser.setOther(mainUser.getOther());
                     }
+
                     MCApp.setUserInstance(newUser);
+                    SendBirdController.getInstance().connectUser(MCApp.getUserInstance().getUserId(), new SendBirdController.IConnectUserCallback() {
+                        @Override
+                        public void onSuccess() {
+
+                        }
+
+                        @Override
+                        public void onError() {
+
+                        }
+                    });
                     callBack.onSuccess();
                 } catch (Exception ex) {
                     ex.printStackTrace();
@@ -206,7 +243,7 @@ public class UserServices extends BaseService<UserView> {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 Log.i("Access Token", FacebookService.getInstance().getTokenString());
                 params.put("AccessToken",FacebookService.getInstance().getTokenString());
@@ -222,43 +259,31 @@ public class UserServices extends BaseService<UserView> {
         CustomStringRequest request = new CustomStringRequest(StringRequest.Method.PUT, Config.BASE_URL + "updateuserprofile", new CustomStringRequest.IResponseStringCallback() {
             @Override
             public void onSuccess(String response) {
-                Log.i("Data", "Log success");
+                MLog.d(UserServices.class, "updateUserInformation success = "+response);
             }
 
             @Override
             public void onError(ArrayList<ErrorView> errors) {
-                Log.i("Data", "Log fail");
+                MLog.d(UserServices.class, "updateUserInformation onError");
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Gson gson = new Gson();
                 Type stringStringMap = new TypeToken<Map<String, String>>(){}.getType();
                 Map<String,String> params = gson.fromJson(gson.toJson(user), stringStringMap);
                 params.put("AccessToken", FacebookService.getInstance().getTokenString());
 
+                MLog.d(UserServices.class,"updateUserInformation Params =" + new Gson().toJson(params));
                 return params;
             }
         };
-        MCApp.getInstance().addToRequestQueue(request, "");
+        MCApp.getInstance().addToRequestQueue(request);
     }
 
     public void updateUserToServer(final User user) {
         MCApp.setUserInstance(user);
         updateUserInformation(user);
-    }
-
-    public interface IGetUserInformationCallBack{
-        void onSuccess();
-    }
-
-    public interface IGetUserInformationFromIDCallBack{
-        void onSuccess(User userInfomation);
-    }
-
-    public interface ILoginServerCallback{
-        void onSuccess();
-        void onFailed();
     }
 
     public void getUserListMatched(final String userID, int page, ClientType clientType, final IGetListUserSearch callback) {
@@ -327,7 +352,7 @@ public class UserServices extends BaseService<UserView> {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 Log.i("Access Token", FacebookService.getInstance().getTokenString());
                 params.put("AccessToken",FacebookService.getInstance().getTokenString());
@@ -352,7 +377,7 @@ public class UserServices extends BaseService<UserView> {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("AccessToken",FacebookService.getInstance().getTokenString());
                 params.put("MyUserID", MCApp.getUserInstance().getUserId());
@@ -493,7 +518,7 @@ public class UserServices extends BaseService<UserView> {
             }
         }){
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<String, String>();
                 params.put("AccessToken",FacebookService.getInstance().getTokenString());
                 params.put("MyUserID", MCApp.getUserInstance().getUserId());
@@ -507,4 +532,43 @@ public class UserServices extends BaseService<UserView> {
         MCApp.getInstance().addToRequestQueue(baseStringRequest);
     }
 
+    public void uploadImagetoServer(final File bitmap){
+
+    }
+    public void RequestMultiPart(File file) {
+
+        Map<String, String> params = new HashMap<>();
+        params.put("AccessToken",FacebookService.getInstance().getTokenString());
+        params.put("UserID", MCApp.getUserInstance().getUserId());
+        params.put("Options","2");
+        String filename = MCApp.getUserInstance().getUserName()+".png";
+        String boundary = "----------------------------"+MCApp.getUserInstance().getUserId();
+        final String reqUrl = UserApis.getInstance().uploadImage();
+        MultipartRequest imageUploadReq = new MultipartRequest(reqUrl,params,file,filename,"file",
+                new Response.ErrorListener()
+                {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        MLog.d("Multipart Request Url: ", reqUrl);
+                        MLog.d("Multipart ERROR", "error => " + error.toString());
+                    }
+
+
+                },
+                new Response.Listener<String>()
+                {
+                    @Override
+                    public void onResponse(String response) {
+                        MLog.d("MediaSent Response", response);
+                    }
+                }
+        ) {
+
+        };
+
+        imageUploadReq.setBoundary(boundary);
+
+        MCApp.getInstance().addToRequestQueue(imageUploadReq);
+
+    }
 }

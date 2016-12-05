@@ -1,0 +1,5 @@
+<resources>
+    <string name="onlineStatus_0">Ngoại tuyến</string>
+    <string name="onlineStatus_1">Vắng mặt</string>
+    <string name="onlineStatus_2">Trực tuyến</string>
+</resources>

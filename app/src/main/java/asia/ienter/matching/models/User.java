@@ -3,6 +3,7 @@ package asia.ienter.matching.models;
 import android.text.TextUtils;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -13,8 +14,9 @@ import asia.ienter.matching.models.enums.Languages;
 /**
  * Created by hoangtuan on 11/15/16.
  */
-public class User {
+public class User implements Serializable{
     public static final int INIT_VALUE = -1;
+    public static final int DEFAULT_VALUE = 0;
 
 
     public String getAccessToken() {
@@ -73,7 +75,12 @@ public class User {
     }
 
     public String getHometown() {
-        return HomeTown==null?"":HomeTown;
+        if(HomeTown.isEmpty()) return  "";
+        if(HomeTown.contains("0,")){
+            return HomeTown.split(",")[1];
+        }else{
+            return HomeTown;
+        }
     }
 
     public List<String> getLanguage() {
@@ -399,6 +406,44 @@ public class User {
     private int Drinking = INIT_VALUE;
     private int Smoking = INIT_VALUE;
     private int HavingChildren = INIT_VALUE;
+
+    public int getAnonymous() {
+        return Anonymous;
+    }
+
+    public void setAnonymous(int anonymous) {
+        Anonymous = anonymous;
+    }
+
+    public double getLat() {
+        return Lat;
+    }
+
+    public void setLat(double lat) {
+        Lat = lat;
+    }
+
+    public double getLong() {
+        return Long;
+    }
+
+    public void setLong(double aLong) {
+        Long = aLong;
+    }
+
+    public int getDistance() {
+        return Distance;
+    }
+
+    public void setDistance(int distance) {
+        Distance = distance;
+    }
+
+    private int Anonymous = DEFAULT_VALUE;
+    private double Lat = DEFAULT_VALUE;
+    private double Long = DEFAULT_VALUE;
+    private int Distance = 50;
+
     public User(){
 
     }
@@ -523,4 +568,5 @@ public class User {
         }
         return (Hobby.isEmpty())? new ArrayList<String>() : Arrays.asList(Hobby.split(","));
     }
+
 }

@@ -149,9 +149,23 @@
     <string name="txt_cm">cm</string>
     <string name="txtKg">kg</string>
     <string name="txt_noInternet">Kết nối tới máy chủ gặp vấn đề. Vui lòng quay lại sau hoặc kéo xuống để thử lại!</string>
+    <string name="chatting_view_profile">Xem trang cá nhân</string>
+    <string name="chatting_sahre">Chia sẻ người dùng</string>
+    <string name="chatting_block">Chặn người dùng</string>
     <string name="txtLastChat">Hãy bắt đầu trò chuyện</string>
     <string name="txtSpecialLike">Đặc biệt yêu thích</string>
     <string name="txtLike">Yêu thích</string>
+    <string name="txtNoData">Không có dữ liệu phù hợp với yêu cầu của bạn! Vui lòng thử lại sau.</string>
+    <string name="txtSearchingNone">Quanh đây không có ai phù hợp với bạn.</string>
+    <string name="txt_refresh_again">Nhấn vào đây để thử lại</string>
+    <string name="txtEdit">Sửa</string>
+    <string name="txtDone">Hoàn thành</string>
+    <string name="txt_noGPS">Để sử dụng tính năng này bạn phải bật chức năng xác định vị trí trong phần \"Cài đặt\" của điện thoại.</string>
+    <string name="txtGotoSetting">Đi tới cài đặt</string>
+    <string name="txtCancel">Hủy</string>
+    <string name="txtOnline">Trực tuyến</string>
+    <string name="txtOffline">Ngoại tuyến</string>
+    <string name="txtAway">Vắng mặt</string>
     <string-array name="advance_search_string_array">
         <item>filter 1</item>
         <item>filter 2</item>

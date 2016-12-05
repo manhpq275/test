@@ -29,10 +29,12 @@ public class AppConstants {
     public static final String DAY_OF_WEEK_PREFIX = "dayOfWeek_";
     public static final String REPORT_PREFIX = "report_";
     public static final String STATUS_PREFIX = "status_";
+    public static final String ONLINE_STATUS_PREFIX = "onlineStatus_";
 
     public static final int BACK_FROM_ADVANCE_SEARCH_TO_HOME = 10000;
     public static final int BACK_FROM_ADVANCE_SEARCH_TO_HOME_RESULT_MATCHING = 10001;
     public static final int BACK_FROM_ADVANCE_SEARCH_TO_HOME_RESULT_BACK = 10002;
+
 
     public static int VOLLEY_TIMEOUT = 30000;
     public static int VOLLEY_MAX_NUM_RETRIES = 0;
@@ -56,4 +58,6 @@ public class AppConstants {
     public static final String API_USER_LIST_LIKE_ME = "%s/getlistuserliked/%s?page=%s";
     public static final String API_USER_LIST_ME_LIKE = "%s/getlistuseryousent/%s?page=%s";
     public static final String API_USER_SEND_LIKE = "%s/sendlike";
+    public static String API_USER_UPLOAD_IMAGE = "%s/insertuserphoto";
+    public static String API_HOME_GET_LIST_SEARCH_NEAR_BY = "%s/getnearbysearch?page=%s";
 }

@@ -77,4 +77,48 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:visibility="gone" />
+
+    <RelativeLayout
+        android:id="@+id/rlNoInternetConnection2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone">
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@mipmap/ico_warning"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/lnMenuTab"
+        android:id="@+id/rlNoInternetConnection"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:gravity="center"
+            android:text="@string/txt_noInternet"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_below="@+id/lnMenuTab"
+        android:id="@+id/rlNoData"
+        android:background="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:padding="5dp"
+            android:gravity="center"
+            android:text="@string/txtNoData"/>
+    </RelativeLayout>
 </RelativeLayout>

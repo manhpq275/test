@@ -1,6 +1,7 @@
 package asia.ienter.matching.services;
 
 import android.app.Activity;
+import android.hardware.camera2.params.Face;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -15,6 +16,7 @@ import com.facebook.HttpMethod;
 import com.facebook.Profile;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.gson.Gson;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -114,7 +116,9 @@ public class FacebookService {
         new GraphRequest(AccessToken.getCurrentAccessToken(), "/me", params, HttpMethod.GET,
                 new GraphRequest.Callback() {
                     public void onCompleted(GraphResponse response) {
-                        Log.i("Result", response.toString());
+                        MLog.d(FacebookService.class,"response="+ response.toString());
+                        MCApp.getUserInstance().setAccessToken(AccessToken.getCurrentAccessToken().getToken());
+                        MLog.d(FacebookService.class,"User="+ new Gson().toJson(MCApp.getUserInstance()));
                         if(!response.toString().isEmpty() && response.getJSONObject()!=null) {
                             UserServices.getInstance().handleSetInformation(response.getJSONObject(), callback);
                             UserServices.getInstance().handleLoginToServer(response, progress, new UserServices.ILoginServerCallback() {

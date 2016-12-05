@@ -4,6 +4,8 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
     <application
         android:name=".MCApp"
         android:allowBackup="true"
@@ -25,8 +27,6 @@
         <activity android:name=".views.activities.HomeActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
 
         </activity>
-        <activity android:name=".views.activities.ProfileActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
-        </activity>
         <activity android:name=".views.activities.MyPageActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
         </activity>
         <activity android:name=".views.activities.AboutActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
@@ -47,7 +47,12 @@
         </activity>
         <activity android:name=".views.activities.settings.ChangePasswordActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
         </activity>
+        <activity android:name=".views.activities.TemplateMessageActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".views.activities.ChattingActivity" android:screenOrientation="portrait" android:theme="@style/AppTheme.NoActionBar">
+        </activity>
         <meta-data android:name="com.facebook.sdk.ApplicationId" android:value="@string/facebook_app_id"/>
+        <service android:name=".services.LocationService" />
     </application>
 
 </manifest>

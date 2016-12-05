@@ -25,24 +25,20 @@ public class SettingNearByActivity extends AppCompatActivity {
     @InjectView(R.id.txtRange)
     TextView tvRange;
 
-    AdvanceSearchView advanceSearchView;
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        advanceSearchView = MCApp.getAdvanceSearchView();
         this.overridePendingTransition(R.anim.enter_from_right, R.anim.hold);
         setContentView(R.layout.activity_setting_nearby);
         ButterKnife.inject(this);
-        tvRange.setText(getString(R.string.txt_your_range)+String.valueOf(advanceSearchView.getDistance())+"km");
-        seekBar.setProgress(advanceSearchView.getDistance());
+        tvRange.setText(getString(R.string.txt_your_range)+String.valueOf(MCApp.getUserInstance().getDistance())+"km");
+        seekBar.setProgress(MCApp.getUserInstance().getDistance());
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 tvRange.setText(getString(R.string.txt_your_range)+String.valueOf(progress)+"km");
-                advanceSearchView.setDistance(progress);
+                MCApp.getUserInstance().setDistance(progress);
             }
 
             @Override
@@ -60,7 +56,6 @@ public class SettingNearByActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        MCApp.setAdvanceSearchView(advanceSearchView);
         this.overridePendingTransition(R.anim.hold, R.anim.exit_to_right);
 
 

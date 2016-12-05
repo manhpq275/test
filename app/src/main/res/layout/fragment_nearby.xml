@@ -8,78 +8,188 @@
     android:paddingBottom="@dimen/height_menu_bar">
 
     <RelativeLayout
-        android:id="@+id/rlSearching"
+        android:id="@+id/rlHasGPS"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:id="@+id/rlSearching"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/tvSearching">
+            android:visibility="visible">
 
-            <com.wang.avi.AVLoadingIndicatorView
-                android:id="@+id/avi"
-                style="@style/AVLoadingIndicatorView.Small"
-                android:layout_width="@dimen/searching_size"
-                android:layout_height="@dimen/searching_size"
-                android:layout_centerInParent="true"
-                android:visibility="visible"
-                app:indicatorColor="@android:color/white"
-                app:indicatorName="BallScaleMultipleIndicator" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tvSearching">
+
+                <com.wang.avi.AVLoadingIndicatorView
+                    android:id="@+id/avi"
+                    style="@style/AVLoadingIndicatorView.Small"
+                    android:layout_width="@dimen/searching_size"
+                    android:layout_height="@dimen/searching_size"
+                    android:layout_centerInParent="true"
+                    android:visibility="visible"
+                    app:indicatorColor="@android:color/white"
+                    app:indicatorName="BallScaleMultipleIndicator" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tvSearching"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:paddingLeft="30dp"
+                android:paddingRight="30dp"
+                android:text="@string/txtSearching"
+                android:textAlignment="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textSize_searching_nearby" />
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/tvSearching"
+        <RelativeLayout
+            android:id="@+id/rlResult"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:paddingLeft="30dp"
-            android:paddingRight="30dp"
-            android:text="@string/txtSearching"
-            android:textAlignment="center"
-            android:textColor="@color/white"
-            android:textSize="@dimen/textSize_searching_nearby" />
-    </RelativeLayout>
+            android:layout_height="match_parent"
+            android:visibility="gone">
 
-    <RelativeLayout
-        android:id="@+id/rlResult"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <FrameLayout
+                    android:id="@+id/tabNearBy_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                </FrameLayout>
+            </RelativeLayout>
+
+
+            <ImageView
+                android:id="@+id/btnCancel"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_alignParentLeft="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="-3dp"
+                android:scaleType="fitStart"
+                android:src="@mipmap/btn_cancel" />
+
+            <ImageView
+                android:id="@+id/btnAgree"
+                android:layout_width="wrap_content"
+                android:layout_height="200dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="-3dp"
+                android:scaleType="fitEnd"
+                android:src="@mipmap/btn_agree" />
+
+
+        </RelativeLayout>
 
 
         <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <FrameLayout
-                android:id="@+id/tabNearBy_content"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-            </FrameLayout>
+            android:id="@+id/rlNoInternetConnection2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="gone">
+            <ImageView
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ico_warning"/>
         </RelativeLayout>
 
+        <RelativeLayout
+            android:id="@+id/rlNoInternetConnection"
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:gravity="center"
+                android:text="@string/txt_noInternet"/>
+        </RelativeLayout>
 
-        <ImageView
-            android:id="@+id/btnCancel"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_alignParentLeft="true"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="-3dp"
-            android:scaleType="fitStart"
-            android:src="@mipmap/btn_cancel" />
+        <RelativeLayout
+            android:id="@+id/rlNoData"
+            android:background="@android:color/transparent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+            <ImageView
+                android:id="@+id/icon_noData"
+                android:src="@mipmap/ico_no_data"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"/>
+            <TextView
+                android:id="@+id/tvNoData"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorAccent"
+                android:padding="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/icon_noData"
 
-        <ImageView
-            android:id="@+id/btnAgree"
-            android:layout_width="wrap_content"
-            android:layout_height="200dp"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:layout_marginRight="-3dp"
-            android:scaleType="fitEnd"
-            android:src="@mipmap/btn_agree" />
-
-
+                android:text="@string/txtSearchingNone"/>
+            <TextView
+                android:id="@+id/tvReload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/tvNoData"
+                android:textAllCaps="true"
+                android:text="@string/txt_refresh_again"/>
+        </RelativeLayout>
     </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rlNoGPS"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:visibility="visible">
+            <ImageView
+                android:id="@+id/imgWarning"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@mipmap/ico_warning"/>
+            <Button
+                android:id="@+id/btnGotoSetting"
+                android:layout_below="@+id/imgWarning"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:background="@color/colorAccent"
+                android:padding="8dp"
+                android:text="@string/txtGotoSetting"/>
+        </RelativeLayout>
+        <RelativeLayout
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:padding="5dp"
+                android:gravity="center"
+                android:text="@string/txt_noGPS"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
 </RelativeLayout>

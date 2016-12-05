@@ -42,6 +42,21 @@
                 android:layout_height="40dp"
                 android:src="@mipmap/btn_search_advance"
                 android:padding="@dimen/padding_search_icon_action_bar"
+
+                android:layout_gravity="center_vertical"
+                android:layout_margin="5dp"/>
+            <TextView
+                android:visibility="gone"
+                android:textAllCaps="true"
+                android:id="@+id/rightBtnTopBarText"
+                android:layout_width="60dp"
+                android:layout_height="40dp"
+                android:padding="@dimen/padding_search_icon_action_bar"
+                android:text="@string/txtEdit"
+                android:background="@color/white"
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:gravity="center"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="5dp"/>
         </LinearLayout>
@@ -72,59 +87,107 @@
         android:background="@drawable/menu_background"
         android:gravity="center">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
+        <LinearLayout
             android:id="@+id/tabMatching"
-            android:text="@string/menu_matching_text_button"
-            android:drawableTop="@mipmap/btn_matching"
-            android:textColor="@color/text_color_menu_active"
-            android:textSize="@dimen/text_size_menu"
-            android:gravity="center"
-            android:padding="@dimen/padding_menu_tab_item"
-            />
-
-        <TextView
-            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableTop="@mipmap/btn_nearby"
-            android:text="@string/menu_near_by_text_button"
-            android:textSize="@dimen/text_size_menu"
-            android:textColor="@color/text_color_menu_no_active"
+            android:paddingTop="5dp">
+            <ImageView
+                android:id="@+id/img_tabMatching"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/btn_matching_active"/>
+            <TextView
+                android:textAllCaps="true"
+                android:id="@+id/tv_tabMatching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/menu_matching_text_button"
+                android:textColor="@color/text_color_menu_active"
+                android:textSize="@dimen/text_size_menu"
+                android:gravity="center"
+                android:padding="@dimen/padding_menu_tab_item"/>
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/tabNearBy"
-            android:padding="@dimen/padding_menu_tab_item"
-            android:gravity="center" />
-
-        <TextView
-            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
             android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableTop="@mipmap/btn_message"
-            android:text="@string/menu_message_menu"
-            android:textColor="@color/text_color_menu_no_active"
-            android:textSize="@dimen/text_size_menu"
+            android:paddingTop="5dp">
+            <ImageView
+                android:id="@+id/img_tabNearBy"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/btn_nearby_no_active"/>
+            <TextView
+                android:textAllCaps="true"
+                android:id="@+id/tv_tabNearBy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/menu_near_by_text_button"
+                android:textColor="@color/text_color_menu_no_active"
+                android:textSize="@dimen/text_size_menu"
+                android:gravity="center"
+                android:padding="@dimen/padding_menu_tab_item"/>
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/tabMessage"
-            android:gravity="center"
-            android:padding="@dimen/padding_menu_tab_item"
-            />
-        <TextView
-            android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:drawableTop="@mipmap/btn_profile"
-            android:text="@string/menu_profile_text_button"
-            android:textColor="@color/text_color_menu_no_active"
-            android:textSize="@dimen/text_size_menu"
-            android:id="@+id/tabProfile"
             android:gravity="center"
-            android:padding="@dimen/padding_menu_tab_item"
-            />
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+            <ImageView
+                android:id="@+id/img_tabMessage"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/btn_message_no_active"/>
+            <TextView
+                android:textAllCaps="true"
+                android:id="@+id/tv_tabMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/menu_message_menu"
+                android:textColor="@color/text_color_menu_no_active"
+                android:textSize="@dimen/text_size_menu"
+                android:gravity="center"
+                android:padding="@dimen/padding_menu_tab_item"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/tabProfile"
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:paddingTop="5dp">
+            <ImageView
+                android:id="@+id/img_tabProfile"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:src="@mipmap/btn_profile_no_active"/>
+            <TextView
+                android:textAllCaps="true"
+                android:id="@+id/tv_tabProfile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/menu_profile_text_button"
+                android:textColor="@color/text_color_menu_no_active"
+                android:textSize="@dimen/text_size_menu"
+                android:gravity="center"
+                android:padding="@dimen/padding_menu_tab_item"/>
+        </LinearLayout>
+
     </LinearLayout>
 
 </RelativeLayout>

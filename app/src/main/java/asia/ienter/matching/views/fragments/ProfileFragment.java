@@ -242,7 +242,7 @@ public class ProfileFragment extends BaseFragment{
         mTagGenitive.setTags(mainUser.getGenitive());
 
         if(!mainUser.getHometown().isEmpty()){
-            txtHomeTown.setText(mainUser.getHometown());
+            txtHomeTown.setText(Regions.fromInteger(Integer.parseInt(mainUser.getHometown())).toString());
         }else{
             txtHomeTown.setText(defaultString);
         }
@@ -708,7 +708,7 @@ public class ProfileFragment extends BaseFragment{
                 public void onClickItem(int position) {
                     String homeTown = listItems[position];
                     txtHomeTown.setText(listItems[position]);
-                    mainUser.setHometown(listItems[position]);
+                    mainUser.setHometown(String.valueOf(position));
                     txtUserPlace.setText(homeTown);
                     if (layoutUserPlace.getVisibility() == View.GONE) {
                         layoutUserPlace.setVisibility(View.VISIBLE);
@@ -906,18 +906,6 @@ public class ProfileFragment extends BaseFragment{
         });
         return false;
     }
-
-    //    @OnClick(R.id.txtCancelAbout)
-//    public void onClickCancelAbout(){
-//        ediChangeAbout.clearFocus();
-//        Utils.collapse(layoutActionAbout);
-//    }
-//
-//    @OnClick(R.id.txtSaveAbout)
-//    public void onClickaveAbout(){
-//        ediChangeAbout.clearFocus();
-//        Utils.collapse(layoutActionAbout);
-//    }
 
     @OnClick(R.id.txtAddLanguage)
     public void onClickChangeLanguage() {
@@ -1178,6 +1166,9 @@ public class ProfileFragment extends BaseFragment{
         Intent intentGallery = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
         getActivity().startActivityForResult(intentGallery, AppConstants.CALL_GALLERY);
     }
+
+
+
 
     //Xu ly call camera
     private void handleCallCamera() {

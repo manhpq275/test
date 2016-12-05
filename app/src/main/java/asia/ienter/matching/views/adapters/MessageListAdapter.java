@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
 import asia.ienter.matching.models.UserView;
+import asia.ienter.matching.models.enums.OnlineStatus;
 import asia.ienter.matching.utils.Config;
 import asia.ienter.matching.utils.Utils;
 import asia.ienter.matching.views.fragments.MessagesFragment;
@@ -54,16 +55,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
 
-        if(mTopFragment.getTabSelected() == 1){
-            Picasso.with(mContext).load(Config.BASE_URL+topViewArrayList.get(position).getImageUser()).into(holder.imAvatar);
-
-
-
-        }else{
-            Picasso.with(mContext).load(Config.BASE_URL+topViewArrayList.get(position).getImageUser()).into(holder.imAvatar);
-
-        }
-       holder.bind(position,mTopFragment);
+        Picasso.with(mContext).load(Config.BASE_URL+topViewArrayList.get(position).getImageUser()).error(R.mipmap.m_avatar2).into(holder.imAvatar);
+        holder.bind(position,mTopFragment);
     }
 
     @Override
@@ -79,7 +72,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView tvName,tvYearsOld,tvHeight,tvJob;
-        private ImageView imAvatar,btnLike;
+        private ImageView imAvatar,btnLike,imgOnlineStatus;
         private LinearLayout lnInfo;
 
         public ViewHolder(View view) {
@@ -89,7 +82,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             imAvatar = (ImageView) view.findViewById(R.id.imAvatar);
             btnLike = (ImageView) view.findViewById(R.id.btnLike);
             lnInfo = (LinearLayout) view.findViewById(R.id.lnInfo);
-
+            imgOnlineStatus = (ImageView) view.findViewById(R.id.imgOnlineStatus);
             if(mTopFragment.getTabSelected() > 1) {
                 tvJob = (TextView) view.findViewById(R.id.tvJob);
                 tvHeight = (TextView) view.findViewById(R.id.tvHeight);
@@ -105,7 +98,18 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             final UserView item = topViewArrayList.get(position);
             tvName.setText(item.getUserName());
             tvYearsOld.setText(mContext.getString(R.string.yearOld).toString() +": "+ Utils.birthDayToYearsOld(item.getBirthDay()));
+            switch (OnlineStatus.fromInteger(item.getStatus())){
+                case ONLINE:
+                    imgOnlineStatus.setImageResource(R.mipmap.ico_online);
+                    break;
+                case OFFLINE:
+                    imgOnlineStatus.setImageResource(R.mipmap.ico_offline);
+                    break;
+                case AWAY:
+                    imgOnlineStatus.setImageResource(R.mipmap.ico_away);
+                    break;
 
+            }
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override public void onClick(View v) {
                         listener.OnItemClickRecycleView(item, position);
@@ -125,6 +129,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
             if(mTopFragment.getTabSelected() == 3){
 //                if(item.isLike() == 1)                        setLike(btnLike,1);
 //                if(item.isLike() == 2)                        setLike(btnLike,2);
+                tvHeight.setText(mContext.getString(R.string.txt_height)+": "+topViewArrayList.get(position).getHeight() + "cm");
+                tvJob.setText(mContext.getString(R.string.txt_job)+": "+topViewArrayList.get(position).getJob());
             }else if(mTopFragment.getTabSelected() == 2){
                 tvHeight.setText(mContext.getString(R.string.txt_height)+": "+topViewArrayList.get(position).getHeight() + "cm");
                 tvJob.setText(mContext.getString(R.string.txt_job)+": "+topViewArrayList.get(position).getJob());

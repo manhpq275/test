@@ -3,7 +3,6 @@ package asia.ienter.matching.views.fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,11 +11,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import asia.ienter.matching.MCApp;
 import asia.ienter.matching.R;
@@ -28,6 +30,7 @@ import asia.ienter.matching.models.enums.ClientType;
 import asia.ienter.matching.services.UserServices;
 import asia.ienter.matching.utils.MLog;
 import asia.ienter.matching.views.activities.ChatActivity;
+import asia.ienter.matching.views.activities.ChattingActivity;
 import asia.ienter.matching.views.activities.HomeActivity;
 import asia.ienter.matching.views.activities.MyPageActivity;
 import asia.ienter.matching.views.adapters.MessageListAdapter;
@@ -102,6 +105,7 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     @Override
     protected void initView() {
         homeActivity = (HomeActivity)getActivity();
+        tabSelected = -1;
         //Load Progress
         mProgressBarLoading = (ProgressBar) mView.findViewById(R.id.mProgressLoading);
         mProgressBarLoadingMore = (ProgressBar) mView.findViewById(R.id.mProgressLoadingMore);
@@ -111,8 +115,13 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
             @Override
             public void onRefresh() {
                 showPullRefresh();
+                return;
             }
         });
+
+        rlNoInternetConnection2 = (RelativeLayout)mView.findViewById(R.id.rlNoInternetConnection2);
+        rlNoInternetConnection = (RelativeLayout)mView.findViewById(R.id.rlNoInternetConnection);
+        rlNoData = (RelativeLayout)mView.findViewById(R.id.rlNoData);
 
         topViewArrayList = new ArrayList<>();
         topViewArrayList_like_me = new ArrayList<>();
@@ -140,7 +149,6 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                             MLog.e(TAG, "Load More Data");
 
                             loadDataFromApi();
-                            // topAdapter.onNotifyDataSetChanged(topViewArrayList);
                             isLoading = false;
                             hideLoading();
                         }
@@ -158,7 +166,10 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         MLog.d(TAG,"loadDataFromApi() Started");
         showLoading();
 
-
+        if(!hasInternet()){
+            recycleTopView.setVisibility(View.INVISIBLE);
+            return;
+        }
 
 
         switch (getTabSelected()){
@@ -168,31 +179,33 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                 if(pageContact==1){
                     recycleTopView.setVisibility(View.INVISIBLE);
                 }
-                UserServices.getInstance().getUserListMatched(MCApp.getUserInstance().getUserId(), pageContact, ClientType.AndroidApp, new IGetListUserSearch() {
+               // UserServices.getInstance().getUserListMatched(MCApp.getUserInstance().getUserId(), pageContact, ClientType.AndroidApp, new IGetListUserSearch() {
+                UserServices.getInstance().getUserListMeLike(MCApp.getUserInstance().getUserId(), pageContact, ClientType.AndroidApp, new IGetListUserSearch() {
                     @Override
                     public void onError(ArrayList errors) {
-
+                        hideLoading();
+                        onLoadError();
                     }
 
                     @Override
                     public void onSuccess(ArrayList<UserView> items) {
                         hideLoading();
                         recycleTopView.setVisibility(View.VISIBLE);
-                        MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
+                        MLog.d(TAG,"loadDataFromApi() topViewArrayList= "+ new Gson().toJson(items));
                         if(items==null){
+                            if(topViewArrayList.size()==0) {
+                                onLoadNoData();
+                            }
                             isLoading = true;
                             pageContact--;
                         }else{
                             if(items.size()>0){
                                 MLog.d(TAG,"List = "+new Gson().toJson(items));
                                 topViewArrayList.addAll(items);
-                                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList);
-                                recycleTopView.setAdapter(adapter);
+                                adapter.onNotifyDataSetChanged(topViewArrayList);
                             }
                         }
 
-
-                        hideLoading();
                     }
                 });
                 break;
@@ -205,7 +218,8 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                 UserServices.getInstance().getUserListLikeMe(MCApp.getUserInstance().getUserId(), pageLikeMe, ClientType.AndroidApp, new IGetListUserSearch() {
                     @Override
                     public void onError(ArrayList errors) {
-
+                        hideLoading();
+                        onLoadError();
                     }
 
                     @Override
@@ -214,14 +228,16 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                         recycleTopView.setVisibility(View.VISIBLE);
                         MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
                         if(items==null){
+                            if(topViewArrayList_like_me.size()==0) {
+                                onLoadNoData();
+                            }
                             isLoading = true;
                             pageLikeMe--;
                         }else{
                             if(items.size()>0){
                                 MLog.d(TAG,"List = "+new Gson().toJson(items));
                                 topViewArrayList_like_me.addAll(items);
-                                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList_like_me);
-                                recycleTopView.setAdapter(adapter);
+                                adapter.onNotifyDataSetChanged(topViewArrayList_like_me);
                             }
                         }
 
@@ -238,7 +254,8 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                 UserServices.getInstance().getUserListMeLike(MCApp.getUserInstance().getUserId(), pageMeLike, ClientType.AndroidApp, new IGetListUserSearch() {
                     @Override
                     public void onError(ArrayList errors) {
-
+                        hideLoading();
+                        onLoadError();
                     }
 
                     @Override
@@ -247,14 +264,16 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                         recycleTopView.setVisibility(View.VISIBLE);
                         MLog.d(TAG,"loadDataFromApi() = "+ new Gson().toJson(items));
                         if(items==null){
+                            if(topViewArrayList_me_like.size()==0) {
+                                onLoadNoData();
+                            }
                             isLoading = true;
                             pageMeLike--;
                         }else{
                             if(items.size()>0){
                                 MLog.d(TAG,"List = "+new Gson().toJson(items));
                                 topViewArrayList_me_like.addAll(items);
-                                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList_me_like);
-                                recycleTopView.setAdapter(adapter);
+                                adapter.onNotifyDataSetChanged(topViewArrayList_me_like);
                             }
                         }
                     }
@@ -262,27 +281,45 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                 break;
         }
 
-
-
-
-
-
-
-
-
-
     }
 
     DialogChat dialogChat;
     @Override
-    public void OnItemClickRecycleView(UserView topView, int position) {
+    public void OnItemClickRecycleView(final UserView topView, int position) {
         MLog.e(TAG,"Item click RecycleView");
         if(tabSelected==1){
-            dialogChat =  new DialogChat(mContext,this);
+            dialogChat =  new DialogChat(mContext, new IMessagesCallback() {
+                @Override
+                public void onAcceptCallback() {
+
+                }
+
+                @Override
+                public void onAcceptChatCallback() {
+                    dialogChat.hide();
+                    // goto chatactivity
+                    Intent iChatting = new Intent(mContext, ChattingActivity.class);
+                    iChatting.putExtra("UserViewChatting", topView);
+                    startActivity(iChatting);
+                }
+
+                @Override
+                public void onCancelCallback() {
+
+                }
+            });
             dialogChat.show();
         }else {
+            String listUser;
             Intent profile = new Intent(mContext, MyPageActivity.class);
-            profile.putExtra("ID",10);
+            if(tabSelected==TAB_INVITETION){
+                listUser = new Gson().toJson(topViewArrayList_like_me, new TypeToken<List<UserView>>(){}.getType());
+            }else{
+                 listUser = new Gson().toJson(topViewArrayList_me_like, new TypeToken<List<UserView>>(){}.getType());
+            }
+            profile.putExtra("UserArray",listUser);
+            profile.putExtra("UserPosition",position);
+            profile.putExtra("SendLiked",true);
             startActivity(profile);
 
         }
@@ -305,11 +342,15 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
         isAccept =true;
     }
 
+    /**
+     *
+     */
     @Override
     public void onAcceptChatCallback() {
         dialogChat.hide();
         // goto chatactivity
         Intent i = new Intent(mContext, ChatActivity.class);
+
         startActivity(i);
 
     }
@@ -324,24 +365,28 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
 
         isLoading=false;
         switch (tabSelected){
-            case 1:
+            case TAB_CONTACT:
                 tab1.setBackgroundResource(R.drawable.dr_bg_left_conner_active);
                 tab2.setBackgroundResource(R.drawable.dr_bg_mid_conner);
                 tab3.setBackgroundResource(R.drawable.dr_bg_right_conner);
+                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList);
                 break;
-            case 2:
+            case TAB_INVITETION:
                 tab1.setBackgroundResource(R.drawable.dr_bg_left_conner);
                 tab2.setBackgroundResource(R.drawable.dr_bg_mid_conner_active);
                 tab3.setBackgroundResource(R.drawable.dr_bg_right_conner);
+                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList_like_me);
                 break;
-            case 3:
+            case TAB_MYREQUEST:
                 tab1.setBackgroundResource(R.drawable.dr_bg_left_conner);
                 tab2.setBackgroundResource(R.drawable.dr_bg_mid_conner);
                 tab3.setBackgroundResource(R.drawable.dr_bg_right_conner_active);
+                adapter = new MessageListAdapter(MessagesFragment.this,topViewArrayList_me_like);
                 break;
         }
 
         setTabSelected(tabSelected);
+        recycleTopView.setAdapter(adapter);
         loadDataFromApi();
     }
 
@@ -375,12 +420,10 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
     public void showPullRefresh(){
         super.showPullRefresh();
         isLoading=false;
-
         switch (getTabSelected()){
             case TAB_CONTACT:
                 pageContact=0;
                 topViewArrayList.clear();
-                recycleTopView.setAdapter(null);
                 if(!hasInternet()){
                     recycleTopView.setVisibility(View.INVISIBLE);
                     return;
@@ -390,7 +433,6 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
             case TAB_INVITETION:
                 pageLikeMe=0;
                 topViewArrayList_like_me.clear();
-                recycleTopView.setAdapter(null);
                 if(!hasInternet()){
                     recycleTopView.setVisibility(View.INVISIBLE);
                     return;
@@ -400,7 +442,6 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
             case TAB_MYREQUEST:
                 pageMeLike=0;
                 topViewArrayList_me_like.clear();
-                recycleTopView.setAdapter(null);
                 if(!hasInternet()){
                     recycleTopView.setVisibility(View.INVISIBLE);
                     return;
@@ -408,11 +449,5 @@ public class MessagesFragment extends BaseFragment implements ITopViewCallback,I
                 loadDataFromApi();
                 break;
         }
-
-
-
-
-
-
     }
 }

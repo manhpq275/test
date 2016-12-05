@@ -10,6 +10,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
 import asia.ienter.matching.R;
+import asia.ienter.matching.utils.MLog;
 
 /**
  * Created by phamquangmanh on 9/15/16.
@@ -21,7 +22,7 @@ public abstract class BaseFragment extends Fragment {
     protected ProgressBar mProgressBarLoading;
     protected ProgressBar mProgressBarLoadingMore;
     protected SwipeRefreshLayout mSwipeRefresh;
-    protected RelativeLayout rlNoInternetConnection,rlNoInternetConnection2;
+    protected RelativeLayout rlNoInternetConnection,rlNoInternetConnection2,rlNoData;
 
     protected abstract void initView();
 
@@ -48,13 +49,16 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void hideLoading(){
+        if(rlNoData!=null)    rlNoData.setVisibility(View.GONE);
+        if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.GONE);
+        if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.GONE);
         if(mProgressBarLoading!=null)       mProgressBarLoading.setVisibility(View.GONE);
         if(mProgressBarLoadingMore!=null)   mProgressBarLoadingMore.setVisibility(View.GONE);
         if(mSwipeRefresh!=null)             mSwipeRefresh.setRefreshing(false);
     }
 
     protected boolean hasInternet(){
-        boolean result = false;
+        boolean result;
         if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.GONE);
         showLoading();
         ConnectivityManager ConnectionManager=(ConnectivityManager)mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
@@ -66,9 +70,11 @@ public abstract class BaseFragment extends Fragment {
             if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.GONE);
         }else{
             onLoadError();
+            if(rlNoInternetConnection!=null)
             rlNoInternetConnection.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    MLog.d(BaseFragment.class,"click reload");
                     showPullRefresh();
                 }
             });
@@ -77,9 +83,21 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected void onLoadError(){
+        if(rlNoData!=null)    rlNoData.setVisibility(View.GONE);
         if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.VISIBLE);
         if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.VISIBLE);
     }
+
+    protected  void onLoadNoData(){
+        if(rlNoData!=null)    rlNoData.setVisibility(View.VISIBLE);
+        if(rlNoInternetConnection!=null)    rlNoInternetConnection.setVisibility(View.GONE);
+        if(rlNoInternetConnection2!=null)    rlNoInternetConnection2.setVisibility(View.VISIBLE);
+    }
+
+
+
+
+
 
 
 

@@ -44,4 +44,8 @@ public class UserApis extends BaseApi<UserView>{
     public String sendLike() {
         return String.format(AppConstants.API_USER_SEND_LIKE,this.getBaseUrl());
     }
+
+    public String uploadImage() {
+        return String.format(AppConstants.API_USER_UPLOAD_IMAGE,this.getBaseUrl());
+    }
 }

@@ -3,10 +3,13 @@ package asia.ienter.matching.services;
 import android.app.Activity;
 import android.app.Application;
 import android.os.Bundle;
+import android.os.SystemClock;
 
 import java.util.ArrayList;
 
+import asia.ienter.matching.MCApp;
 import asia.ienter.matching.models.ErrorView;
+import asia.ienter.matching.models.enums.OnlineStatus;
 import asia.ienter.matching.utils.CustomStringRequest;
 import asia.ienter.matching.utils.MLog;
 
@@ -27,32 +30,64 @@ public class MCAppLifecycleHandler implements Application.ActivityLifecycleCallb
 
     @Override
     public void onActivityDestroyed(Activity activity) {
-        if(!(started > stopped)){
-            HomeServices.getInstance().appStatus(17, "12", new CustomStringRequest.IResponseStringCallback() {
+        if(!(started > stopped))
+            HomeServices.getInstance().appStatus(OnlineStatus.OFFLINE, new CustomStringRequest.IResponseStringCallback() {
                 @Override
                 public void onSuccess(String response) {
 
-                    MLog.d(MCAppLifecycleHandler.class, "======>response : " +  response);
+                    MLog.d(MCAppLifecycleHandler.class, "======>response offline: " +  response);
                 }
 
                 @Override
                 public void onError(ArrayList<ErrorView> errors) {
-
+                    MLog.d(MCAppLifecycleHandler.class, "======>response offline: " +  errors);
                 }
             });
-        }
-        MLog.d(MCAppLifecycleHandler.class, "onActivityDestroyed : "+(started > stopped));
+
+            MLog.d(MCAppLifecycleHandler.class, "onActivityDestroyed Offline : "+!(started > stopped));
+
+
+
     }
+
 
     @Override
     public void onActivityResumed(Activity activity) {
         ++resumed;
+        MLog.d(MCAppLifecycleHandler.class, "onActivityResumed Online: " + (resumed > paused));
+        MLog.d(MCAppLifecycleHandler.class, "onActivityResumed Acess: " + MCApp.getUserInstance().getAccessToken() );
+        HomeServices.getInstance().appStatus(OnlineStatus.ONLINE, new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+
+                MLog.d(MCAppLifecycleHandler.class, "======>response online: " +  response);
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(MCAppLifecycleHandler.class, "======>response online: " +  errors);
+            }
+        });
+
     }
 
     @Override
     public void onActivityPaused(Activity activity) {
         ++paused;
-        MLog.d(MCAppLifecycleHandler.class, "application is in foreground: " + (resumed > paused));
+        if(!(resumed > paused))
+        HomeServices.getInstance().appStatus(OnlineStatus.AWAY, new CustomStringRequest.IResponseStringCallback() {
+            @Override
+            public void onSuccess(String response) {
+
+                MLog.d(MCAppLifecycleHandler.class, "======>response away: " +  response);
+            }
+
+            @Override
+            public void onError(ArrayList<ErrorView> errors) {
+                MLog.d(MCAppLifecycleHandler.class, "======>response away: " +  errors);
+            }
+        });
+        MLog.d(MCAppLifecycleHandler.class, "onActivityPaused Away: " + (resumed > paused));
     }
 
     @Override
@@ -67,7 +102,8 @@ public class MCAppLifecycleHandler implements Application.ActivityLifecycleCallb
     @Override
     public void onActivityStopped(Activity activity) {
         ++stopped;
-        MLog.d(MCAppLifecycleHandler.class, "application is visible: " + (started > stopped));
+
+
     }
 
     // If you want a static function you can use to check if your application is
@@ -87,5 +123,18 @@ public class MCAppLifecycleHandler implements Application.ActivityLifecycleCallb
     public static boolean isApplicationInForeground() {
         return resumed > paused;
     }
+
+     HomeServices.getInstance().appStatus(OnlineStatus.OFFLINE, new CustomStringRequest.IResponseStringCallback() {
+                @Override
+                public void onSuccess(String response) {
+
+                    MLog.d(MCAppLifecycleHandler.class, "======>response : " +  response);
+                }
+
+                @Override
+                public void onError(ArrayList<ErrorView> errors) {
+                    MLog.d(MCAppLifecycleHandler.class, "======>response : " +  errors);
+                }
+            });
     */
 }

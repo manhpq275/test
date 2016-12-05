@@ -44,8 +44,9 @@
                     android:paddingBottom="10dp"
                     android:layout_centerHorizontal="true">
                     <ImageView
-                        android:layout_width="15dp"
-                        android:layout_height="15dp"
+                        android:id="@+id/imgOnlineStatus"
+                        android:layout_width="20dp"
+                        android:layout_height="18dp"
                         android:src="@mipmap/ic_online"/>
                     <TextView
                         android:id="@+id/tvName"
